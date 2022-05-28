@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Put a Creative Name Here</title>
+	<meta name="ad.size" content="width=300,height=250"> 
+	<link rel="stylesheet" href="style.css">
+	<script>
+		var clickTag 	= "https://www.google.com";
+	</script>
+	<script src="https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.0_d360d9a082ccc13b1a1a9b153f86b378_min.js"></script>
+	<script src="CustomEase.js"></script>
+    <script src="https://s0.2mdn.net/ads/studio/cached_libs/easeljs_0.8.2_937c3ec68021211c056f61c9ceaccffd_min.js"></script>
+	<script src="standard.js"></script>
+	<script src="particlesystem.js"></script>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+</head>
+<body>
+	<div id="container">
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+		<div class="bg">
+			<img class="bg2" src="bg2.jpg" alt="Background">
+			<img class="bg1" src="bg1.jpg" alt="Background">
+		</div>
+		<div class='sprite logo'></div>
+		<div class='sprite dirtygear'></div>
+		<canvas id="cvs"></canvas>
+		<div class="maskNew">
+			<div class='sprite new'></div>
+		</div>
+		<div class='sprite gear img1'></div>
+		<div class='sprite gear img2'></div>
+		<div class='sprite gear img3'></div>
+		<div class='sprite gear img4'></div>
+		
+		<div class='sprite purex'></div>
+		<div class="t1"><img src="t1.svg" alt=""></div>
+		<div class="t2"><img src="t2.svg" alt=""></div>
+		<div class="t3"><img src="t3.svg" alt=""></div>
+		<div class="t4"><img src="t4.svg" alt=""></div>
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+	</div>
+	<script>
+		var tl;
+		function initAd() {
+			//--------- PRE-LOAD IMAGE ------------
+			startPreload('bg1.jpg','bg2.jpg','sprite.png','smoke-g.png', startAnim);
+			//-------------------------------------
+			function startAnim() {
+				var bounce ="M0,0,C0.14,0,0.242,0.438,0.272,0.561,0.313,0.728,0.354,0.963,0.362,1,0.37,0.985,0.392,0.916,0.455,0.872,0.538,0.814,0.619,0.855,0.632,0.864,0.708,0.914,0.719,0.981,0.726,0.998,0.876,0.998,1,1,1,1"
+				tl = new TimelineMax();
+				//--------------- SET -----------------
+				TweenMax.set('#container', {display: 'block'});
+				TweenMax.set(['img','.sprite','.bg'], {rotation: 0.001, force3D: true})
+				TweenMax.set('.bg', {transformOrigin: '50% 50%'})
+				TweenMax.set('.gear', {top:'60%',left:'50%',xPercent:-50,yPercent:-50,scale:0,rotation:-50}) 
+				//------------ ADD EVENT --------------
+				addEvent();
+				initCanvas();
+				//---------- ADD ANIMATION ------------
+				tl
+					.from('.t1',.5,{y:-70,ease: CustomEase.create("custom",bounce)},'f1')
+					.add(shake,'f1+=.2')
+					//-----frame2--------------------------------
+					.add('f2','+=2')
+					.from('.t2',.5,{y:-70,ease: CustomEase.create("custom",bounce)},'f2')
+					.add(shake,'f2+=.2')
+					.to('.t1',.2,{scaleY:0,scaleX:1.1,transformOrigin:'center bottom',ease: Power3.easeOut},'f2+=.18')
+					//-----frame3------------------------
+					.add('f3','+=1')
+					.to('.t2',.3,{scale:0,opacity:0,transformOrigin:'center center'},'f3')
+					.to('#cvs',.3,{opacity:0,onComplete:stinkStop},'f3')
+					.from('.purex',.6,{y:-220,ease: CustomEase.create("custom",bounce)},'f3')
+					.add(shake,'f3+=.2')
+					.from('.new',.5,{x:75,ease:Power2.easeInOut},'f3+=.5')
+					.to('.bg1',1,{opacity:0},'f3+=.5') //shine 
+					.to('.dirtygear',.5,{scale:0,opacity:0,transformOrigin:'center center',ease: Back.easeIn.config(1)},'f3+=1')
+					//-----frame4------------------------
+					.add('f4')
+					.from('.t3',1,{opacity:0},'f4')
+					.staggerTo('.gear',.6,{
+								cycle:{
+									x:[-83,47,68,77], //img1,img2,img3,img4
+									y:[14,-19,5,26]  //img1,img2,img3,img4
+								},scale:1,rotation:0},.1,'f4')
+					//-----frame5------------------------
+					.add('f5','+=1.5')
+					.to('.t3,.gear',1,{opacity:0},'f5')
+					.from('.t4',1,{opacity:0},'f5+=.5')
+				//-------------------------------------
+				function shake(){
+					var tl = new TimelineMax();
+					tl
+					  .to('.dirtygear,.bg',.1,{y:2,rotation:-1})
+					  .to('.dirtygear,.bg',.1,{y:0,rotation:0})
+					return tl;
+				}
+
+			};
+			
+			function addEvent() {
+				//--------------- SET -----------------
+				//To add:		_(object).on(events,  function);
+				//To remove:	_(object).off(events, function);
+				//-------------------------------------
+				_('#container').on('click', exit);
+			};
+			
+			function exit() {
+				// EB.clickthrough();						/*Sizmek Exit*/
+				// Enabler.exit('Background Exit');   		/*Studio/Enabler Exit*/
+				// ADGEAR.html5.clickThrough("clickTAG");  	/*Adgear Exit*/
+				// ExitApi.exit();								/*Adword Exit*/
+				window.open(clickTag);						/*Standard Exit*/
+				console.log('Exit')
+			}
+			
+
+
+
+		};
+	</script>
+</body>
+</html>

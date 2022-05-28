@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<meta charset='UTF-8'>
+	<title>Neuron Syndicate - Free Guy</title>
+	<meta name='ad.size' content='width=300,height=250'>
+    <link rel='stylesheet' href='style.css'>
+	<script> var clickTag = 'https://www.google.com'; </script>
+    <script src='https://s0.2mdn.net/ads/studio/cached_libs/gsap_3.2.4_min.js'></script>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+</head>
+<body>
+	<div id='container'>
+        <div class='bg-cont imgfix'>
+            <div class="ef-bg imgfix"><img src='https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/ef-bg.jpg' alt='Background'></div>
+            <div class="balloon"><img src="https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/balloon.png" alt="Baloon"></div>
+            <canvas id="cvs2"></canvas>
+            <div class="light-1 lights"><img src="https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/light-1.png" alt="Lights"></div>
+            <div class="light-2 lights"><img src="https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/light-2.png" alt="Lights"></div>
+            <div class="light-3 lights"><img src="https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/light-3.png" alt="Lights"></div>
+            
+        </div>
+
+        <div class='sprite top'></div>
+        <div class='ryan imgfix'>
+            <img src="https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/ryan.png" alt="">
+        </div>
+        <canvas id="cvs"></canvas>
+
+        <div class='sprite bottom2'></div>
+        <div class='logo'>
+            <img src="https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/logo.png" alt="">
+        </div>
+        <div id='border'></div>
+        <div id='clickthru'></div>
+        <div id='cta'>
+            <div class='sprite cta-text1'></div>
+            <div class='sprite cta-text2'></div>
+        </div>  
+	</div>
+    <script src="https://s0.2mdn.net/ads/studio/cached_libs/easeljs_0.8.2_937c3ec68021211c056f61c9ceaccffd_min.js"></script>
+	<script src="canvas.js"></script>
+	<script>
+    //--------------preload---------------------
+    function preload(arr,f) { $('<div id="preload" />').appendTo('body'); $(arr).each(function () {$('<img />').attr('src',this).appendTo('#preload').hide(); }); window.onload =function(){ f(); $('#preload').remove()} }
+    //--------------vars-------------------
+    var tl = gsap.timeline({delay: 0.5,  defaults: {duration: 0.5,ease: "none" }});
+    var tlExplode = gsap.timeline({repeat: 6, repeatDelay: .5});
+    //----------------------------------
+    preload([
+        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/balloon.png",
+        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/ef-bg.jpg",
+        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/light-1.png",
+        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/light-2.png",
+        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/light-3.png",
+        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/logo.png",
+        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/ryan.png",
+        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/sprite.png"
+    ],startAnim);
+    //--------------animations---------------------
+    function startAnim() {
+        //--------------- SET -----------------
+        gsap.set('#container', {display: 'block'});
+        gsap.set('.imgfix', { rotation:0.001, willChange: 'transform'});
+       
+        //------------ ADD EVENT --------------
+        addEvent();
+		initCanvas();
+        //---------- ADD ANIMATION ------------ 
+        var tl = gsap.timeline()
+            tl
+            .add('Scene1')
+            .fromTo('.bg-cont', {scale:1.5},{duration: 1.2, scale: 1, transformOrigin: '50% 40%', ease: 'power2.inOut'}, 'Scene1')
+            .fromTo('.ryan', {scale:1.55},{duration: 1.25, scale: 1, transformOrigin: '50% 30%', ease: 'power2.inOut'}, 'Scene1')
+            .fromTo('.top',{y:-60},{duration:.7, y:0, ease: "power1.out"},'Scene1+=.5')
+            .fromTo('.bottom2',{y:60},{duration:.7, y:0, ease: "power1.out"},'Scene1+=.5')
+            
+            .fromTo('.logo',{opacity: 0,scale:3},{duration: .2, opacity: 1,scale:1, ease: 'power1.inOut'},'Scene1+=1.1')
+            .fromTo('#cta',{opacity: 0, pointerEvents: 'none',},{duration: .5, opacity: 1, pointerEvents: 'auto', ease: 'power1.out'}, 'Scene1+=1.5')
+
+            .add('repeat', 'Scene1')
+            // .add(tlExplode.play, 'repeat')
+            .to('.balloon', {duration: 1, rotation: -1, yoyo: true, repeat: 10, transformOrigin: '85% 10%', ease: 'power1.inOut'},'repeat')
+            .to('.balloon', {duration: 3, y: -3, yoyo: true, repeat: 10, ease: 'power1.inOut'},'repeat')
+            .add(hoverFunction, 'Scene1+=2')
+            .add(p_stop,'17')
+
+            tlExplode
+            .add('init')
+            .fromTo('.light-1', {opacity: 0, scale: .2}, {duration: .4, opacity: .6, scale: 1, transformOrigin: '5% 67%', yoyo: true, repeat: 5, ease: 'none'},'init+=.2')
+            .fromTo('.light-2', {opacity: 0, scale: .2}, {duration: .4, opacity: .6, scale: 1, transformOrigin: '24% 53%', yoyo: true, repeat: 5, ease: 'none'},'init')
+            .fromTo('.light-3', {opacity: 0, scale: .2}, {duration: .4, opacity: .6, scale: 1, transformOrigin: '63% 54%', yoyo: true, repeat: 3, ease: 'none'},'init+=.5')
+
+        //-------------------------------------
+    };
+
+
+    function addEvent() {
+        $('#clickthru').on('click', exit);
+        $('#cta').on('click', exit);
+    };
+
+    function hoverFunction() {
+        $('#cta').on('mouseenter', function() {
+            gsap.to('.cta-text2',{duration:.6,opacity:1 });
+        });
+        $('#cta').on('mouseleave', function() {
+            gsap.to('.cta-text2',{duration:.6,opacity:0});
+        });
+    }
+
+    function exit() {
+        window.open(clickTag);
+    }
+    
+
+
+</script>
+</body>
+</html>
+
+<!--2021-->
