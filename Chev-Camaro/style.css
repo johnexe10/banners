@@ -1,0 +1,137 @@
+body {margin: 0px;}
+
+#container {
+	background-color: white;
+	border: 1px solid gray;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: none;
+	overflow: hidden;
+	position: absolute;
+	width: 300px;
+	height: 250px;
+    pointer-events: none;
+}
+
+#container * {
+	position: absolute;
+}
+
+
+#camaro{
+    position: absolute;
+    top: 0;
+}
+.bgclick{
+    pointer-events: auto;
+}
+.frame2,.frame2-bg,.frame3,.bgclick{
+    width: 300px;
+    height: 250px;
+}
+.frame2-bg{
+    background-color:#795548;
+    opacity: .5;
+}
+.frame3{
+   background-color:#fff; 
+    
+}
+/*sprite*/
+.sprite { background: url('sprite.png') no-repeat top left; height: 25px;  } 
+.sprite.f3-t5 { background-position: 0 0; width: 131px; height: 18px; } 
+.sprite.f3-t6 { background-position: 0 -28px; width: 59px; height: 18px; } 
+.sprite.f3-t7 { background-position: 0 -56px; width: 106px; height: 11px; } 
+.sprite.logo { background-position: 0 -77px; width: 174px; height: 33px; } 
+.sprite.camaro2 { background-position: 0 -120px; width: 200px; height: 69px; } 
+.sprite.cta-bg { background-position: 0 -199px; width: 118px; } 
+.sprite.cta-glow { background-position: 0 -234px; width: 180px; height: 88px; } 
+.sprite.cta-txt { background-position: 0 -332px; width: 102px; height: 10px; } 
+.sprite.f2-t1 { background-position: 0 -352px; width: 157px; } 
+.sprite.f2-t2 { background-position: 0 -387px; width: 197px; } 
+.sprite.f2-t3 { background-position: 0 -422px; width: 182px; } 
+.sprite.f2-t4 { background-position: 0 -457px; width: 184px; } 
+.sprite.f3-t1 { background-position: 0 -492px; width: 137px; height: 10px; } 
+.sprite.f3-t2 { background-position: 0 -512px; width: 132px; height: 9px; } 
+.sprite.f3-t3 { background-position: 0 -531px; width: 181px; height: 56px; } 
+.sprite.f3-t4 { background-position: 0 -597px; width: 54px; height: 23px; } 
+
+
+.sprite.f2-t1 {
+    top: 70px;
+    left: 50px;
+}
+
+.sprite.f2-t2 {
+    top: 105px;
+    left: 51px;
+}
+
+.sprite.f2-t3 {
+    top: 140px;
+    left: 50px;
+}
+
+.sprite.f2-t4 {
+    top: 175px;
+    left: 53px;
+}
+.sprite.f3-t1 {
+    top: 40px;
+    left: 13px;
+} 
+
+.sprite.f3-t2 {
+    top: 61px;
+    left: 13px;
+}
+
+.sprite.f3-t3 {
+    top: 75px;
+    left: 11px;
+}
+
+.sprite.f3-t4 {
+    top: 98px;
+    left: 196px;
+}
+
+.sprite.f3-t5 {
+    top: 134px;
+    left: 13px;
+}
+
+.sprite.f3-t6 {
+    top: 192px;
+    left: 13px;
+}
+
+.sprite.f3-t7 {
+    top: 223px;
+    left: 13px;
+}
+.camaro2{
+    top: 142px;
+    left: 89px;
+}
+.cta{
+    width: 118px;
+    height: 25px;
+    bottom: 9px;
+    right: 10px;
+    overflow: hidden;
+}
+.sprite.logo {}
+
+.sprite.cta-glow {
+    top: -26px;
+    left: -185px;
+}
+
+.sprite.cta-txt {
+    top: 8px;
+    left: 8px;
+}
+
