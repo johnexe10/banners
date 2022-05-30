@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<title>Telus</title>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<meta name="ad.size" content="width=300,height=250">
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<link rel="stylesheet" href="style.css">
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<script>
+		var clickTag = "https://www.google.com";
+	</script>
+	<!-- ~~~~~~~~~~~~~~ STANDARD ~~~~~~~~~~~~~~ -->
+    <script type="text/javascript" src="https://h5.adgear.com/v2/js/html5.min.js"></script>
+    <script src="https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.18.0_499ba64a23378545748ff12d372e59e9_min.js"></script>
+    <script src="https://s0.2mdn.net/ads/studio/cached_libs/easeljs_0.8.2_937c3ec68021211c056f61c9ceaccffd_min.js"></script>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<script src="cb_standard.js"></script>
+	<script src="canvas.js"></script>
+	<script src="particlesystem.js"></script> 
+</head>
+<body>
+	<div id="container">
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+		<canvas id="bg" class="bg1 bg"></canvas>
+		<div class='t1'>
+                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                       width="300px" height="250px" viewBox="0 0 300 250" enable-background="new 0 0 300 250" xml:space="preserve">
+                        <g>
+                          <defs>
+                              <clipPath id="mask">
+                                  <rect id="mask-rect" fill="#fff" x="0" y="0" width="300" height="250"/>
+                              </clipPath>
+                          </defs>
+                          <image class="price" clip-path="url(#mask)" width="300" height="250" xlink:href="t1.svg"></image>
+                        </g>
+                  </svg>
+        </div>
+        <div class="flybird"><img src="bird1.png" alt=""></div>
+        <div class="flybird2"><img src="bird2.png" alt=""></div>
+		<div class='t2'><img src="t2.svg"/></div>
+		<div class='t3'><img src="t3.svg"/></div>
+		<div class='logo'><img src="logo.svg"/></div>
+        <div class="birdend"></div>
+        <div class="legal"><img src="legal.svg" alt=""></div>
+		<div id="cta">
+			<div class='cta_bg'></div>
+			<img class="cta" src="cta.svg"/>
+			<img class="cta_hover" src="cta_hover.svg"/>
+		</div>
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+	</div>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<script>
+		var tl = new TimelineMax();
+        var hover = new TimelineMax({repeat:-1,repeatDelay:0});
+		var bird = new TimelineMax({repeat:-1});
+        var fb1 = [{"x":-27.7,"y":234},{"x":-27.7,"y":234},{"x":45,"y":179.7},{"x":64,"y":167.7},{"x":87,"y":153},{"x":139.3,"y":138},{"x":146.5,"y":165}]
+		var fb2 = [{"x":146.5,"y":165},{"x":153.5,"y":175.4},{"x":137.7,"y":188.2},{"x":125.7,"y":167.7},{"x":105.5,"y":133},{"x":160.5,"y":74},{"x":172.7,"y":108}];
+		var fb3 = [{"x":172.7,"y":109},{"x":173,"y":106.2},{"x":202.6,"y":232.9},{"x":257.7,"y":215.1}]
+		var fb4 = [{"x":216,"y":212.3},{"x":313.5,"y":234.4},{"x":288,"y":162},{"x":281,"y":133},{"x":277.7,"y":122},{"x":269,"y":84},{"x":229,"y":108}]
+		function initAd() {
+			//--------- PRE-LOAD IMAGE ------------
+			startPreload(
+              'bird-sprite.png',
+              'bird1.png',
+              'bird2.png',
+              'circle.png',
+              'cta_hover.svg',
+              'cta.svg',
+              'fbr1_1.png',
+              'fbr1_2.png',
+              'fbr1_3.png',
+              'fbr1_4.png',
+              'legal.svg',
+              'logo.svg',
+              'smoke.png',
+              't1.svg',
+              't2.svg',
+              't3.svg',
+            animate);
+			//-------------------------------------
+            function animate(){
+                initCanvas();
+                startAnim();
+            }
+			function startAnim() {
+				//--------------- SET -----------------
+				tl.set('#container', {display: 'block'});
+				tl.set(['img','.sprite'], {rotation: 0.001, force3D: true});
+				tl.set('.txt', {transformPerspective:200, transformOrigin:"50% 0"});
+                //------------ ADD EVENT --------------
+				addEvent();
+				//---------- ADD ANIMATION ------------
+					tl
+					//--- F1
+					.from('.bg1', 			.5,	{opacity:0, ease:Power1.easeOut},'start')
+                    .from('.t1', 	.8, 	{opacity:0, y:10,ease:Power1.easeInOut})
+                    .add('out','+=3')
+                    .to('#mask-rect',.6,{attr:{x:600},ease: Power2.easeIn},'out+=.1')
+                    .to('.t1',1,{opacity:0},'out')
+                    .to('.legal',.6,{opacity:0},'out+=.5')
+                    .fromTo('.flybird',.6,{x:-347},{x:700,ease: Power2.easeIn},'out')
+              
+                    //---F2 
+                    .from('.t2', .8, 	{opacity:0, y:10,ease:Power1.easeInOut})
+                    .fromTo('.flybird2',.6,{x:300},{x:-700,y:-400,ease: Power2.easeIn},'+=1.5')
+                    .to('.t2',.3,{opacity:0},'-=.3')
+                    //----F3
+                    .to([_bot.c,_top.c], .5,{alpha:0,onComplete:clearScene1})
+                    //endframe                    
+					.add('end')
+                    .add(function(){createEndFrame()},'end')
+                    .add(endFrame,'end')
+                    .add(hover,'end-=.3')
+                    .add(bird,'end')
+                    .from('.logo', .7, 	{opacity:0, ease:Power1.easeOut},'end')
+                    .from('.t3', .8, 	{opacity:0, y:10,ease:Power1.easeInOut},'end+=.5')
+                    .from('#cta', .5, 	{y:10, opacity: 0, ease: Power1.easeOut},'end+=1.3')
+              
+                    .to(fiber1.mask,.3,{bezier:{values:fiber1.path, type:"cubic"},onUpdate:fiber1.draw,ease:Linear.easeNone},'end')
+					.to(fiber2.mask,.25,{bezier:{values:fiber2.path, type:"cubic"},onUpdate:fiber2.draw,ease:Linear.easeNone},'end+=.3') 
+					.to(fiber3.mask,.25,{bezier:{values:fiber3.path, type:"cubic"},onUpdate:fiber3.draw,ease:Linear.easeNone},'end+=.55') 
+					.to(fiber4.mask,.3,{bezier:{values:fiber4.path, type:"cubic"},onUpdate:fiber4.draw,ease:Linear.easeNone},'end+=.7') 
+                    .fromTo('.birdend',.5,{x:-100,y:30},{x:0,y:0},'end+=.7')
+                    //end  
+                   .add(removeCanvas,15)
+                   .add(function(){
+                      bird.pause()
+                      hover.pause()           
+                    },15)
+                    //--bird
+                    bird
+                    .to('.birdend', .1, { backgroundPosition:'0 -47px', ease: SteppedEase.config(1) });
+                    //--hover
+                    hover
+                    .to('.birdend',2,{y:'+=10',ease:Power1.easeInOut})
+                    .to('.birdend',2,{y:'-=10',ease:Power1.easeInOut})
+                    .to('.birdend',2,{y:'+=10',ease:Power1.easeInOut})
+			};
+
+			function exit() {
+//                window.open(clickTag);
+                 ADGEAR.html5.clickThrough("clickTAG");
+			}
+
+			function endFrame() {
+				_('#container').on('mouseenter', function() {
+					TweenMax.to('.cta_bg', 		0.3, {backgroundColor:'#fff'});
+					TweenMax.to('.cta', 		0.3, {opacity:0});
+					TweenMax.to('.cta_hover', 	0.3, {opacity:1});
+				});
+				_('#container').on('mouseleave', function() {
+					TweenMax.to('.cta_bg', 		0.3, {backgroundColor:'#248700'});
+					TweenMax.to('.cta', 		0.3, {opacity:1});
+					TweenMax.to('.cta_hover', 	0.3, {opacity:0});
+				});
+			}
+			function addEvent() {
+				_('#container').on('click', exit);
+
+			};
+
+		};
+	</script>
+</body>
+</html>

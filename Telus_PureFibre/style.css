@@ -1,0 +1,62 @@
+body {margin: 0px;}
+
+#container {
+	background-color: #fff;
+	border: 1px solid gray;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: none;
+	overflow: hidden;
+	position: absolute;
+	width: 300px;
+	height: 250px;
+}
+
+#container * {
+	position: absolute;
+}
+
+.bg, .pics_holder {
+	width: 300px;
+	height: 250px;
+	left: -1px;
+	top: -1px;
+}
+
+#fiber1,#fiber2{display: none;}
+
+
+/*SPRITE POSITION*/
+.sprite { background: url('sprite.png') no-repeat top left;  }
+.sprite.bird1 { background-position: 0 0; width: 237px; height: 173px; }
+.sprite.bird2 { background-position: 0 -183px; width: 154px; height: 143px; }
+
+.t1{width: 300px;height: 250px; left: -1px;top: -1px;}
+.legal{width: 300px;height: 250px; left: 2px;top: -1px;}
+.t2{width: 300px;height: 250px; left: -1px;top: -1px;}
+.t6_1{width: 300px;height: 21px;left: 0;top: 397px;}
+.t6_2{width: 300px;height: 26px;left: 0;top: 424px;}
+.logo,.logo img {width: 124px;height: 31px;top: 3px;left: 4px;}
+
+
+
+
+
+/*CUSTOM DIVS*/
+#cta{left:95px;top:156px;width:108px;height:27px}
+.cta_bg{width:100%;height:100%;background-color:#248700;border-radius:6px;border:1px solid #248700;-moz-box-sizing:border-box;box-sizing:border-box}
+.cta,.cta_hover{width:84px;height:10.5px;top:7px;left:12px}
+.cta_hover{opacity:0}
+.flybird{width:347px;height:243px;top:10px}
+.flybird2{width:396px;height:278px;top:100px}
+.flybird2 img{width:100%;height:auto;display:block}
+.t3{width:300px;height:250px;left:-1px;top:-1px}
+.birdend{
+    width: 52px;
+    height: 47px;
+    background: url(bird-sprite.png) no-repeat;
+    background-position: 0 0;
+    top: 160px;
+    left: 15px;
+}
