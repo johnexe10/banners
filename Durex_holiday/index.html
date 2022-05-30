@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!----------------------------------------->
+	<title></title>
+	<!----------------------------------------->
+	<meta name="ad.size" content="width=300,height=250"> 
+	<!----------------------------------------->
+	<link rel="stylesheet" href="style.css">
+	<!----------------------------------------->
+	<script>
+		var clickTag 	= "https://www.google.com";
+		var ads 		= 'standard' // studio | sizmek | standard
+	</script>
+	
+	<!--------------- STANDARD ---------------->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/BezierPlugin.min.js"></script>
+	<!----------------------------------------->
+<!--	<script src="gsapSnow.js"></script>-->
+	<script src="cb_core.js"></script>
+	<!----------------------------------------->
+</head>
+<body>
+	<div id="container">
+		<!----------- INSERT DIVS ------------->
+		<div class="bg">
+			<img src="bg.jpg" alt="Background">
+		</div>
+        
+        <canvas id='cvs'></canvas> 
+<!--
+		<div id="flake1" class="flake1"><img src="flake1.png" alt="snowflake"></div>
+		<div id="flake2" class="flake2"><img src="flake2.png" alt="snowflake"></div>
+		
+-->
+        <div id="container-snow"></div>
+		<div class='sprite dots dots1 scene2'></div>
+		<div class='sprite dots dots2 scene2'></div>
+		<div class='sprite logo'></div>
+		<div class='sprite packshots'></div>
+		<div class='sprite t1_1 scene1'></div>
+		<div class='sprite t1_2 scene1'></div>
+		<div class='sprite t1_3 scene1'></div>
+		<div class='sprite t1_4 scene1'></div>
+		<div class='sprite t2_1 scene2'></div>
+		<div class='sprite t2_2 scene2'></div>
+		<div class='sprite cta'></div>
+
+
+
+		<!----------- INSERT DIVS ------------->
+	</div>
+	
+	<script src="canvas.js"></script>
+	<script>
+		var tl = new TimelineMax();
+		var tl2 = new TimelineMax();
+		var loops = 3;
+		function initAd() {
+			//--------- PRE-LOAD IMAGE ------------
+			startPreload('bg.jpg','sprite.png', startAnim);
+			//-------------------------------------
+			function startAnim() {
+//				fillSnow();
+
+				//--------------- SET -----------------
+				TweenMax.set('#container', {display: 'block'});
+				// tl.set(['img','.sprite'], {rotation: 0.001, force3D: true})
+				TweenMax.set('.bg', {transformOrigin: '50% 50%'})
+				//------------ ADD EVENT --------------
+				addEvent();
+                createStars()
+				//---------- ADD ANIMATION ------------
+                tl2
+                    .staggerTo(".stars", 	2, {scale:.1,opacity:0,yoyo:true,repeat:-1},.2	,"start")
+                    .to(".stars", 	2, {rotation:90,repeat:-1,ease:Power0.easeNone},.3	,"start")
+				tl
+					.from(".scene1", 	.5, {opacity:0}	,"start")
+					.to(".scene1", 		.5, {opacity:0}	,"+=2")
+					.from(".scene2", 	.5, {opacity:0})
+                    
+					// .to(".scene2", 		.5, {opacity:0}	,"+=2")
+					.add(function() {
+						if (loops > 0) {
+							loops--;
+							TweenMax.to(".scene2", .5, {opacity:0, delay:2, onComplete:function() {
+								tl.play("start");
+							}})
+						} else {
+//							TweenMax.to("#container-snow", 1, {opacity:1, onComplete:function() {
+//								
+//							}});
+                            tl2.stop()
+                            killSnow();
+						}
+					})
+
+				;
+
+                
+			
+				//-------------------------------------
+			};
+			function createStars(){
+                for(var i=0;i<=17;i++){
+                    var star = document.createElement('img');
+                    star.src = 'star.png';
+                    star.className = 'stars';
+                    //change width and height for x and y depending on the size of banner
+                    TweenMax.set(star,{x:Math.random()*(300-32),y:Math.random()*(250-32),scale:Math.random()*.4,opacity:Math.random()})
+                    //TweenMax.set(star,{})
+                    _('#container-snow').c.appendChild(star)
+                    
+                }
+                
+            }
+            
+			function addEvent() {
+				//--------------- SET -----------------
+				//To add:		_(object).on(events,  function);
+				//To remove:	_(object).off(events, function);
+				//-------------------------------------
+				_('#container').on('click', exit);
+			};
+			
+			function exit() {
+				switch(ads) {
+					case 'sizmek': 		EB.clickthrough("myClickInteraction"); console.log('sizmek'); break; 
+					case 'studio': 		Enabler.exit('Background Exit'); console.log('studio'); break;
+					case 'standard':	window.open(clickTag); console.log('standard'); break;
+					default: 			window.open(clickTag); console.log('standard'); break;
+				}
+				
+			}
+
+		
+		};
+	</script>
+</body>
+</html>

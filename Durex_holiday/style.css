@@ -1,0 +1,91 @@
+body {margin: 0px;}
+
+#container {
+	background-color: black;
+	border: 1px solid gray;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: none;
+	overflow: hidden;
+	position: absolute;
+	width: 300px;
+	height: 250px;
+}
+
+#container * {
+	position: absolute;
+}
+
+.bg {
+	width: 300px;
+	height: 250px;
+}
+
+/*	SPRITE  */
+.sprite { background: url('sprite.png') no-repeat top left; width: 86px; height: 18px;  } 
+.sprite.cta { background-position: 0 0; width: 83px; height: 30px; } 
+.sprite.dots { background-position: 0 -40px; height: 4px; } 
+.sprite.logo { background-position: 0 -54px; width: 70px; height: 32px; } 
+.sprite.packshots { background-position: 0 -96px; width: 112px; height: 151px; } 
+.sprite.t1_1 { background-position: 0 -257px; width: 102px; } 
+.sprite.t1_2 { background-position: 0 -285px; width: 90px; } 
+.sprite.t1_3 { background-position: 0 -313px; width: 117px; height: 19px; } 
+.sprite.t1_4 { background-position: 0 -342px; width: 78px; height: 15px; } 
+.sprite.t2_1 { background-position: 0 -367px; width: 67px; height: 23px; } 
+.sprite.t2_2 { background-position: 0 -400px; height: 24px; } 
+
+/*	SPRITE POSITION  */
+.cta {
+    left: 161px;
+    top: 182px;
+}
+.dots1 {
+    left: 166px;
+    top: 88px;
+}
+.dots2 {
+    left: 166px;
+    top: 161px;
+}
+.logo {
+    left: 163px;
+    top: 33px;
+}
+.packshots {
+    left: 28px;
+    top: 60px;
+}
+.t1_1 {
+    left: 163px;
+    top: 80px;
+}
+.t1_2 {
+    left: 164px;
+    top: 103px;
+}
+.t1_3 {
+    left: 164px;
+    top: 126px;
+}
+.t1_4 {
+    left: 163px;
+    top: 149px;
+}
+.t2_1 {
+    left: 166px;
+    top: 101px;
+}
+.t2_2 {
+    left: 166px;
+    top: 129px;
+}
+
+/*	OTHER ELEMENTS  */
+.flake1 {
+	width: 97px;
+	height: 105px;
+}
+.flake2 {
+	width: 86px;
+	height: 86px;
+}
