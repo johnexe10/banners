@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<meta charset="UTF-8">
+	<title>CandyBanners</title>
+	<meta name="ad.size" content="width=300,height=250"> 
+	<link rel="stylesheet" href="style.css">
+	<script> var clickTag = "https://www.google.com"; </script>
+    <script src="https://s0.2mdn.net/ads/studio/cached_libs/gsap_3.2.4_min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	<div id="container">
+		<div class='bg'>
+			<img src="bg.jpg" alt="Background">
+		</div>
+        <div class="clock-holder">
+            <div class="clock">
+                <img src="clock.png" alt="">
+            </div>
+            <div class="hand">
+                <img src="hand.png" alt="">
+            </div>
+            <div class="arrow-mask">
+                <div class="arrow-holder">
+                    <div class="arrow">
+                        <img src="arrow.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='sprite t1-1 t1'></div>
+        <div class='sprite t1-2 t1'></div>
+
+        <div class='sprite t2-1 t2'></div>
+        <div class='sprite t2-2 t2'></div>
+
+        <div class='sprite t3-1 t3'></div>
+        <div class='sprite t3-2 t3'></div>
+
+        <div class='sprite t4-1 t4'></div>
+        <div class='sprite t4-2 t4'></div>
+
+        <div class='sprite t5-1 t5'></div>
+        <div class='sprite t5-2 t5'></div>
+        <div class='sprite t5-3 t5'></div>
+
+        <div class='sprite t6'></div>
+
+
+        <div class='cta'>
+            <div class='sprite cta-text1'></div>
+            <div class='sprite cta-text2'></div>
+        </div>
+        <div class='sprite legal'></div>
+        <div class='sprite logo'></div>
+        <div id='clickthru'></div>
+        
+	</div>
+	<script>
+    //--------------preload-img-------------------
+    function preload(arr,f) { $('<div id="preload" />').appendTo('body'); $(arr).each(function () {$('<img />').attr('src',this).appendTo('#preload').hide(); }); window.onload =function(){ f(); $('#preload').remove()} }
+    //--------------vars-------------------
+    var tl = gsap.timeline({delay: 0.5,  defaults: {duration: 0.8,ease: "power1.out" }});
+    //---------------------------------
+    preload([
+        "sprite.png",
+        "clock.png",
+        "bg.jpg"
+    ],startAnim);
+    //--------------animations---------------------
+    function startAnim() {
+        //--------------- SET -----------------
+		gsap.set('#container', {display: 'block',delay: 0.5});
+        gsap.set('.arrow-holder',{transformOrigin:'0 100%',ease:'none'})
+        gsap.set('.hand',{rotation:-36,transformOrigin:'0 100%',transformOrigin:'17.4% 83.8%',ease:'none'})
+        gsap.set('.arrow',{scale:.6,x:8,y:5})
+        //------------ ADD EVENT --------------
+        addEvent();
+        //---------- ADD ANIMATION ------------
+        tl
+            //=========================translate(-48px, -25px) rotate(-34deg) scale(0.6, 0.6)
+            .add('frame1')
+            .from('.t1',{stagger:.4,opacity:0,y:10},'frame1')
+            .from('.logo',{opacity:0},'frame1+=.6')
+            //====================
+            .add('frame2','frame1+=3.5')
+            .to('.t1',{opacity:0},'frame2')
+            .from('.clock-holder',{opacity:0},'frame2+=.5')
+            .fromTo('.arrow-holder',{rotation:-68},{rotation:-32,duration:1,ease: "power1.out"},'frame2+=1')
+            .to('.hand',{rotation:0,duration:1,ease: "power1.out"},'frame2+=1')
+            .from('.t2',{stagger:.2,x:20,opacity:0,duration:.5},'frame2+=.8')
+            //====================
+            .add('frame3','frame2+=4.5')
+            .to('.t2',{opacity:0},'frame3')
+            .to('.hand',{rotation:'+=324',ease:'power1.out'},'frame3')
+            .to('.arrow-holder',{rotation:0,duration:.75,ease: "power1.out"},'frame3+=1.55')
+            .to('.arrow',{scale:1,x:0,y:0,duration:.75,ease: "power1.out"},'frame3+=1.55')
+            .to('.hand',{rotation:'+=78',duration:1,ease: "power1.out"},'frame3+=1.3')
+            .from('.t3',{stagger:.2,x:20,opacity:0,duration:.5},'frame3+=.8')
+            //====================
+            .add('frame4','frame3+=4.5')
+            .to('.t3',{opacity:0},'frame4')
+            .to('.hand',{rotation:'+=282',ease:'power1.out'},'frame4')
+            .to('.hand',{rotation:'+=78',duration:1,ease: "power1.out"},'frame4+=1.3')
+            .from('.t4',{stagger:.2,x:20,opacity:0,duration:.5},'frame4+=.8')
+            //====================
+            .add('frame5','frame4+=4.5')
+            .to('.t4',{opacity:0},'frame5')
+            .to('.hand',{rotation:'+=282',ease:'power1.out'},'frame5')
+            .to('.hand',{rotation:'+=78',duration:1,ease: "power1.out"},'frame5+=1.3')
+            .from('.t5',{stagger:.2,x:20,opacity:0,duration:.5},'frame5+=.8')
+            //====================
+            .add('frame6','frame5+=4.5')
+            .to('.t5,.clock-holder',{opacity:0},'frame6')
+            .from('.t6',{opacity:0,y:10},'frame6+=.5')
+            .from('.legal',{opacity:0},'frame6+=.5')
+            .from('.cta',{opacity:0},'frame6+=1.5')
+            .add(hoverFunction)
+        //-------------------------------------
+    };
+
+    function addEvent() {
+        $('#clickthru').on('click', exit);
+    };
+    
+    function exit() {
+        //-----------exit guide--------------------------
+        //--adword--> ExitApi.exit();
+        //--adgear--> ADGEAR.html5.clickThrough("clickTAG");
+        //--studio--> Enabler.exit('Background Exit'); 
+        //--standard/sizemek/adword no-api--> window.open(clickTag);
+        //-----------exit--------------------------------
+        window.open(clickTag); /*Studio/Enabler Exit*/
+    }
+    
+    function hoverFunction() {
+        $('#clickthru').on('mouseenter', function() {
+            gsap.to('.cta',{duration:.6,backgroundColor:'#fff'});
+            // gsap.to('.cta-text1',{duration:.6,opacity:0});
+            // gsap.to('.cta-text2',{duration:.6,opacity:1 });
+        });
+        $('#clickthru').on('mouseleave', function() {
+            gsap.to('.cta',{duration:.6,backgroundColor:'#ffd100'});
+            // gsap.to('.cta-text1',{duration:.6,opacity:1});
+            // gsap.to('.cta-text2',{duration:.6,opacity:0});
+        });
+    }
+//-------------------------------------
+
+</script>
+</body>
+</html>
+
+<!--2021-->

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- PUT CREATIVE NAME HERE -->
+	<title>Pine-Sol Lavander</title>
+	<!-- ADJUST META SIZE ACCORDING TO THE SIZE OF AD -->
+	<meta name="ad.size" content="width=300,height=250"> 
+	<!-- CUSTOMIZE CSS -->
+	<link rel="stylesheet" href="style.css">
+	<script>
+		var clickTag = "https://www.google.com";
+	</script>
+    <script src="https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.18.0_499ba64a23378545748ff12d372e59e9_min.js"></script> 
+	<script src="cb_standard.js"></script>
+</head>
+<body>
+	<div id="container">
+        <div class="bg"><img src="bg.jpg"/></div>
+        <div class='sprite sun'></div>
+        <div class='sprite bouquet'></div>
+        <div class='sprite doodle'></div>
+        <div id="emitter" class="emitter"></div>
+        <div class='sprite blob'></div>
+        <div class='sprite bottle'></div>
+         
+        <div class='sprite t1'></div>
+        <div class='sprite t2'></div>
+        <div class='sprite t3'></div>
+        <div class='sprite t4'></div>
+        <div class="cta">
+            <div class='sprite cta-t'></div>
+        </div>
+	</div>
+	<script>
+		var tl = new TimelineMax();
+		function initAd() {
+			//--------- PRE-LOAD IMAGE ------------
+			startPreload('bg.jpg','sprite.png','spring1.png','spring2.png','spring3.png','spring4.png','spring5.png','spring6.png', startAnim);
+			     
+			//-------------------------------------
+			function startAnim() {
+				//--------------- SET -----------------
+				TweenMax.set('#container', {display: 'block'});
+				TweenMax.set('img', {rotation: .0001, force3D: true})
+				//------------ ADD EVENT --------------
+				addEvent();
+				//---------- ADD ANIMATION ------------
+                tl
+                .from('.bottle',.7,{yPercent:100,ease:Power1.easeInOut},'start')
+                .from('.t1',1,{opacity:0,y:5,ease:Power1.easeInOut},'start+=.5')
+                .from('.blob',1,{scale:0,y:5,transformOrigin:'bottom center',ease:Power1.easeInOut},'start+=1.2')
+                .from('.sun',1,{scale:0,y:5,transformOrigin:'50% 60%',ease:Power1.easeInOut, delay:.6},'start+=1.2')
+                .from('.bouquet',1,{scale:0,y:5,transformOrigin:'50% 50%',ease:Power1.easeInOut, delay:.8},'start+=1.2')
+                .add('r','-=.6')
+                .from('.doodle',0.8,{scale:0,transformOrigin:'95% 73%',ease:Power3.easeInOut},'r')
+                .from('.doodle',2,{rotation:-5,transformOrigin:'95% 73%',repeat:3,yoyo:true,ease:Power0.easeNone},'r')
+                .add(emitScents,'r-=0.2')
+                .add('txt','r+=1')
+                .to('.t1',1,{opacity:0,y:5,ease:Power2.easeInOut},'txt')
+                .from('.t2',1,{opacity:0,y:5,ease:Power2.easeInOut},'txt+=.5')
+                .to('.t2',1,{opacity:0,y:5,ease:Power2.easeInOut},'txt+=4')
+                .staggerFrom('.t3,.t4',1,{opacity:0,y:5,ease:Power2.easeInOut},.4,'txt+=4.5')
+                .from('.cta',.5,{opacity:0,ease:Power2.easeInOut},'txt+=7')
+				//-------------------------------------
+			};
+            
+            function emitScents() {
+                for(var e=["spring1", "spring2", "spring3","spring4","spring5","spring6"], t=document.getElementById("emitter"), n=0;n<25;n++) {
+                    var o=rr(0,5,true),
+                    l=e[o],
+                    u=5,
+                    s=document.createElement("div");
+                    s.id="bubble"+n,
+                    s.className=l,
+                    t.appendChild(s),
+                    TweenLite.set("#bubble"+n, {scale: .3, opacity:rr(.8,1), transformOrigin:'50% 50%'}),
+                    TweenLite.to("#bubble"+n,.7,{scale:rr(.5,.8),ease:Power1.easeInOut, delay:.15*n + 2})
+                    TweenLite.to("#bubble"+n,u,{rotation:360,ease:Power0.easeNone, delay:.15*n})
+                    TweenLite.to("#bubble"+n, u, {
+                        bezier: {
+                            curviness:1.25, 
+                            values:[{x: 0, y: 0},
+                                    {x: rr(-70,50,true), y: -90},
+                                    {x: -100, y:rr(-100,-50,true)},
+                                    {x: -350, y:rr(-120,40,true)}
+                                   ],
+                            autoRotate:false
+                        }
+                        ,opacity:1, ease:Circ.easeIn, delay:.15*n
+                    }
+                    )
+                }
+                
+            }
+            function rr(min,max,round) {
+                return round ? Math.floor(Math.random()*(1+max-min)+min) : Math.random()*(max-min)+min;
+            }
+			function addEvent() {
+				_('#container').on('click', exit);
+			};
+			
+			function exit() {
+				window.open(clickTag);
+			}
+		};
+	</script>
+</body>
+</html>

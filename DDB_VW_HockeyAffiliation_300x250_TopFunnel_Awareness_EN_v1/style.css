@@ -1,0 +1,117 @@
+*{margin: 0;padding: 0;}
+#container-cb,#container-cb div{position: absolute;}
+#container-cb{cursor:pointer;width: 300px; height: 250px;pointer-events: none;border:1px black solid;box-sizing: border-box;display:none;overflow:hidden;}
+.footer{width: 100%;height: 71px;background-color: white;bottom:0;}
+.bg1{width: 100%;height: 100%;background: url('bg1.jpg');}
+.frame1{width: 100%;height: 100%;}
+.bg2{width: 100%;height: 100%;background: url('bg2.jpg');}
+#clickTag{width: 100%;height: 100%;pointer-events: auto;top:0px;}
+.tiguan {
+    background: url('sprite.png') no-repeat -5px -100px;
+    width: 92px;
+    height: 13px;
+    top: 29px;
+    left: 19px;
+}
+.tiguan2 {
+	background: url('sprite.png') no-repeat -30px -550px;
+	width: 211px;
+	height: 27px;
+    top: 6px;
+    left: 11px;
+}
+.logo {
+    background: url('sprite.png') no-repeat -1px -123px;
+    width: 53px;
+    height: 56px;
+    right: 10px;
+    bottom: 7px;
+}
+.t1 {
+    background: url('sprite.png') no-repeat -2px -5px;
+    width: 234px;
+    height: 36px;
+    top: 80px;
+    left: 30px;
+}
+.t2 {
+    background: url('sprite.png') no-repeat -4px -50px;
+    width: 233px;
+    height: 28px;
+    top: 125px;
+    left: 33px;
+}
+.hockey {
+	background: url('sprite.png') no-repeat -216px -299px;
+	width: 82px;
+	height: 78px;
+	top: 142px;
+	right: 0px;
+}
+.with .l1{
+    width: 68px;
+    height: 3px;
+    background-color: black;
+    top: 4px;
+    right: 63px;
+    position: absolute;
+}
+.with .l2{
+    width: 68px;
+    height: 3px;
+    background-color: black;
+    top: 4px;
+    left: 59px;
+    position: absolute;
+}
+.with {
+	background: url('sprite.png') no-repeat -89px -197px;
+	width: 43px;
+	height: 13px;
+	top: 78px;
+	left: 125px;
+}
+.motion{
+	background: url('sprite.png') no-repeat -2px -214px;
+	width: 240px;
+	height: 36px;
+	top: 95px;
+	left: 38px;
+}
+.all-wheel{
+	background: url('sprite.png') no-repeat -1px -256px;
+	width: 217px;
+	height: 17px;
+	top: 137px;
+	left: 37px;
+}
+.car {
+    position: absolute;
+    top: 49px;
+    left: 13px;
+}
+#cta {
+	background: url('sprite.png') no-repeat -3px -300px;
+	width: 86px;
+	height: 20px;
+    bottom: 16px;
+    left: 11px;
+    pointer-events: auto;
+}
+.legal {
+	background: url('sprite.png') no-repeat -149px -131px;
+	width: 41px;
+	height: 25px;
+    right: -2px;
+    top: -1px;
+    pointer-events: auto;
+}
+
+.legal-txt {
+	background: url('sprite.png') no-repeat 0 -600px;
+	width: 300px;
+	height: 250px;
+    top:0;
+    left: 0;
+    opacity: 0;
+}

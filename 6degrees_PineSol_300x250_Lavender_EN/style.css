@@ -1,0 +1,141 @@
+body {margin: 0px;}
+
+#container {
+	background-color: white;
+	border: 1px solid #57a0d6;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: none;
+	overflow: hidden;
+	position: absolute;
+	width: 300px;
+	height: 250px;
+}
+
+#container * {
+	position: absolute;
+}
+.bg {
+	width: 300px;
+	height: 250px;
+}
+
+/*sprite*/
+.sprite { background: url('sprite.png') no-repeat top left; width: 105px; height: 135px;  } 
+.sprite.blob { background-position: 0 0; width: 38px; height: 12px; } 
+.sprite.bottle { background-position: 0 -22px; width: 64px; } 
+.sprite.bouquet { background-position: 0 -167px; width: 112px; height: 208px; } 
+.sprite.cta-t { background-position: 0 -385px; width: 68px; height: 10px; } 
+.sprite.doodle { background-position: 0 -405px; width: 217px; } 
+.sprite.sun { background-position: 0 -550px; height: 106px; } 
+.sprite.t1 { background-position: 0 -666px; width: 118px; height: 46px; } 
+.sprite.t2 { background-position: 0 -722px; height: 74px; } 
+.sprite.t3 { background-position: 0 -806px; width: 102px; height: 44px; } 
+.sprite.t4 { background-position: 0 -860px; width: 151px; height: 30px; } 
+
+.blob{
+    top: 104px;
+    right: 43px;
+}
+.doodle{
+    right: 47px;
+    top: 14px;
+}
+.bouquet {
+    top: 26px;
+    right: 6px;
+}
+.bottle{}
+.t1{
+    top: 115px;
+    left: 41px;
+}
+.t2{
+    top: 116px;
+    left: 48px;
+}
+.t3{
+    top: 117px;
+    left: 41px;
+}
+.t4{
+  top: 167px;
+  left: 16px;
+}
+.sun{
+    right: 9px;
+    top: 43px;
+}
+.cta-t{
+    top: 8px;
+    left: 17px;
+}
+.cta{
+    width: 103px;
+    height: 25px;
+    background-color: #00548b;
+    bottom: 16px;
+    left: 39px;
+    -webkit-transition: background-color .4s ease-out;
+    -moz-transition: background-color .4s ease-out;
+    transition: background-color .4s ease-out;
+}
+.cta:hover{
+    background-color: #009aff;
+}
+
+
+
+.bottle{
+    bottom: -1px;
+    right: 30px;
+}
+
+.spring1 {
+  width: 56px;
+  height: 58px;
+  top: 87px;
+  left: 208px;
+  background-image: url("spring1.png");
+}
+
+.spring2 {
+  width: 67px;
+  height: 68px;
+  top: 82px;
+  left: 202px;
+  background-image: url("spring2.png");
+}
+
+.spring3 {
+  width: 18px;
+  height: 18px;
+  top: 107px;
+  left: 227px;
+  background-image: url("spring3.png");
+}
+
+.spring4 {
+  width: 17px;
+  height: 17px;
+  top: 108px;
+  left: 227px;
+  background-image: url("spring4.png");
+}
+
+.spring5 {
+  width: 9px;
+  height: 10px;
+  top: 112px;
+  left: 231px;
+  background-image: url("spring5.png");
+}
+
+.spring6 {
+  width: 36px;
+  height: 36px;
+  top: 98px;
+  left: 218px;
+  background-image: url("spring6.png");
+}

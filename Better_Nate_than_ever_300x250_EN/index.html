@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<meta charset="UTF-8">
+	<title>CandyBanners</title>
+	<meta name="ad.size" content="width=300,height=250">
+	<link rel="stylesheet" href="style.css">
+	<script> var clickTag = "https://www.google.com"; </script>
+    <script src="https://s0.2mdn.net/ads/studio/cached_libs/gsap_3.2.4_min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	<div id="container">
+		<div class='background bg'>
+			<img src="bg.jpg" alt="Background">
+		</div>
+		<div class='shadow bg'>
+			<img src="shadow.png" alt="">
+        </div>
+		<div class='white bg'></div>
+		<div class='nate bg'>
+			<img src="nate.png" alt="nate">
+		</div>
+		<div class='cloud bg'>
+			<img src="cloud.png" alt="nate">
+        </div>
+        <div class='sprite legals'></div>
+        <div class='sprite disney-logo'></div>
+        <div class='sprite logo'>
+            <div class="light-holder">
+            </div>
+        </div>
+
+
+        <div class='sprite date d1'></div>
+        <div class='sprite date d2'></div>
+
+        <div class='cta-sign cta'>
+            <div class='sprite  cta-text1-1 '></div>
+            <div class='sprite  cta-text2-1 '></div>
+            <div class='sprite  cta-text1-2 '></div>
+            <div class='sprite  cta-text2-2 '></div>
+        </div>
+        <div class='logo'></div>
+        <div id='clickthru'></div>
+
+	</div>
+    <!-- <script src="TimeZone.js"></script> -->
+	<script>
+    //--------------preload-img-------------------
+    function preload(arr,f) { $('<div id="preload" />').appendTo('body'); $(arr).each(function () {$('<img />').attr('src',this).appendTo('#preload').hide(); }); window.onload =function(){ f(); $('#preload').remove()} }
+    //--------------vars-------------------
+    var tl = gsap.timeline({delay: 0.5,  defaults: {duration: 0.5,ease: "power1.out" }})
+    //---------------------------------
+    preload([
+        "sprite.png",
+        "nate.png",
+        "light.png",
+        "shadow.png",
+        "cloud.png",
+        "bg.jpg"
+    ],startAnim);
+    //-----------------------------------------------
+    // var dateEvent = [
+    //     new Date('March 15 2022 00:00:00'), // now - 26 Mar 2022 11pm pst // streaming april 1 // Date 1
+    //     new Date('March 27 2022 00:00:00'), // 26 Mar 2022 11pm pst - 31 Mar 2022 11pm pst // streaming fridays // Date 2
+    //     new Date('April 01 2022 00:00:00') // april 1 onward
+    // ],
+    // indexDate = 0;
+    // var arrayDate = [
+    //     'd1',
+    //     'd2'
+    // ];
+    // var todaysDate = new Date();
+    // var timezoneModel = new TimeZone({
+    //     timeZoneOffset: -8,
+    //     date: todaysDate,
+    //     hour: todaysDate.getHours(),
+    //     minute: todaysDate.getMinutes(),
+    //     second: todaysDate.getSeconds(),
+    //     doDaylightSavingsOffset: true,
+    // });
+    // function setDate(){
+    //     var currentDate = timezoneModel.timeZoneOffsetDate;
+    //     for (var i = 0; i < dateEvent.length; i++) {
+    //         if (currentDate >= dateEvent[i]) {
+    //             indexDate = i;
+    //         }
+    //     }
+    //     console.log('Current Date: '+currentDate ,'Event Date: '+dateEvent[indexDate])
+    //     if(indexDate>=0 && indexDate<=1){
+    //         gsap.set('.'+arrayDate[indexDate],{display:'block'})
+    //         gsap.set(['.cta-text1-1','.cta-text2-1'],{display:'block'})
+    //     }else{
+    //         gsap.set('.disney-logo',{y:18})
+    //         gsap.set(['.cta-text1-2','.cta-text2-2'],{display:'block'})
+    //     }
+    // }
+
+    //--------------animations---------------------
+    function startAnim() {
+        //--------------- SET -----------------
+						gsap.set('#container', {display: 'block',delay: 0.5});
+		        gsap.set('.disney-logo',{y:18})
+		        gsap.set(['.cta-text1-2','.cta-text2-2'],{display:'block'})
+        //------------ ADD EVENT --------------
+        // setDate();
+        addEvent();
+        addLights();
+        //---------- ADD ANIMATION ------------
+        tl
+            .add('f1+=.5')
+            .from('.nate,.cloud',{ scale:2.5, duration:2.5,transformOrigin:'50% 70%', ease:"power3.out"}, 'f1')
+            .from('.background',{ scale:4, duration:2,transformOrigin:'50% 70%', ease:"power3.out"}, 'f1')
+            .to('.nate,.cloud',{ scale:1, duration:3,transformOrigin:'50% 70%', ease:"power1.out"}, 'f1+=1.2')
+            .to('.background',{ scale:1, duration:3,transformOrigin:'50% 70%', ease:"power1.out"}, 'f1+=1.2')
+            .to('.white',{ opacity:0, duration:1,ease:"power1.out"}, 'f1')
+            .to('.cloud',{ opacity:0, duration:2.5,ease:"power1.inOut"}, 'f1')
+
+            .add('f2','f1+=1')
+            .from('.logo',{opacity:0,duration:1},'f2')
+            .from('.cta,.disney-logo,.date,.legals,.shadow',{opacity:0,onComplete:hoverFunction},'f2+=0.75')
+            .add(lightAnim,'f2')
+            .add(function(){
+                lightAnim.pause()
+                gsap.to('.lights',{opacity:0,duration:.4})
+            },'15')
+        //------------------
+
+
+        var lightAnim = gsap.timeline({defaults:{ease:'none'}})
+        lightAnim.to('.lights',{stagger:{from:"random",repeat:-1,repeatDelay:.2,yoyo:true,amount:10},duration:.2,autoAlpha:0 },'l')
+        lightAnim.seek('20')
+        //-------------------------------------
+
+    };
+
+    function addLights(){
+        var light = $("<div class='lights'><img src='light.png'></div>")
+        //N----------------------
+        for(var a=0;a<=4;a++){
+            light = light.clone();
+            gsap.set(light,{y:(10*a)})
+            $(".light-holder").append(light);
+        }
+        for(var a=0;a<=3;a++){
+            light = light.clone();
+            gsap.set(light,{x:(9+6.2*a),y:(6+8.6*a)})
+            $(".light-holder").append(light);
+        }
+        for(var a=0;a<=4;a++){
+            light = light.clone();
+            gsap.set(light,{x:38,y:(10*a)})
+            $(".light-holder").append(light);
+        }
+        //A----------------------
+        for(var a=0;a<=4;a++){
+            light = light.clone();
+            gsap.set(light,{x:(73-4.8*a),y:(9.5*a)})
+            $(".light-holder").append(light);
+        }
+        light = light.clone();
+        gsap.set(light,{x:73,y:29})
+        $(".light-holder").append(light);
+        for(var a=0;a<=3;a++){
+            light = light.clone();
+            gsap.set(light,{x:(80+4.2*a),y:(10+9.5*a)})
+            $(".light-holder").append(light);
+        }
+        //T----------------------
+        for(var a=0;a<=3;a++){
+            light = light.clone();
+            gsap.set(light,{x:(100+10*a),y:0})
+            $(".light-holder").append(light);
+        }
+        for(var a=0;a<=3;a++){
+            light = light.clone();
+            gsap.set(light,{x:115,y:(10+9.5*a)})
+            $(".light-holder").append(light);
+        }
+        //E----------------------
+        for(var a=0;a<=4;a++){
+            light = light.clone();
+            gsap.set(light,{x:145,y:(9.5*a)})
+            $(".light-holder").append(light);
+        }
+        for(var a=0;a<=2;a++){
+            light = light.clone();
+            gsap.set(light,{x:155,y:(19*a)})
+            $(".light-holder").append(light);
+        }
+        for(var a=0;a<=2;a++){
+            light = light.clone();
+            gsap.set(light,{x:165,y:(19*a)})
+            $(".light-holder").append(light);
+        }
+    }
+
+    function addEvent() {
+        $('#clickthru').on('click', exit);
+    };
+
+    function exit() {
+        //-----------exit guide--------------------------
+        //--adword--> ExitApi.exit();
+        //--adgear--> ADGEAR.html5.clickThrough("clickTAG");
+        //--studio--> Enabler.exit('Background Exit');
+        //--standard/sizemek/adword no-api--> window.open(clickTag);
+        //-----------exit--------------------------------
+        window.open(clickTag); /*Studio/Enabler Exit*/
+    }
+
+    function hoverFunction() {
+        $('#clickthru').on('mouseenter', function() {
+            gsap.to('.cta-text2-1,.cta-text2-2',{duration:.6,opacity:1 });
+        });
+        $('#clickthru').on('mouseleave', function() {
+            gsap.to('.cta-text1-1,.cta-text1-2',{duration:.6,opacity:1});
+            gsap.to('.cta-text2-1,.cta-text2-2',{duration:.6,opacity:0});
+        });
+    }
+//-------------------------------------
+
+</script>
+</body>
+</html>
+
+<!--2021-->

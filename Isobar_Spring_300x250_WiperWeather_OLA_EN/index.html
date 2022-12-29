@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<title>Isobar_Spring_300x250_WiperWeather_OLA_EN</title>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<meta name="ad.size" content="width=300,height=250"> 
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<link rel="stylesheet" href="style.css">
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<script>
+		var clickTag = "https://www.google.com";
+	</script>
+	<!-- ~~~~~~~~~~~~~~ STANDARD ~~~~~~~~~~~~~~ -->
+    <script src="https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.18.0_499ba64a23378545748ff12d372e59e9_min.js"></script>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<script src="cb_standard.js"></script>
+	
+</head>
+<body>
+	<div id="container">
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+		<div class="frame1">
+			<div id="sky"><img src="sky.jpg"></div>
+			<div id="grass"></div>
+            <div id="road"></div>
+            
+            <div class="car">
+              <img src="car.png" alt="car">
+              <img class="rim1" src="rim.png" alt="car">
+              <img class="rim2" src="rim.png" alt="car">
+		    </div>
+		    <div class='sprite f1-t1 f1'></div>
+            <div class='sprite f1-t2 f1'></div>
+            <div class="rain">
+		      <canvas id='rain'></canvas> 
+		    </div>
+		</div>
+        
+        
+		
+        <div class="frame2">
+			<div id="wiper-mask">
+				<div class="bg2"><img src="bg2.jpg" alt=""></div>
+			</div>
+			<div class="wiper"><img src="wiper.png" alt=""></div>
+        </div>
+        <div class="frame3">
+          <div class='sprite f3-txt1 f3'></div>
+          <div class='sprite f3-txt2 f3'></div>
+          <div class='sprite f3-txt3 f3'></div>
+          <div class='sprite f3-txt4 f3'></div>
+          <div class='sprite f3-txt5 f3'></div>
+          <div class='sprite f3-txt6 f3'></div>
+          <div class='sprite f3-txt7'></div>
+          <div class='sprite logo'></div>
+          <div class='sprite wiper1'></div>
+          <div class='sprite wiper2'></div>
+        </div>
+        <div id="ctaButton" class="cta">
+              <div class='sprite cta-bg'></div>	
+              <div class='sprite cta-glow'></div>	
+              <div class='sprite cta-txt'></div>
+        </div>
+        <div class="legal"><img src='legal.png' alt="Legal Text"/></div>
+        <div class='sprite t_legal'></div>
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+	</div>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<script src="rain2.js"></script>
+	<script src="scrollBg.js"></script>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<script>
+		var tl = new TimelineMax();
+        var road = new scrollBg();
+        var grass = new scrollBg();
+		function initAd() {
+			//--------- PRE-LOAD IMAGE ------------
+			startPreload('road.png', startAnim);
+			//-------------------------------------
+			function startAnim() {
+				//--------------- SET -----------------
+                CSSPlugin.defaultTransformPerspective = 200;
+				tl.set('#container', {display: 'block'});
+				tl.set('img', {rotation: .0001, force3D:true})
+                tl.set(['.f1','.f3'], {transformOrigin: 'top 50% 20', rotation: 0.001, force3D: true})
+                tl.set('.wiper', {rotation:-180})
+                tl.set('.frame2, .bg2', {transformOrigin:"50% 291px"})
+                tl.set('.legal', {opacity:0,display:'none'})
+				
+                //------------ ADD EVENT --------------
+				addEvent();
+				//---------- ADD ANIMATION ------------
+                tl
+                .from('.car',2,{x:'300',ease:Power2.easeOut},'start')
+                .from('.rim1,.rim2',1, {rotation: 720,ease:Power0.easeNone},'start')
+                .to('.rim1,.rim2',1, {rotation: -360,repeat:3,ease:Power0.easeNone},'start+=.6')
+                .staggerFrom('.f1', 1,{scale: 1.1, opacity: 0, rotationX: 90, ease: Power3.easeOut},0.1,'start+=1.2')
+
+                .from('.frame2', 2, {rotation:180,ease: Power2.easeInOut, force3D:true},'start+=3')
+                .from('.bg2', 2, {rotation:-180,ease: Power2.easeInOut, force3D:true},'start+=3')
+
+                .add(startScroll,'start')
+                .add(stopScroll,'start+=6')
+                .set('.frame1',{display:'none'})
+                .add('frame3','-=2')
+				.from('.logo', 0.3, {x:'-=5', opacity:0, ease:Power0.easeNone},'frame3')
+                .from('.f3-txt7', 0.3, {x:'-=5', opacity:0, ease:Power0.easeNone},'frame3')
+                .to('.frame1,.frame2',1,{opacity:0},'frame3+=3')
+
+                .staggerFrom('.f3', 1, {scale: 1.1, opacity: 0, rotationX: 90, ease: Power3.easeOut}, 0.2,'frame3+=3.5')
+				.from('.wiper2', .5, {rotation:-10, transformOrigin:"Bottom Center", opacity:0, ease:Power2.easeInOut},'-=.8')
+				.from('.wiper1', .5, {rotation:-10, transformOrigin:"Bottom Center", opacity:0, ease:Power2.easeInOut},'-=.6')
+
+				.fromTo('.cta-glow', 0.3, {x:0},{x:350, ease:Power0.easeNone, repeat:1})
+                .from('.t_legal', 0.6, {opacity: 0,onComplete:addLegal},'-=.4')
+				//-------------------------------------
+			};
+
+			function startScroll(){
+                //init val 'width,height,speed,canvas id,src'
+                road.init(300,250,2,'road','road.png');
+                grass.init(300,250,.5,'grass','grass.png');
+                TweenLite.ticker.addEventListener("tick", road.render);
+                TweenLite.ticker.addEventListener("tick", grass.render);
+                TweenLite.ticker.addEventListener("tick", drawRain);
+            }
+            function stopScroll(){
+                TweenLite.ticker.removeEventListener("tick", road.render);
+                TweenLite.ticker.removeEventListener("tick", grass.render);
+                TweenLite.ticker.removeEventListener("tick", drawRain);
+            }
+			function addEvent() {
+				//--------------- SET -----------------
+				//To add:		_(object).on (events, function);
+				//To remove:	_(object).off(events, function);
+				//-------------------------------------
+				_('#container').on('click', exit);
+                _('#container').on('mouseover', function(){
+					TweenMax.fromTo('.cta-glow', 0.4, {x:0},{x:350, ease:Power0.easeNone})
+				});
+			};
+			
+			function exit() {
+                    window.open(clickTag);
+			}
+                        function addLegal(){
+				_('.t_legal').on( 'mouseover', onLegalOver)
+                _('.t_legal').on( 'mouseout', onLegalOut)
+			}
+
+			function onLegalOver(){
+				TweenMax.to('.legal',.3,{ opacity:1,display:'block', ease:Power1.easeInOut })
+			}
+			function onLegalOut(){
+				TweenMax.to('.legal',.3,{ opacity:0,display:'none', ease:Power1.easeInOut })
+			}
+
+
+
+		};
+	</script>
+</body>
+</html>
