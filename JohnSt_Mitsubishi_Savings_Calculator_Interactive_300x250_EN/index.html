@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Mitsubishi_Savings_Calculator</title>
+	<meta name="ad.size" content="width=300,height=250"> 
+	<link rel="stylesheet" href="style.css">
+	<script>
+		var clickTag = "https://www.google.com";
+	</script>
+	<!-- GSAP -->
+	<script src="https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.0_d360d9a082ccc13b1a1a9b153f86b378_min.js"></script>
+	<script src="Draggable.min.js"></script>
+    <!-- STANDARD -->
+	<script src="cb_standard.js"></script>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+</head>
+<body>
+	<div id="container">
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+		<div class='car'> <img src="car.png"> </div>
+		<div class="bg"> <img src="bg.jpg"> </div>
+
+
+
+		<div class='logoContainer'>
+			<div class='logo'> <img src="logo.png"> </div>
+			<div class="redLine"></div>
+		</div>
+
+		<div class='sprite t1'></div>
+		<div class='sprite model'></div>
+		<div class='sprite t2-1'></div>
+		<div id="textOneContainer">
+			<div id="textOne"></div>
+		</div>
+		<div class='sprite t2-2'></div>
+		<div id="textTwoContainer">
+			<div id="textTwo"></div>
+		</div>
+		<div class='sprite t3'></div>
+		<div class='sprite legal'></div>
+		
+		
+		<div id="clickthru"></div>
+		<div id='cta'>
+			<div class='shadow'> <img src="shadow.png"> </div>
+			<div class='cta-bg'></div>
+			<div class='sprite cta-text'></div>
+			<div class='sprite cta-hover'></div>
+		</div>
+		
+		<div id='progress-bar'>
+			<div class='bar'></div>
+			<div id="progress-meter" class='progress-meter'></div>
+			
+			<div class="knob">
+				<div class='reddot'><img src="reddot.png"></div>
+				<div class='tryme'><img src="tryme.png"></div>
+			</div>
+		</div>
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+	</div>
+	<script>
+		var tl = new TimelineMax();
+		var glow = new TimelineMax({repeat:-1,yoyo:true});
+		var progressWidth;
+		function initAd() {
+			//--------- PRE-LOAD IMAGE ------------
+			startPreload('sprite.png','car.png','logo.png','shadow.png','reddot.png', startAnim);
+			//-------------------------------------
+			function startAnim() {
+				//--------------- SET -----------------
+				TweenMax.set('#container', {display: 'block'});
+				TweenMax.set('.cta-hover', {opacity:0})
+				// Fix the 0 always get of width by adding Delayed call by 0.1 secs
+				TweenMax.delayedCall(0.1, function() {
+					var div = _('#progress-meter').c;
+					var rect = div.getBoundingClientRect();
+					progressWidth = rect.width;
+					TweenMax.set('#progress-meter', {width: 0})
+				})
+				//------------ ADD EVENT --------------
+				addEvent();
+				//---------- ADD ANIMATION ------------
+				tl
+					.add('frame1')
+					.from('.t1', 0.5, {y: +10, opacity: 0, ease: Power2.easeInOut}, 'frame1')
+					.to('.t1', 0.5, {y: -10, opacity: 0, ease: Power2.easeInOut}, 'frame1+=2')
+					
+					.add('frame2')
+					.to('.bg', 0.7, {opacity: 0, ease: Power2.easeOut}, 'frame2')
+					.from('.legal', 0.7, {opacity: 0, ease: Power2.easeOut}, 'frame2+=0.2')
+					.from('.t3', 0.8, {y: +10, opacity: 0, ease: Power2.easeInOut}, 'frame2+=0.5')
+					.from('.t2-1', 0.5, {y: -10, opacity: 0, ease: Power2.easeOut}, 'frame2+=0.7')
+					.from('.t2-2', 0.5, {y: -10, opacity: 0, ease: Power2.easeOut}, 'frame2+=1')
+					
+					.from('#progress-bar', 0.5, {opacity:0, y: +20,  ease: Back.easeOut.config(1), onComplete: addScrubber}, 'frame2+=1.2')
+					.to('.knob',1,{x:27.5,onUpdate:function(){animate(_('.knob').c._gsTransform.x)}},'frame2+=1.5')
+					.from('.tryme',0.6,{opacity:0},'frame2+=2.7')
+					.add(glow,'frame2+=2.7')
+					.add(knobhovers,'frame2+=2.7')
+				
+					.add('frame3')
+					.from('#cta', 0.8, {y: +10, opacity: 0, ease: Power1.easeOut}, 'frame3+=1')
+					
+					.add(hover);
+				glow
+					.to('.knob',0.8,{boxShadow:'0 0 20px rgba(56, 172, 255, 1)',ease:Power1.easeInOut})
+				//-------------------------------------
+			};
+			
+			function addEvent() {
+				//--------------- SET -----------------
+				//To add:		_(object).on(events,  function);
+				//To remove:	_(object).off(events, function);
+				//-------------------------------------
+				_('#clickthru').on('click', exit);
+				_('#cta').on('click', exit);
+			};
+			
+			function exit() {
+				window.open(clickTag); /*Standard Exit*/
+				console.log('Exit')
+			}
+			//vars
+			var width = 259; //change it to MAX travel distance of knob. via X
+			var x;
+			var textOne;
+			// Scrubber Function
+			function addScrubber() { //move everything else outside of addscrubber 
+				Draggable.create(".knob", {
+					bounds:"#progress-bar",
+					type: "x",
+					lockAxis:true,
+					edgeResistance:1,
+					onDrag: function() {
+						var x = _('.knob').c._gsTransform.x; //change it to X of knob for more accurate travel distance of X to the proggress
+						animate(x); //moveto a function
+					}
+				});
+			}
+			function animate(x){
+				TweenMax.set('.progress-meter', {width: computeWidth(x)});
+				_('#textOne').c.innerHTML = computeX(x) +' km<sup>*</sup>'
+				_('#textTwo').c.innerHTML = '<sup class="dollar">$</sup>'+averageSaving(computeX(x)) +'<sup>*</sup>'
+			}
+			// Compute for the Progress Meter
+			function computeWidth(x) {
+				return (x/width)*progressWidth;
+			}
+			// Compute for X
+			function computeX(x) {
+				return Math.round(((x/width)*100) * 3);
+			}
+			// Compute for Average Saving
+			function averageSaving(x) {
+				// convert distances to MILES
+				var distanceTravelledWeekday = x;
+				var distanceTravelledWeekend = x;
+				var phevElectricRange = 35;
+				distanceTravelledWeekday = convertKmToMiles(distanceTravelledWeekday);
+				distanceTravelledWeekend = convertKmToMiles(distanceTravelledWeekend);
+				phevElectricRange 		 = convertKmToMiles(phevElectricRange);
+				// convert fuel economy to MPG
+				var currentFuelEconomy = 10.0;
+				var phevFuelEconomy = 9.4;
+				currentFuelEconomy = convertLP100ToMPG(currentFuelEconomy);
+				phevFuelEconomy = convertLP100ToMPG(phevFuelEconomy);
+				// convert fuel cost to /G
+				var currentFuelCost = 1.17;
+				var phevPetrolCost = 1.17;
+				// if (this.regionData.units.fuelVolume.toLowerCase() === "l"){
+				currentFuelCost = convertCostPLToPG(currentFuelCost);
+				phevPetrolCost = convertCostPLToPG(phevPetrolCost);
+				// console.log(' currentFuelCost ', currentFuelCost, ' phevPetrolCost ',phevPetrolCost)
+				// }
+				// current cost
+				var currentVehicleCostWeekday = (distanceTravelledWeekday / currentFuelEconomy) * currentFuelCost;
+				var currentVehicleCostWeekend = (distanceTravelledWeekend / currentFuelEconomy) * currentFuelCost;
+				var currentCostForWeek = currentVehicleCostWeekday * 5 + currentVehicleCostWeekend * 2;
+				// phev electricity cost
+				var phevElecDistanceWeekday = Math.min(distanceTravelledWeekday, phevElectricRange);
+				var phevElecDistanceWeekend = Math.min(distanceTravelledWeekend, phevElectricRange);
+				var phevElecCostForWeek = 0.4458 * 0.14 * (phevElecDistanceWeekday * 5 + phevElecDistanceWeekend * 2);
+				// phev petrol cost
+				var phevPetrolCostForWeek = 0;
+				if (distanceTravelledWeekday > phevElectricRange){
+					phevPetrolCostForWeek += (distanceTravelledWeekday - phevElectricRange) / phevFuelEconomy * phevPetrolCost * 5;
+				}
+				if (distanceTravelledWeekend > phevElectricRange){
+					phevPetrolCostForWeek += (distanceTravelledWeekend - phevElectricRange) / phevFuelEconomy * phevPetrolCost * 2;
+				}
+				var phevTotalCostForWeek = phevPetrolCostForWeek + phevElecCostForWeek;
+				return Math.round(Math.max(Math.abs(currentCostForWeek - phevTotalCostForWeek), 0)* 156);
+			}
+
+			function convertKmToMiles(distanceInKm) {
+				return distanceInKm * (1.0 / 1.60934);
+			}
+			function convertLP100ToMPG (economyInLP100) {
+				return 282.48 / economyInLP100;
+			}
+			function convertCostPLToPG (costPL) {
+				return costPL / 0.219969;
+			}
+
+			function knobhovers(){
+				_('.knob').on('mouseenter', function() {
+					glow.pause();
+					TweenMax.to('.tryme',0.3,{opacity:0})
+					TweenMax.to('.knob',0.3,{boxShadow:'0 0 20px rgba(56, 172, 255, 0)'})
+				})
+				_('.knob').on('mouseleave', function() {
+					glow.play();
+					
+					TweenMax.to('.tryme',0.3,{opacity:1})
+				})
+			}
+			function hover() {
+			
+			   _('#cta').on('mouseenter', function() {
+                    TweenMax.to('.cta-bg', 		0.1, {backgroundColor:'#ffffff'});
+                    TweenMax.to('.cta-text', 		0.1, {opacity:0});
+                    TweenMax.to('.cta-hover', 	0.1, { opacity:1 });
+                });
+                _('#cta').on('mouseleave', function() {
+                    TweenMax.to('.cta-bg', 		0.1, {backgroundColor:'#686d71'});
+                    TweenMax.to('.cta-text', 		0.1, {opacity:1});
+                    TweenMax.to('.cta-hover', 	0.1, {opacity:0});
+                });
+				
+			}
+
+			
+		};
+	</script>
+</body>
+</html>

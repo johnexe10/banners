@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+        <meta name="apple-touch-fullscreen" content="yes">
+        <meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+<!-----------campaign name in title----------------------------->
+		<title></title>
+<!-------------------------------------------------------------->
+		<script>
+		  var clickTag = "https://www.google.com"; 
+		</script>
+<!-------------------------------------------------------------->
+    <link rel="stylesheet" type="text/css" href="style.css">
+<!-------------------------------------------------------------->     
+    </head>
+	<body>
+    <div id="container-cb" class="desktop">
+        <div class="bg-s1"></div>
+        <div class="bg-s2"></div>
+        <div class="bg-s3"></div>
+        <div id="smokeHolder"></div>
+        <div id="wind-dust-particle">
+            <canvas id='cvs'></canvas>
+        </div>
+        <section id="sect1">
+            <div class="main-content">
+                <div class="main-img">
+                    <img draggable=false src="main-img.png">
+                </div>
+                <div class="headline">
+                    <div class="detail">
+                        <img draggable=false src="mp-detail.png" alt="">
+                    </div>
+                    <div class="masterpiece">
+                        <img draggable=false class="q1" src="q1.png">
+                        <img draggable=false class="master-img" src="masterpiece.png">
+                        <img draggable=false class="q2" src="q2.png">
+                    </div>
+                    <div class="forbes">
+                        <img draggable=false src="forbes.png">
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="sect2">
+            <div class="main-content">
+                <div class="main-img">
+                    <img draggable=false src="s2-main-img.png">
+                </div>
+                <div class="headline">
+                    <div class="detail">
+                        <img draggable=false src="dar-detail.png" alt="">
+                    </div>
+                    <div class="daring">
+                        <img draggable=false class="q1" src="q1.png">
+                        <img draggable=false class="dare-img" src="daring.png">
+                        <img draggable=false class="q2" src="q3.png">
+                    </div>
+                    <div class="vanity">
+                        <img draggable=false src="vanity.png">
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="sect3">
+            <div class="main-content">
+                <div class="main-img">
+                    <img draggable=false src="s3-main-img.png">
+                </div>
+                <div class="headline">
+                    <div class="detail">
+                        <img draggable=false src="glo-detail.png" alt="">
+                    </div>
+                    <div class="glorious">
+                        <img draggable=false class="q1" src="q1.png">
+                        <img draggable=false class="glor-img" src="glorious.png">
+                        <img draggable=false class="q2" src="q2.png">
+                    </div>
+                    <div class="scott">
+                        <img draggable=false src="scott.png">
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="sect4">
+            <div class="main-content">
+                <div class="headline">
+                        <div class="brilliant">
+                           <div class="detail">
+                            <img draggable=false src="bri-detail.png" alt="">
+                        </div>
+                        <img draggable=false class="q1" src="q1.png" alt="">
+                        <img draggable=false class="bri-img" src="brilliant.png" alt="">
+                        <img draggable=false class="q2" src="q3.png" alt="">
+                    </div>
+                    <div class="david">
+                        <img draggable=false src="david.png" alt="">
+                    </div>
+                    <div class="timeout">
+                        <img draggable=false src="timeout.png" alt="">
+                    </div>
+                </div>
+              <div class="btn-cta">
+                  <div class="cta">
+                      <img draggable=false src="btn-copy.png" alt="">
+                  </div>
+                  <div class="shine">
+                      <img draggable=false src="shine.png" alt="">
+                  </div>
+              </div>
+            </div>
+        </section>
+
+        <div id="logo"><img draggable=false src="logo.png" alt=""></div>
+        <div id="trigger"></div>
+        <div class="yt-holder unselectable">
+            <div class="yt">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/hEJnMQG9ev8" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+	
+		 
+		
+		<!-------------------------------------------------------------->
+		<!-------------------------------------------------------------->
+		
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+    <script src="Draggable.min.js"></script>
+    <script src="ThrowPropsPlugin.min.js"></script>
+    <script type="text/javascript" src="smoke.js"></script>
+    <script type="text/javascript" src="wind-dust.js"></script>
+
+    <script>
+        function startPreload(){
+            var ctr = 0, images_arr = new Array(), 
+            preArgumentsLength = startPreload.arguments.length-1, 
+            preArguments = startPreload.arguments; 
+            for (i = 0; i < preArgumentsLength; i++) {
+                images_arr[i] 		= new Image()
+                images_arr[i].src 	= startPreload.arguments[i]
+                addEvent(images_arr[i], 'load', imageLoaded)
+            }
+            function imageLoaded(){if(ctr === (preArgumentsLength - 1)){preArguments[preArgumentsLength]();}else{ctr++;}} 
+        }
+        //selector
+        function _(selector){return document.querySelector(selector);}
+        //hassClass
+        function hassClass(s,a){var e=" "+a+" ";return(" "+s.className+" ").replace(/[\n\t\r]/g," ").indexOf(e)>-1?!0:!1}
+        //addEventlistener
+        function addEvent(obj, evt, fn) {if(obj.addEventListener) {obj.addEventListener(evt, fn, false);}else if(obj.attachEvent) {obj.attachEvent('on' + evt, fn)}}
+        //removeEventlistener
+        function removeEvent(obj, evt, fn) {if(obj.addEventListener) {obj.removeEventListener(evt, fn, false);}else if(obj.attachEvent) {obj.detachEvent('on' + evt, fn)}}
+
+        (function() {
+            var	cbWidth = window.innerWidth,
+                cbHeight = window.innerHeight;
+            var dragging = false,snapPoints = [],yPos=0, scrollbarPosition=0, min_bb = -0, mid_bb = -0, max_bb = 0;
+            var scrubValue = 0.0;
+            var mainTL = new TimelineMax({onUpdate:svc});
+            var tl1 = new TimelineMax({paused:false});//
+            var tl2 = new TimelineMax({paused:false});
+            var tl3 = new TimelineMax({paused:false});
+            var tl4 = new TimelineMax({paused:false});
+            //var currTimeline = tl1;
+            	startPreload(
+                    'bg-s1.jpg',
+                    'bg-s2.jpg',
+                    'bg-s3.jpg',
+                    'daring.png',
+                    'forbes.png',
+                    'logo.png',
+                    's2-main-img.png',
+                    'vanity.png',
+                    'main-img.png',
+                    'main-img-shadow.png'
+                    ,init_ad);
+			//---------------------------------------------------------------------------------------------------------------    
+            function init_ad(){
+                TweenMax.set('#container-cb',{display:'block',onComplete:addDragg});
+                TweenMax.set('#container-cb div',{force3D:true,rotation:.0001});
+                TweenMax.set('#container-cb img',{force3D:true,rotation:.0001});
+                TweenMax.set('#cvs',{rotation:'180'});
+                TweenMax.set('#sect4 .btn-cta',{x:'-50%'});
+                if(cbWidth>=480){
+                    _('#container-cb').className='desktop';
+                }else{
+                    _('#container-cb').className='';
+                }
+                
+                if(hassClass(_('#container-cb'),'desktop')){
+                    TweenMax.set('#container-cb',{x:'-50%',y:'-50%'});
+                    cbWidth = 375;
+                    cbHeight = 667;
+                };
+
+                addSmoke();
+                init(_('#cvs'),cbWidth,(cbHeight/2)*1.2);
+                animate();
+            }
+            function animate(){
+                tl1
+                .from('#sect1 .main-img',.7,{opacity:0,ease:Power3.easeInOut},'0')
+                .from('#sect1 .main-img',5,{x:'-=15',ease:Power0.easeNone},'0')
+                .from('.bg-s1',10,{y:'5%',ease:Power0.easeNone},'0')
+                .from('.masterpiece',.3,{scale:10,opacity:0,ease:Power3.easeInOut},'.5')
+                .from('.masterpiece .master-img',.05,{x:'+=3',y:'-=3',ease:Power4.easeInOut,yoyo:true,repeat:2},'.8')
+                .from('.masterpiece .q1',.05,{x:'+=3',y:'-=3',ease:Power4.easeInOut,yoyo:true,repeat:2},'.86')
+                .from('.masterpiece .q2',.05,{x:'+=3',y:'-=3',ease:Power4.easeInOut,yoyo:true,repeat:2},'.86')
+                .from('#sect1 .detail',.07,{scale:0,ease:Power4.easeInOut},'.95')
+                .from('#sect1 .detail',.01,{opacity:0,ease:Power4.easeInOut},'.95')
+                .from('.forbes',.7,{x:'-=6',opacity:0,ease:Power3.easeInOut,force3D:true,rotation:.001},'.8')
+                .to('#sect1 .headline',5,{scale:1.05,y:'+=3',force3D:false,rotation:.001,delay:.5,ease:Power2.easeOut},'.5')
+                .from('.forbes .line',.5,{width:'0',ease:Power3.easeInOut},'1')
+                .to('#sect1 .main-content',1,{opacity:0,ease:Power1.easeOut},'4')
+                tl2 
+                .from('.bg-s2',.7,{opacity:0,ease:Power3.easeInOut},'0')
+                .from('#sect2 .main-img',.7,{opacity:0,ease:Power3.easeInOut},'0')
+                .from('#sect2 .main-img',5,{x:'-=15',ease:Power1.easeOut},'0')
+                .from('.daring',.3,{scale:10,opacity:0,force3D:false,rotation:.001,ease:Power4.easeInOut},'.5')
+                .from('.daring .dare-img',.05,{x:'+=3',y:'-=3',ease:Power4.easeInOut,yoyo:true,repeat:2},'.8')
+                .from('.daring .q1',.05,{x:'+=3',y:'-=3',ease:Power4.easeInOut,yoyo:true,repeat:2},'.86')
+                .from('.daring .q2',.05,{x:'+=3',y:'-=3',ease:Power4.easeInOut,yoyo:true,repeat:2},'.86')
+                .from('#sect2 .detail',.07,{scale:0,ease:Power4.easeInOut},'.95')
+                .from('#sect2 .detail',.01,{opacity:0,ease:Power4.easeInOut},'.95')
+                .from('.vanity',.7,{x:'-=6',opacity:0,force3D:false,rotation:.001,ease:Power1.easeInOut},'.8')
+                .from('.vanity .line',.5,{width:'0',ease:Power3.easeInOut},'1')
+                .to('#sect2 .headline',4,{scale:1.05,y:'+=3',force3D:false,rotation:.001,delay:.5,ease:Power2.easeOut},'.5')
+                .to('#sect2 .main-content',1,{opacity:0,ease:Power1.easeOut},'4')
+                tl3
+                .from('.bg-s3',.7,{opacity:0,ease:Power3.easeInOut},'0')
+                .from('#sect3 .main-img',.7,{opacity:0,ease:Power3.easeInOut},'0')
+                .from('#sect3 .main-img',5,{x:'-=15',ease:Power1.easeOut},'0')
+                .from('.glorious',.3,{scale:10,opacity:0,ease:Power3.easeInOut},'.5')
+                .from('.glorious .glor-img',.05,{x:'+=3',y:'-=3',ease:Power4.easeInOut,yoyo:true,repeat:2},'.8')
+                .from('.glorious .q1',.05,{x:'+=3',y:'-=3',ease:Power4.easeInOut,yoyo:true,repeat:2},'.86')
+                .from('.glorious .q2',.05,{x:'+=3',y:'-=3',ease:Power4.easeInOut,yoyo:true,repeat:2},'.86')
+                .from('#sect3 .detail',.07,{scale:0,ease:Power4.easeInOut},'.95')
+                .from('#sect3 .detail',.01,{opacity:0,ease:Power4.easeInOut},'.95')
+                .from('.scott',.7,{x:'-=6',opacity:0,force3D:false,rotation:.001,ease:Power1.easeInOut},'.8')
+                .from('.scott .line',.5,{width:'0',ease:Power3.easeInOut},'1')
+                .to('#sect3 .headline',4,{scale:1.05,y:'+=3',force3D:false,rotation:.001,delay:.5,ease:Power2.easeOut},'.5')
+                .to('#sect3 .main-content',1,{opacity:0,ease:Power1.easeOut},'4')
+                tl4
+                .from('.yt-holder',1,{opacity:0,y:10,display:'none'},'0')
+                .from('.brilliant',.3,{scale:10,opacity:0,force3D:false,rotation:.001,ease:Power4.easeInOut},'.2')
+                .from('.brilliant .bri-img',.05,{x:'+=3',y:'-=3',ease:Power4.easeInOut,yoyo:true,repeat:2},'.5')
+                .from('.brilliant .q1',.05,{x:'+=3',y:'-=3',ease:Power4.easeInOut,yoyo:true,repeat:2},'.56')
+                .from('.brilliant .q2',.05,{x:'+=3',y:'-=3',ease:Power4.easeInOut,yoyo:true,repeat:2},'.56')
+                .from('#sect4 .detail',.07,{scale:0,ease:Power4.easeInOut},'.65')
+                .from('#sect4 .detail',.01,{opacity:0,ease:Power4.easeInOut},'.65')
+                .staggerFrom(['#sect4 .david','#sect4 .timeout','.btn-cta'],1,{opacity:0,y:5,ease:Power2.easeInOut},.3,'.8')
+                .to('.btn-cta .shine',1,{xPercent:400,ease:Power3.easeInOut},'1.7')
+                
+                mainTL
+                .play()
+                .add(tl1,'0')
+                .add(tl2,'4.5')
+                .add(tl3,'8.5')
+                .add(tl4,'12.5')
+                
+            }
+			//---------------------------------------------------------------------------------------------------------------
+			//---------------------------------------------------------------------------------------------------------------
+            function pauseMainTimeline () {
+                    mainTL.pause();
+            }
+            function playMainTimeline () {
+                    mainTL.play();
+            }
+            function addSmoke(){
+                var smokeAmount =200;
+                var smoke = new Smoke(_('#smokeHolder'),'canvasSmoke','smoke_blue2.png',cbWidth,cbHeight,{x : cbWidth/2, y : (cbHeight/2)*1.2},smokeAmount);
+                smoke.start(true);
+                smoke.setWind(2);
+            }
+            function addDragg(){
+                Draggable.create(_('#trigger'),{
+                    type:'y',
+                    bounds: _('#container-cb'),
+                    onRelease:onUp,
+                    onPress:onDown,
+                    throwResistance:500,
+                    dragResistance:-1,
+                    edgeResistance:1,
+                    maxDuration:1,
+                    throwProps:true,
+                    onDrag:update,
+                    force3D:true,
+                    zIndexBoost: false
+                });
+            }
+
+            function onUp() {
+                dragging = false;
+                playMainTimeline()
+            };
+            function onDown() {
+                dragging = true;
+                pauseMainTimeline()
+            };
+            function svc(){
+                 yPos = ~~(-(cbHeight*3)*(mainTL.time()/mainTL.totalDuration()));
+                 TweenMax.set('#trigger',{y:yPos});
+            }
+            function update() {
+                scrollbarPosition = parseInt(_('#trigger')._gsTransform.y);
+//                    yPos = ~~(-(cbHeight*3)*(mainTL.time()/mainTL.totalDuration()));
+//                    console.log(scrollbarPosition,yPos)
+                if (scrollbarPosition != NaN) {
+                    scrubValue = (-scrollbarPosition)/(cbHeight*3);
+                   // scrubValue = (mainTL.time()/mainTL.totalDuration()) + scrubValue;
+//                        console.log('scrollbarPosition',scrollbarPosition,'scrubValue',scrubValue)
+                }
+                //update timeline time
+                if(dragging){mainTL.time(mainTL.totalDuration()*scrubValue);
+//                                console.log(mainTL.totalDuration()*scrubValue)
+                            }
+            }
+
+                
+/*---------------------------------------General functions----------------------------------------*/
+
+                //clamp a number
+                function clamp (a,b,c) {
+                    return Math.max(b,Math.min(c,a));
+                }
+            
+            
+        })();
+        
+    </script>
+</body>
+</html>

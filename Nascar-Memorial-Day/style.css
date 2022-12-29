@@ -1,0 +1,360 @@
+body {margin: 0px;}
+
+
+
+#container {
+	background-color: black;
+	border: 1px solid gray;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: none;
+	overflow: hidden;
+	position: absolute;
+	width: 300px;
+	height: 250px;
+	pointer-events: none;
+}
+
+
+#clickthru{
+	width: 100%;
+	height: 100%;
+	pointer-events: auto;
+	position: absolute;
+}
+.sprite{
+	position: absolute;
+}
+/*-------------- SPRITE -------------*/
+.sprite { background: url('sprite.png') no-repeat top left; width: 189px; height: 109px; background-size: 189px 109px;  } 
+.sprite.cta-text1 { background-position: 0 0; width: 61px; height: 10px; } 
+.sprite.cta-text2 { background-position: 0 -15px; width: 61px; height: 10px; } 
+.sprite.logo { background-position: 0 -30px; width: 70px; height: 40px; } 
+.sprite.text1 { background-position: 0 -75px; width: 178px; height: 15px; } 
+.sprite.text2 { background-position: 0 -95px; width: 189px; height: 14px; } 
+
+/*--------- SPRITE POSITION ---------*/
+
+
+
+/*-------- IMAGES | POSITION --------*/
+img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+.bg{
+	width: 300px;
+	height: 250px;
+	position: absolute;
+}
+
+
+.cta{
+    background-color: #089cab;
+    border: 1px solid #089cab;
+    width: 52px;
+    height: 19px;
+    left: 13px;
+    top: 130px;
+    position: absolute;
+}
+.cta-text{
+	position:absolute;
+	top: 3px;
+	left: 13px;
+	width:28px;
+	height: 13px;
+}
+
+#svgtexts{top: -1px;left: -1px;width:300px;height:250px;position:absolute;}
+
+.logo{top: 4px;left: 12px;width: 112px;height: 54px;position:absolute;}
+.disclaimer{top: 20px;left: 140px;width: 145px;height: 22px;position:absolute;}
+/*--------------------------------------------------------*/
+/*-------------scroller css start-------------------------*/
+/*--------------------------------------------------------*/
+p,span,table,ul,li{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	-moz-osx-font-smoothing: grayscale;
+	image-rendering: optimizeQuality;
+}
+#scroller-container{
+	width: 298px;
+	height: 63px;
+	bottom: 0px;
+	left: 0px;
+	pointer-events: auto;
+	cursor: default;
+	position: absolute;
+}
+
+#scroller{
+	width: 100%;
+	height: 100%;
+	background-color: #604976;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-right: 17px;
+}
+#scrollerbar {
+	position: absolute;
+	width: 5px;
+	height: 42px;
+	right: 5px;
+	top: 10px;
+}
+#scrollbar {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #2b173d;
+	left: 0;
+	top: 0;
+	border-radius: 50px;
+}
+#scrubber {
+	position: absolute;
+	width: 100%;
+	height: 13px;
+	border-radius: 50px;
+	background-color: #a490b7;
+	cursor: pointer!important;
+}
+
+.content{
+	position: relative!important;
+	padding-left: 13px;
+	padding-right: 27px;
+	padding-top: 7px;
+	font-size: 13px;
+	line-height: 15px;
+	letter-spacing: -.2px;
+	color: #ffffff;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	font-family: SlateProReg, Arial, sans-serif;
+}
+
+ol{
+	font-weight: bold;
+	padding: 0;
+	margin-top: 0px;
+	padding-left: 10px;
+}
+
+ol li{
+	margin-bottom: 3px;
+    padding-left: 3px;
+}
+
+ol li span{
+	font-weight: normal;
+}
+
+ul{
+    padding: 0;
+    list-style-type: disc;
+    list-style-position: inside;
+    list-style: none;
+    margin-left: 8px;
+    padding-bottom: 17px;
+}
+
+ul li{
+	list-style-type: none;
+	margin-left: 1px;
+	list-style-position: outside;
+	position: relative;
+	padding-bottom: 2px;
+}
+
+ul li:before {
+    display: block;
+    content: "\2022";
+    position: absolute;
+    left: -9px;
+    font-size: 12px;
+    overflow: visible;
+    color: #ffffff;
+}
+
+a u, a span {
+    color: inherit;
+}
+
+
+#toggle {
+	position: absolute;
+	right: 14px;
+	top: 8px;
+	cursor: pointer;
+	font-size: 11px;
+	color: black;
+}
+
+#toggle .expand, #toggle .collapse {
+    display: none;
+    height: inherit;
+    width:13px;
+    height: 13px;
+}
+
+#toggle.expand .expand,#toggle.collapse .collapse{
+	display: block;
+}
+
+#toggle{
+	pointer-events: auto;
+}
+
+nowrap{
+	white-space: nowrap;
+}
+
+.arrow{
+	top: 2px;
+    position: absolute;
+    width: 14px;
+	height: 8px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+}
+.scroller-arrows{
+	position: absolute;
+	width: 14px;
+	height: 13px;
+	right: 9px;
+	top: 5px;
+	border-radius: 4px 4px 0 0;
+	background-color: #074162;
+	pointer-events: auto;
+	cursor: pointer;
+}
+.arrow-down{
+	transform:rotate(180deg);
+	top: 59px;
+}
+/*--------------------------------------------------------*/
+/*-------------scroller css end---------------------------*/
+/*--------------------------------------------------------*/
+/*--------------------custom css--------------------------*/
+.content b{
+	font-family: SlateProBold;
+	letter-spacing: -.1px;
+}
+
+.content i{
+	
+}
+.content .title{
+    padding-bottom: 7px;
+}
+#header-scroller{
+	position: absolute;
+	width: 100%;
+	height: 23px;
+	background-color: #2b173d;
+	top: 163px;
+}
+
+p{
+	padding-bottom: 17px;
+}
+
+.biohaven-logo{
+	width: 90px;
+	height: auto;
+	display: block;
+	position: static;
+	margin-top: -6px;
+	padding-bottom: 18px;
+}
+#presInfo1{
+    font-family: SlateProReg;
+    position: absolute;
+    color: #ffffff;
+    font-size: 13px;
+    top: 4px;
+    left: 13px;
+}
+#presInfo1, #presInfo2,#biohavenCTA {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+/*--------------------cars--------------------------*/
+.car-holder1,.car-holder2,.car-holder3,.car-holder4{
+	top: -1px;left: -1px;width:300px;height:250px;position:absolute;
+}
+.car{
+	position: absolute;
+	left: 320px;
+}
+.car-holder1 .car{
+	width:170px;
+	height:47px;
+	top: 55px;
+}
+
+.car-holder2 .car{
+	width:174px;
+	height:47px;
+	top: 76px;
+}
+
+.car-holder3 .car{
+	width:174px;
+	height:47px;
+	top: 96px;
+}
+
+.car-holder4 .car{
+	width:173px;
+	height:48px;
+	top: 123px;
+}
+.tires{
+	position:absolute;
+	width: 24px;height: 24px;
+}
+.car1 .tire1{top: 23px;left: 21px;}
+.car1 .tire2{
+	top: 23px;
+	left: 115px;
+}
+.car2 .tire1{top: 24px;left: 23px;}
+.car2 .tire2{
+	top: 23px;
+	left: 119px;
+}
+.car3 .tire1{top: 23px;left: 24px;}
+.car3 .tire2{
+	top: 23px;
+	left: 119px;
+}
+.car4 .tire1{top: 23px;left: 22px;}
+.car4 .tire2{
+	top: 23px;
+	left: 118px;
+}
+
+#cvs{
+	position:absolute;
+}

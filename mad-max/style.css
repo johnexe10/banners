@@ -1,0 +1,408 @@
+
+*{margin: 0;padding: 0;}
+
+#clickTag{width: 100%;height: 100%;pointer-events: auto;position: absolute;}
+/*            #bg{background:url('bg.jpg');}*/
+
+html{
+    height  : 100%;
+    overflow: hidden;
+}
+body{
+    height  : 100%;
+    overflow: auto;
+}
+html,body{
+    width: 100%;
+    background-color: #4a4a4a;
+}
+canvas{position: absolute;}
+
+#container-cb{
+  width: 100%;
+  height: 100%;
+  display: none;
+  overflow: hidden;
+  position: fixed;
+  pointer-events: none;
+}
+.desktop{
+    width: 375px !important;
+    height: 667px !important;
+    position: absolute !important;
+    left: 50%;
+    top: 50%;
+}
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+}
+
+#logo{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+#logo img{
+    margin: 0 auto;
+}
+/*-----------------------------------------------*/
+    /* sections */
+#sect1,#sect2,#sect3,#sect4{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    top:0;
+}
+.bg-s1{
+    background: url(bg-s1.jpg) no-repeat center bottom; 
+}
+.bg-s2{
+    background: url(bg-s2.jpg) no-repeat center bottom; 
+}
+.bg-s3{
+    background: url(bg-s3.jpg) no-repeat center bottom; 
+}
+.bg-s1,.bg-s2,.bg-s3{
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: 110%;
+  position: absolute;
+  top:-10%;
+}
+
+/*-----------------------------------------------*/
+
+#sect1 .main-content{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+#sect1 .main-img{
+    width: 105%;
+    position: relative;
+    bottom: 0;
+}
+#sect1 .main-img img{
+    width: 105%;
+}
+#sect1 .headline{
+    width: 100%;
+    position: absolute;
+    top: -23vh;
+    
+}
+#sect1 .headline .detail{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: -17%;
+    left: 1%;
+}
+#sect1 .headline .masterpiece{
+    width: 80%;
+    position: relative;
+    margin: 0 auto;
+}
+#sect1 .headline .masterpiece .q1{
+    position: absolute;
+    width: 9%;
+    left: -7%;
+    top: 0;
+}
+#sect1 .headline .masterpiece .q2{
+    position: absolute;
+    width: 9%;
+    right: -8%;
+    top: 0;
+}
+#sect1 .forbes{
+    width: 13%;
+    position: relative;
+    left: 8%;
+    padding-bottom: 2%;
+}
+#sect1 .forbes .line {
+    background-color: #f9bc00;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 10%;
+    width: 60%;
+}
+
+/*-----------------------------------------------*/
+#sect2 .main-content{
+    width: 100%;
+    position: absolute;100%:z;
+    height: 90%;
+    bottom: 0;
+}
+#sect2 .main-content .main-img{
+    width: 105%;
+    position: relative;
+    top: 15vh;
+}
+#sect2 .main-img img{
+    width: 105%;
+}
+#sect2 .main-content .headline{
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 3%;
+}
+#sect2 .headline .detail{
+    width: 90%;
+    position: absolute;
+    top: -15%;
+    left: 3%;
+}
+#sect2 .headline .daring{
+    width: 70%;
+    position: relative;
+    margin: 0 auto;
+}
+#sect2 .headline .daring .q1{
+    position: absolute;
+    width: 14%;
+    left: -11%;
+    top: 0;
+}
+#sect2 .headline .daring .q2{
+    position: absolute;
+    width: 14%;
+    right: -13%;
+    top: 0;
+}
+#sect2 .vanity{
+    width: 28%;
+    position: relative;
+    left: 13%;
+    margin-top: 5%;
+    padding-bottom: 2%;
+}
+#sect2 .vanity .line {
+    background-color: #f9bc00;
+    position: absolute;
+    bottom: 4%;
+    left: 1%;
+    height: 10%;
+    width: 33%;
+}
+/*
+
+*/
+/*-----------------------------------------------*/
+#sect3 .main-content{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    /* height: 90%; */
+}
+#sect3 .main-img{
+    width: 105%;
+    position: relative;
+    top: 5vh;
+}
+
+#sect3 .headline{
+    width: 100%;
+    position: absolute;
+    top: -10vh;
+}
+#sect3 .headline .detail{
+    width: 100%;
+    position: absolute;
+    top: -13%;
+    left: 0%;
+ 
+}
+#sect3 .headline .glorious{
+    width: 71%;
+    position: relative;
+    margin: 0 auto;
+    left: -1%;
+}
+#sect3 .headline .glorious .q1{
+    position: absolute;
+    width: 10%;
+    left: -8%;
+    top: 0;
+}
+#sect3 .headline .glorious .q2{
+    position: absolute;
+    width: 10%;
+    right: -10%;
+    top: 0;
+}
+#sect3 .scott{
+    width: 30%;
+    position: relative;
+    left: 7%;
+    margin-top: 5%;
+    padding-bottom: 3%;
+}
+#sect3 .scott .line {
+    background-color: #f9bc00;
+    position: absolute;
+    bottom: 0;
+    left: 3%;
+    height: 10%;
+    width: 30%;
+}
+
+/*-----------------------------------------------*/
+#sect4 .main-content{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+}
+
+#sect4 .headline{
+    width: 100%;
+    position: absolute;
+    bottom: 29.5%;
+}
+#sect4 .headline .detail{
+    position: absolute;
+    top: -115%;
+    width: 140%;
+    left: -15%;
+}
+#sect4 .headline .brilliant{
+    width: 64%;
+    position: relative;
+    margin: 0 auto;
+    left: -1%;
+}
+#sect4 .headline .brilliant .q1{
+    position: absolute;
+    width: 13%;
+    left: -10%;
+    top: 0;
+}
+#sect4 .headline .brilliant .q2{
+    position: absolute;
+    width: 12%;
+    right: -17%;
+    top: 0;
+}
+#sect4 .headline .david{
+    position: relative;
+    margin: 0 auto;
+    width: 26%;
+    margin-top: 3%;
+}
+#sect4 .headline .timeout{
+    position: relative;
+    margin: 0 auto;
+    width: 42%;
+    margin-top: 2%;
+}
+#sect4 .btn-cta{
+    width: 60%;
+    background: black;
+    height: 5.8%;
+    position: absolute;
+    border: #f9bc00 2px solid;
+    bottom: 19.4%;
+    border-radius: 15px;
+    left: 50%;
+    overflow: hidden;
+}
+#sect4 .btn-cta .shine {
+    position: absolute;
+    width: 40%;
+    top: -100%;
+    left: -25%;
+}
+#sect4 .btn-cta .cta {
+    width: 80%;
+    top: 33.9%;
+    position: relative;
+    margin: 0 auto;
+}
+
+@media only screen and (max-device-width: 480px){
+    #sect4 .btn-cta{
+        border: #f9bc00 1px solid;
+        border-radius: 12px;
+    }
+}
+
+/*---------------------YT--------------------------*/
+#container-cb .yt-holder{
+    width: 100%;
+    position: absolute;
+    margin: 0 auto;
+    bottom: 55.5%;
+        height: 35%;
+    pointer-events: auto;
+}
+#container-cb .yt-holder .yt{
+    width: 93%;
+    position: relative;
+    margin: 0 auto;
+    height: 100%;
+}
+/*-----------------------------------------------*/
+/*triggers*/
+#trigger{
+    width: 100%;
+    height: 400%;
+    position: absolute;
+    pointer-events: auto;
+}
+
+
+#trigger > div {
+ opacity: .3;   
+}
+.col1 {
+    background-color: red;
+    width: 100%;
+    height: 50%;
+    position: relative;
+}
+.col2 {
+    background-color: green;
+    width: 100%;
+    height: 50%;
+    position: relative;
+}
+.col3 {
+    background-color: blue;
+    width: 100%;
+    height: 25%;
+    position: relative;
+}
+.col4 {
+    background-color: yellow;
+    width: 100%;
+    height: 25%;
+    position: relative;
+}
+/*particles*/
+#smokeHolder{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+#wind-dust-particle{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+#cvs{
+    position: absolute;
+    bottom: 20%;
+}
+
