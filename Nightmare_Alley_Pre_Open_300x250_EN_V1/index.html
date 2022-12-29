@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<meta charset="UTF-8">
+	<title>CandyBanners</title>
+	<meta name="ad.size" content="width=300,height=250"> 
+	<link rel="stylesheet" href="style.css">
+	<script> var clickTag = "https://www.google.com"; </script>
+    <script src="https://s0.2mdn.net/ads/studio/cached_libs/gsap_3.2.4_min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://s0.2mdn.net/ads/studio/Enabler.js"></script>
+</head>
+<body>
+	<div id="container">
+        <video id="mainVid" width="300" height="250" preload playsinline muted>
+          <source id='mainVid-src' type="video/mp4">
+        </video>
+        
+        
+        <div id="btn-unmute" class='vid-unmute'></div>
+        <div id="btn-close" class='vid-close'></div>
+        
+        <div class='endframe ef imgfix'>
+            <div id="carousel-holder">
+                <div id="carousel5" class="carousel"><img src='bradley.jpg' alt=""></div>
+                <div id="carousel4" class="carousel"><img src='toni.jpg' alt=""></div>
+                <div id="carousel3" class="carousel"><img src='willem.jpg' alt=""></div>
+                <div id="carousel2" class="carousel"><img src='rooney.jpg' alt=""></div>
+                <div id="carousel1" class="carousel"><img src='cate.jpg' alt=""></div>
+            </div>
+            <div class='sprite t1 text'></div>
+            <div class='sprite t2 text'></div>
+            <div class='sprite t3-1 d1'></div>
+            <div class='sprite t3-2 d2'></div>
+            <div class='sprite t3-3 d3'></div>
+
+            <div id='clickthru'></div>
+            
+            <div class='cta-get cta'>
+                <div class='sprite cta1-get'></div>
+                <div class='sprite cta2-get'></div>
+            </div>
+            
+            <div class='cta-trailer cta'>
+                <div class='sprite cta1-trailer'></div>
+                <div class='sprite cta2-trailer'></div>
+            </div>
+            
+            <div id="btn-left" class='btn'><img src="btn-left.png" alt=""></div>
+            <div id="btn-right" class='btn'><img src="btn-right.png" alt=""></div>
+            <div id='btn-replay' class="vid-replay"></div>
+        </div>
+
+	</div>
+	<script>
+    //--------------preload-img-------------------
+    function preload(arr,f) { $('<div id="preload" />').appendTo('body'); $(arr).each(function () {$('<img />').attr('src',this).appendTo('#preload').hide(); }); window.onload =function(){ f(); $('#preload').remove()} }
+        
+    var tl = gsap.timeline({delay: 0.5,  defaults: {duration: 0.5,ease: "none" }});
+    var tlcaro = gsap.timeline();
+    
+    var mainef = false;
+    //--------------caro-------------------   
+    var ctr = 1,prev,next,isPause=false;
+    var isCaroAnim = false;
+    //---------------------------------
+    preload([
+        "sprite.png",
+        "bradley.jpg",
+        "cate.jpg",
+        "rooney.jpg",
+        "toni.jpg",
+        "willem.jpg"
+    ],initializedStudio);
+    function initializedStudio(){
+        if (Enabler.isInitialized()) {startAnim();} else {Enabler.addEventListener(studio.events.StudioEvent.INIT, startAnim);}
+    };
+    //--------------animations---------------------
+    function startAnim() {
+        //--------------- SET -----------------
+		gsap.set('#container', {display: 'block'});
+        gsap.set(['.cta2-get','.cta2-trailer'],{ transformOrigin: '50% 50% -9px',rotationX:-90 })
+        gsap.set(['.cta1-get','.cta1-trailer'], { transformOrigin: '50% 50% -9px' })
+        gsap.set('.endframe, .replay', { opacity:0, display:'none'});
+        //------------ ADD EVENT --------------
+        addEvent();
+        checkDate();
+        videoEvents();
+        setVideo("mainVid.mp4");
+        carouselEvents()
+        
+        for(var i=1;i<=5-1;i++){
+            tlcaro.add(animcaro(i,i+1),i*2.5)
+        }
+
+    };
+        
+    function endAnimation() {
+        mainef = true;
+        var tl = gsap.timeline()
+        gsap.set('.endframe, #btn-replay', {opacity: 0, display:'block'});
+        gsap.set('#btn-play, #btn-mute, #btn-unmute', { pointerEvents:'none'});
+        gsap.set('.carousel',{force3D:true})
+
+        tl
+
+        .add('Scene1')
+        .set('.endframe', {opacity: 1})
+        
+        .from('#carousel-holder', {duration: .8, scale: 1.2, ease: 'power2.inOut'}, 'Scene1')
+        .from('.cta', {duration: .35, opacity: 0, ease: 'power1.out'}, 'Scene1+=.5')
+        .to('#btn-replay', {duration: .35, opacity: 1, ease: 'power1.out'}, 'Scene1+=1')
+        .add(tlcaro, 'Scene1') 
+        .from('#btn-left', {duration: .8, x: 10, opacity: 0, pointerEvents: 'none', ease: 'power1.out'}, 'Scene1+=1.7')
+        .from('#btn-right', {duration: .8, x: -10, opacity: 0, pointerEvents: 'none', ease: 'power1.out'}, 'Scene1+=1.7')
+        .add(hoverFunction, 'Scene1+=1')
+
+        return tl;
+    }
+        
+    function animcaro(p,n,dir="right"){
+        var tl = gsap.timeline({onStart:function(){ isCaroAnim = true;},onComplete:function(){isCaroAnim = false;if(isPause)tlcaro.pause()}})
+            .to('#carousel'+p, {x:function(){return dir=="right"?-300:300}, duration: 0.6,ease:'power1.inOut'}, 'anim')
+            .fromTo('#carousel'+n,{x:function(){ctr = n; return dir=="right"?300:-300}}, {x:0,duration: 0.6,ease:'power1.inOut'}, 'anim')
+        return tl
+    }
+
+    function carousel(){
+        isPause=true;
+        var dir = this.id.slice(4);
+        if(!isCaroAnim){
+            prev=ctr;
+            if(dir=="right"){
+                ctr<5? ctr++ : ctr=1 ;  Enabler.counter('Button Right')
+            }else{
+                ctr<=1? ctr=5 : ctr--;  Enabler.counter('Button Left')
+            }
+            next=ctr;
+            animcaro(prev,next,dir)
+        }
+    }
+        //------------------------------------
+    var mainVid = document.querySelector('#mainVid');
+    function setVideo(vid){
+        $('#mainVid-src').attr('src',Enabler.getUrl(vid))
+        mainVid.load();
+        mainVid.play();
+    }
+        
+    function videoEvents(){
+        mainVid.addEventListener('ended', mainVidEndHandler, false);
+        mainVid.addEventListener('playing', mainVidStartHandler, false);
+        Enabler.loadModule(studio.module.ModuleId.VIDEO, function() {
+            studio.video.Reporter.attach('Main Video', mainVid);
+        });
+    }
+
+    function mainVidStartHandler(){
+        var video = document.getElementById('mainVid');
+        video.ontimeupdate = function(){
+            if(video.currentTime >= 26.5) {
+                if(!mainef) endAnimation();
+            }
+        };
+    }
+    function mainVidEndHandler(e) {}
+
+    function closeVid(){
+        console.log()
+        endAnimation();
+        mainVid.pause();
+        if(this.id=="btn-close"){
+            Enabler.counter("Close Click");
+        }else{
+            exit()
+        }
+    }
+    function playMainVideo(){
+        setVideo("mainVid.mp4");
+    }
+    function muteVideo() {
+        $('#mainVid').prop('muted', true);
+        gsap.set('#btn-mute',{display:'none'})
+        gsap.set('#btn-unmute',{display:'block'})
+    }
+    function unmuteVideo(){
+        Enabler.counter("Unmute Click");
+        $('#mainVid').prop('muted', false);
+        gsap.set('#btn-close', {display: 'block'});
+        gsap.set('#btn-unmute', {display: 'none'});
+        playMainVideo()
+    }
+    function replayVideo(){
+        Enabler.counter("Replay Click");
+
+        mainef = false;
+        setVideo('mainVid.mp4');
+        
+        $('#mainVid').prop('muted', false);
+        gsap.set('#btn-close', {display: 'block'});
+        gsap.set('#btn-unmute', {display: 'none'});
+        gsap.set('#btn-close', { pointerEvents:'auto'});
+        gsap.set('.endframe', {display: 'none'});
+        
+        //--------------------------
+        ctr=1;
+        isCaroAnim = false;
+        tlcaro.restart();
+        animcaro(5,1,'right');
+        tlcaro.pause();
+    }
+        
+    function checkDate(){
+//        var dcta = new Date("December 12, 2021");
+        var d1 = new Date("December 5, 2021 23:59:59");
+        var d2 = new Date("December 11, 2021 23:59:59");
+        var d3 = new Date("December 16, 2021 23:59:59");
+        var now = new Date();
+        console.log(now)
+        var timenow = new Date().getHours()
+            if(now < d1){
+                console.log('ONLY IN THEATERS DECEMBER 17 - Watch Trailer')
+                gsap.set('.d1',{display:'block'});
+                gsap.set('.cta-trailer',{display:'block'});
+            }
+            else if(now > d1 && now < d2){
+                console.log('ONLY IN THEATERS DECEMBER 17 - Get Tickets')
+                gsap.set('.d1',{display:'block'});
+                gsap.set('.cta-get',{display:'block'});
+            }
+            else if(now > d2 && now < d3){
+                console.log('ONLY IN THEATERS THIS FRIDAY')
+                gsap.set('.d2',{display:'block'});
+                gsap.set('.cta-get',{display:'block'});
+            }
+            else{
+                console.log('NOW PLAYING ONLY IN THEATERS')
+                gsap.set('.d3',{display:'block'});
+                gsap.set('.cta-get',{display:'block'});
+            }
+        
+
+//        if (now < dcta){
+//            $('#clickthru').on('click', exit1);
+//            gsap.set('.ds1',{display:'block'});
+//        }else{
+//            $('#clickthru').on('click', exit2);
+//            gsap.set('.ds2',{display:'block'});
+//        }
+    }
+
+    function addEvent() {
+        $('#clickthru').on('click', exit);
+        $('#mainVid').on('click', closeVid);
+        $('.cta').on('click', exit);
+        $('#btn-play').on('click', playMainVideo);
+        $('#btn-close').on('click', closeVid);
+        $('#btn-unmute').on('click', unmuteVideo);
+        $('#btn-replay').on('click', replayVideo);
+    };
+
+    function exit() {
+        //-----------exit guide--------------------------
+        //--adword--> ExitApi.exit();
+        //--adgear--> ADGEAR.html5.clickThrough("clickTAG");
+        //--studio--> Enabler.exit('Background Exit'); 
+        //--standard/sizemek/adword no-api--> window.open(clickTag);
+        //-----------exit--------------------------------
+        Enabler.exit('Background Exit'); 
+    }
+
+    function carouselEvents(){
+        $("#btn-right").on('click', carousel);
+        $("#btn-left").on('click', carousel);
+    }
+    function hoverFunction() {
+        $('.cta').on('mouseenter', function() {
+            gsap.to(['.cta1-get','.cta1-trailer'], 0.2,{ rotationX:90 },'In')
+            gsap.to(['.cta2-get','.cta2-trailer'], 0.2,{ rotationX:0  },'In')
+        });
+        $('.cta').on('mouseleave', function() {
+            gsap.to(['.cta2-get','.cta2-trailer'], 0.2,{ rotationX:-90 },'Out')
+            gsap.to(['.cta1-get','.cta1-trailer'], 0.2,{ rotationX:0   },'Out')
+        });
+        
+
+    }
+
+//-------------------------------------
+
+</script>
+</body>
+</html>
+
+<!--2021-->
