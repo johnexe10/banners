@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<meta charset="UTF-8">
+	<title>CandyBanners</title>
+	<meta name="ad.size" content="width=160,height=600">
+	<link rel="stylesheet" href="style.css">
+	<script> var clickTag = "http://www.esbnyc.com/"; </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+<body>
+	<div id="container">
+        <div class='mask1 mask'>
+            <div class="bg1 bg imgfix"><img src="bg1.jpg" alt=""></div>
+        </div>
+        <canvas id="cvs"></canvas>
+        <div class='mask2 mask'>
+            <div class="bg2 bg imgfix"><img src="bg2.jpg" alt=""></div>
+        </div>
+        <div class='sprite t1-1 t1 text'></div>
+        <div class='sprite t1-2 t1 text'></div>
+
+        <div class='sprite t2-1 t2 text'></div>
+        <div class='sprite t2-2 t2 text'></div>
+
+        <div class='sprite logo'></div>
+        <div class='cta'>
+            <div class="sprite cta-bg1 cta1"></div>
+            <div class="sprite cta-bg2 cta2"></div>
+            <div class="sprite cta-text1 cta1"></div>
+        </div>
+
+
+        <div id='clickthru'></div>
+        <div id='border'></div>
+	</div>
+    <script src="https://s0.2mdn.net/ads/studio/cached_libs/easeljs_0.8.2_937c3ec68021211c056f61c9ceaccffd_min.js"></script>
+	<script src="canvas.js"></script>
+	<script>
+    //--------------preload-img-------------------
+    function preload(arr,f) { $('<div id="preload" />').appendTo('body'); $(arr).each(function () {$('<img />').attr('src',this).appendTo('#preload').hide(); }); window.onload =function(){ f(); $('#preload').remove()} }
+    //--------------vars-------------------
+    var tl = gsap.timeline();
+    //---------------------------------
+    preload([
+        "bg1.jpg",
+        "bg2.jpg",
+        "p1.png",
+        "p2.png",
+        "gradient.png",
+        "sprite.png"
+    ],startAnim);
+    //--------------animations---------------------
+    function startAnim() {
+        //--------------- SET -----------------
+		gsap.set('#container', {display: 'block'});
+		gsap.set('.bg', {willChange: 'transform'});
+		gsap.set('.imgfix,.sprite', {transformPerspective: 100, force3D: true, rotation: 0.01});
+        //------------ ADD EVENT --------------
+        addEvent();
+        hoverFunction();
+        initCanvas()
+        //---------- ADD ANIMATION ------------
+        tl
+            //=========================
+            .add('Scene1')
+            .from('.bg1', {duration: 10, scale:1.13, ease: 'none'}, 'Scene1')
+            .from('.t1', {duration:.8, stagger:.1, x:-220, ease: 'power3.out'}, 'Scene1')
+
+            .add('Scene2', 'Scene1+=4')
+            .set('#cvs', {zIndex:2}, 'Scene2')
+            .from('.bg2', {duration: 10, scale:1.13, ease: 'none'}, 'Scene2')
+            .from('.mask2', {duration: .8, width:0, ease: 'elastic.out(.1, 2)'}, 'Scene2')
+            .from('.t2', {duration:.8, stagger:.1, x:-220, ease: 'power3.out'}, 'Scene2')
+            .add(()=>{
+                stopParticles()
+            },'15')
+
+        //-------------------------------------
+    };
+
+    function addEvent() {
+        $('#clickthru').on('click', exit);
+    };
+
+    function exit() {
+        //-----------exit guide--------------------------
+        //--adword--> ExitApi.exit();
+        //--adgear--> ADGEAR.html5.clickThrough("clickTAG");
+        //--studio--> Enabler.exit('Background Exit');
+        //--standard/sizemek/adword no-api--> window.open(clickTag);
+        //-----------exit--------------------------------
+        window.open(clickTag); /*Studio/Enabler Exit*/
+    }
+
+    function hoverFunction() {
+        $('#clickthru').on('mouseenter', function() {
+            gsap.to('.cta2',{duration:.5,opacity: 1,  ease: 'power1.inOut'});
+        });
+        $('#clickthru').on('mouseleave', function() {
+            gsap.to('.cta2',{duration:.5,opacity: 0,  ease: 'power1.inOut'});
+        });
+    }
+//-------------------------------------
+
+</script>
+</body>
+</html>
+
+<!--2021-->

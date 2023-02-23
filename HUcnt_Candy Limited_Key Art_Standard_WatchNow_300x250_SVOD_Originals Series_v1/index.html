@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<meta charset="UTF-8">
+	<title>CandyBanners</title>
+	<meta name="ad.size" content="width=300,height=250">
+	<link rel="stylesheet" href="style.css">
+	<script> var clickTag = "https://www.hulu.com"; </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="DrawSVGPlugin.min.js"></script>
+</head>
+<body>
+	<div id="container">
+		<div class='bg'>
+			<img src="bg.jpg" alt="Background">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="400px"
+            height="400px" viewBox="0 0 400 400" enable-background="new 0 0 400 400" xml:space="preserve">
+            <defs>
+                <filter id="f1" x="0" y="0">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+                </filter>
+                <mask id="svgmaskblood">
+                    <circle fill="#FFFFFF" cx="120.2" cy="172.1" r="2.1"/>
+                    <circle fill="#FFFFFF" cx="120.9" cy="162" r="2.1"/>
+                    <circle fill="#FFFFFF" cx="126.4" cy="161.6" r="2.1"/>
+                    <circle fill="#FFFFFF" cx="131.2" cy="154.7" r="2.1"/>
+                    <circle fill="#FFFFFF" cx="121" cy="154.6" r="2.1"/>
+                    <circle class="circ" fill="#FFFFFF" cx="113.8" cy="150" r="2.1"/>
+                </mask>
+                <mask id="svgmask">
+                    <path  class="line" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" d="M44.1,110.4c0,0,27.5-4.1,32,12.4h9.8c0,0,4.1-12.6,25.2-12.9"/>
+                </mask>
+            </defs>
+            <g mask="url(#svgmaskblood)">
+                <image overflow="visible" width="400" height="400" id="blood" xlink:href="blood.png" ></image>
+            </g>
+
+            <g mask="url(#svgmask)">
+                <image overflow="visible" width="400" height="400" id="flare" xlink:href="flare.png" ></image>
+            </g>
+            </svg>
+		</div>
+
+        <div class='sprite t1-1 f1'></div>
+        <div class='sprite t1-2 f1'></div>
+        <div class='sprite t2-1 f1'></div>
+				<div class='logo-candy f1'>
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            width="183px" height="45px" viewBox="0 0 366 90" enable-background="new 0 0 366 90" xml:space="preserve">
+                <defs>
+                    <mask id="mask1">
+                        <rect fill="#FFFFFF" width="366" height="90"/>
+                        <path class="masklogo" fill="#000000" d="M154.8,61.3l-11.7,29V40.5l11.7-21.4V61.3z"/>
+                    </mask>
+                </defs>
+                <g mask="url(#mask1)">
+                    <image overflow="visible" width="329" height="81" xlink:href="logo-candy.png"  transform="matrix(1 0 0 1 3.6 8.3497)"></image>
+                </g>
+            </svg>
+        </div>
+        <!-- <div class='sprite t3-1 '></div> -->
+				<div class='sprite dates date1'></div>
+				<div class='sprite dates date2'></div>
+        <div class='sprite logo-hulu '></div>
+
+        <div class='cta'>
+            <div class='sprite cta-text1'></div>
+            <div class='sprite cta-text2'></div>
+        </div>
+        <div id='clickthru'></div>
+
+	</div>
+	<script>
+    //--------------preload-img-------------------
+    function preload(arr,f) { $('<div id="preload" />').appendTo('body'); $(arr).each(function () {$('<img />').attr('src',this).appendTo('#preload').hide(); }); window.onload =function(){ f(); $('#preload').remove()} }
+    //--------------vars-------------------
+    var tl = gsap.timeline({paused:true,  defaults: {duration: 1,ease: "power1.out" }});
+    //---------------------------------
+    preload([
+        "sprite.png",
+        "logo-candy.png",
+        "blood.png",
+        "flare.png",
+        "bg.jpg"
+    ],startAnim);
+
+    //--------------dateswap---------------------
+
+		function checkDate(){
+				var d1 = new Date("May 12, 2022 23:59:59");
+				var now = new Date();
+				console.log(now)
+				var timenow = new Date().getHours()
+						if(now < d1){
+								// console.log('Now – August 14: In Theaters August 20th')
+								gsap.set('.date1',{display:'block'});
+								gsap.set('.f1',{x:'-16'});
+								gsap.set('.cta',{x:'-16'});
+								gsap.set('.logo-hulu',{x:'-16'});
+						}
+						else{
+								// console.log('August 19 6pm+: Now Playing,aug 19 onwards')
+								gsap.set('.date2',{display:'block'});
+						}
+		}
+
+    //--------------animations---------------------
+    function startAnim() {
+        //--------------- SET -----------------
+		gsap.set('#container', {display: 'block',onComplete:()=>{tl.play()}});
+		gsap.set('.bg', {force3D:false});
+        //------------ ADD EVENT --------------
+        addEvent();
+        checkDate();
+        //---------- ADD ANIMATION ------------
+        tl
+            .add('frame1')
+            .from('.bg',{scale:.85,duration:1.2},'frame1')
+            .to('.bg',{scale:1,duration:4},'frame1+=.6')
+            .from('.f1',{stagger:.6,opacity:0},'frame1+=.2')
+            .fromTo('.line',{drawSVG:"10% 20%"},{drawSVG:"75% 85%",duration:6,ease:"none"},'frame1')
+            .from('#svgmaskblood circle',{stagger:.05,opacity:0,duration:0.01},'frame1+=2')
+            .to('#svgmaskblood .circ',{attr:{r:40,cy:130},duration:1},'frame1+=2.3')
+            .fromTo('.masklogo',{y:12},{y:62,duration:3},'frame1+=2')
+            .from('.dates,.logo-hulu,.cta',{opacity:0},'frame1+=3.5')
+
+            .add(hoverFunction)
+        //-------------------------------------
+    };
+    function addEvent() {
+        $('#clickthru').on('click', exit);
+    };
+
+    function exit() {
+        //-----------exit guide--------------------------
+        //--adword--> ExitApi.exit();
+        //--adgear--> ADGEAR.html5.clickThrough("clickTAG");
+        //--studio--> Enabler.exit('Background Exit');
+        //--standard/sizemek/adword no-api--> window.open(clickTag);
+        //-----------exit--------------------------------
+        window.open(clickTag); /*Studio/Enabler Exit*/
+    }
+
+    function hoverFunction() {
+        $('#clickthru').on('mouseenter', function() {
+            gsap.to('.cta',{duration:.6,backgroundColor:'#ffffff'});
+            gsap.to('.cta-text1',{duration:.6,opacity:0});
+            gsap.to('.cta-text2',{duration:.6,opacity:1 });
+        });
+        $('#clickthru').on('mouseleave', function() {
+            gsap.to('.cta',{duration:.6,backgroundColor:'rgba(255,255,255,0)'});
+            gsap.to('.cta-text1',{duration:.6,opacity:1});
+            gsap.to('.cta-text2',{duration:.6,opacity:0});
+        });
+    }
+//-------------------------------------
+
+</script>
+</body>
+</html>
+
+<!--2021-->

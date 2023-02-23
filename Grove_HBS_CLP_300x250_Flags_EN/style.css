@@ -1,0 +1,99 @@
+body {margin: 0px;}
+img {width: 100%; height: 100%;}
+
+#container {
+	background-color: white;
+	border: 1px solid gray;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: none;
+	overflow: hidden;
+	position: absolute;
+	width: 300px;
+	height: 250px;
+}
+
+#container * {
+	position: absolute;
+}
+
+#clickthru{
+	width: 100%;
+	height: 100%;
+	pointer-events: auto;
+}
+
+/*-------------- SPRITE -------------*/
+.sprite { background: url('sprite.png') no-repeat top left; width: 226px; height: 331px; background-size: 226px 331px;  } 
+.sprite.ctatext { background-position: 0 0; width: 64px; height: 12px; } 
+.sprite.logo { background-position: 0 -17px; width: 126px; height: 41px; } 
+.sprite.text1a { background-position: 0 -63px; width: 183px; height: 21px; } 
+.sprite.text1b { background-position: 0 -89px; width: 156px; height: 21px; } 
+.sprite.text1c { background-position: 0 -115px; width: 67px; height: 21px; } 
+.sprite.text2a { background-position: 0 -141px; width: 125px; height: 21px; } 
+.sprite.text2b { background-position: 0 -167px; width: 68px; height: 21px; } 
+.sprite.text3 { background-position: 0 -193px; width: 63px; height: 32px; } 
+.sprite.text4a { background-position: 0 -230px; width: 226px; height: 21px; } 
+.sprite.text4b { background-position: 0 -256px; width: 90px; height: 21px; } 
+.sprite.text5a { background-position: 0 -282px; width: 168px; height: 14px; } 
+.sprite.text5b { background-position: 0 -301px; width: 60px; height: 14px; } 
+.sprite.text6 { background-position: 0 -320px; width: 21px; height: 11px; } 
+
+/*--------- SPRITE POSITION ---------*/
+.ctatext	    {top: 11px;left: 32px;}
+.logo 			{top: 194px;left: 14px;}
+.text1a 		{top: 34px;left: 15px;}
+.text1b 		{top: 59px;left: 15px;}
+.text1c 		{top: 59px;left: 175px;}
+.text2a 		{top: 34px;left: 15px;}
+.text2b 		{top: 59px;left: 14px;}
+.text3 		    {top: 73px;left: 118px;}
+.text4a 		{top: 34px;left: 14px;}
+.text4b 		{top: 59px;left: 15px;}
+.text5a 		{top: 108px;left: 27px;}
+.text5b 		{top: 123px;left: 27px;}
+.text6 		    {top: 123px;left: 91px;}
+
+/*-------- IMAGES | POSITION --------*/
+#cvs {
+    top: 0px;
+    left: 0px;
+}
+
+.bg{
+	width: 300px;
+	height: 166px;
+	background-color: #f16548;
+}
+
+.line {
+    top: 101px;
+    left: 15px;
+    width: 2px;
+    height: 41px;
+    background-color: white;
+}
+
+.pole {
+    width: 300px;
+    height: 250px;
+    top: 0px;
+    left: 0px;
+}
+
+/*CTA*/ 
+#cta {width: 127px;height: 33px;top: 200px;left: 157px;}
+
+.cta-in{
+    width: 100%;
+    height: 100%;
+    background-color: #b7133f;
+}
+.cta-out{
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+}
+
+
+

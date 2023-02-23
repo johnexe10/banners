@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<meta charset="UTF-8">
+	<title>Grove - Harvard CLP Banners</title>
+	<meta name="ad.size" content="width=300,height=250"> 
+	<link rel="stylesheet" href="style.css">
+	<script> var clickTag = "https://www.google.com"; </script>
+	<!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+    <!-- STANDARD -->
+    <script src="cb_sizmek.js"></script> 
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+</head>
+<body>
+	<div id="container">
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+        
+        <!-- ADD 'imgfix' CLASS ON ALL IMG TAGS DIVS -->
+        
+		<div class='bg'></div>
+       
+        <div class="pole"><img src="pole.png" alt=""></div>
+        <canvas id='cvs' width="300" height="250"></canvas>
+        
+        <div class='sprite logo'></div>
+        <div class='sprite text1a t1'></div>
+        <div class='sprite text1b t1'></div>
+        <div class='sprite text1c'></div>
+        <div class='sprite text2a t2'></div>
+        <div class='sprite text2b t2'></div>
+        <div class='sprite text3'></div>
+        <div class='sprite text4a t4'></div>
+        <div class='sprite text4b t4'></div>
+        
+        <div class="line"></div>
+        <div class='sprite text5a t5'></div>
+        <div class='sprite text5b t5'></div>
+        <div class='sprite text6'></div>
+        
+        <!-----------------CTA----------------->
+        
+        <div id="cta">
+            <div class="cta-in">
+                <div class='sprite ctatext'></div>
+            </div>
+        
+            <div class="cta-out">
+                <div class='sprite ctatext'></div>
+            </div>
+        </div>
+        
+        <div class='sprite logo'></div>
+        <div id='clickthru'></div>
+        
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+	</div>
+	<script src="canvas.js"></script>
+	<script>
+		var tl = new TimelineMax();
+		function initAd() {
+			//--------- PRE-LOAD IMAGE ------------
+			startPreload('sprite.png', 'flag.png', 'pole.png',startAnim);
+			//-------------------------------------
+			function startAnim() {
+				//--------------- SET -----------------
+				TweenMax.set('#container', {display: 'block'});
+                TweenMax.set('.sprite', { rotation:0.001});
+                TweenMax.set('.imgfix', { rotation:0.001});
+                TweenMax.set('.cta-out', {transformOrigin: "50% 50% -16px",rotationX:-90})
+                TweenMax.set(".cta-in",  {transformOrigin: "50% 50% -10px",})
+                TweenMax.set(".text1c",  {transformOrigin: "bottom center 20px", transformPerspective: 90})
+				//------------ ADD EVENT --------------
+				addEvent();
+				//---------- ADD ANIMATION ------------
+				tl
+                    //=========================
+                    .add('Scene1')
+                    .staggerFrom(".t1", 0.8, {opacity:0, y: 15, ease:Power1.easeOut}, .4, 'Scene1')
+                    .from(".text1c", 0.8, {rotationX: 90, opacity:0, ease:Power1.easeOut}, 'Scene1+=0.7')
+                
+                    //=========================
+                    .add('Scene2','+=2.0')
+                    .to(".t1,.text1c", 0.8, {opacity:0, ease:Power1.easeOut}, 'Scene2')
+                    .from(".text2a", 0.8, {opacity:0,y:15,ease:Power1.easeOut}, 'Scene2+=0.5')
+                    .from(".text2b", 0.4, {opacity:0,scale: 1.6,ease:Power4.easeOut}, 'Scene2+=1.1')
+                    .add(initCanvas, 'Scene2+=1.5')
+                    .from('.pole,#cvs', 0.8, { opacity: 0, ease: Power1.easeOut}, 'Scene2+=1.5')
+                
+                    //=========================
+                    .add('Scene3','+=3.0')
+                    .to(".t2,.pole,#cvs", 0.8, {opacity:0, ease:Power1.easeOut}, 'Scene3')
+                    .from(".text3", 0.6, {opacity:0,scale:.1,ease:Back.easeOut.config(4)}, 'Scene3+=0.6')
+                    .add(stopAnim)
+
+                    //=========================
+                    .add('Scene4','+=2.0')
+                    .to(".text3", 0.8, {opacity:0, ease:Power1.easeOut}, 'Scene4')
+                    .staggerFrom(".t4", 0.8, {opacity:0, y: 15, ease:Power1.easeOut}, .4, 'Scene4+=0.6')
+                    .from(".line", 0.4, {scaleY:0},  'Scene4+=1.8')
+                    .staggerFrom(".t5", 0.8, {opacity:0, y: 15, ease:Power1.easeOut}, .4, 'Scene4+=1.8')
+                    .from(".text6", 0.6, {opacity:0,scale:.1,ease:Back.easeOut.config(4)}, 'Scene4+=3.0')
+                    .from("#cta", 0.6, {opacity:0, ease:Power1.easeOut})
+                    .add(hoverFunction)
+                    
+					
+				//-------------------------------------
+			};
+
+			function addEvent() {
+				//--------------- SET -----------------
+				//To add:		_(object).on(events,  function);
+				//To remove:	_(object).off(events, function);
+				//-------------------------------------
+				_('#clickthru').on('click', exit);
+			};
+			
+			function exit() {
+				window.open(clickTag); /*Standard Exit*/
+				console.log('Exit')
+			}
+			
+            function hoverFunction() {
+                console.log('awdawd')
+                _('#clickthru').on('mouseenter', function() {
+                    TweenMax.to('.cta-in',.2,{rotationX:90},'In')
+                    TweenMax.to('.cta-out',.2,{rotationX:0},'In')
+                });
+                _('#clickthru').on('mouseleave', function() {
+                    TweenMax.to('.cta-out',.2,{rotationX:-90},'Out')
+                    TweenMax.to('.cta-in',.2,{rotationX:0},'Out')
+                });
+            }
+            //-------------------------------------
+            
+		};
+	</script>
+</body>
+</html>
+
+<!--1018V1-->
