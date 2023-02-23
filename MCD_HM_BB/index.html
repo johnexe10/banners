@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+<!-----------campaign name in title----------------------------->
+		<title>DDB_McD_HappyMeal_300x250_EN</title>
+<!-----------change size depends on your ad banner-------------->
+        <meta name="ad.size" content="width=300,height=250"> 
+<!-------------------------------------------------------------->
+		<script>
+		  var clickTag = "https://www.google.com"; 
+		</script>
+<!-------------------------------------------------------------->
+		<link href="style.css" rel="stylesheet" type="text/css">
+        
+    </head>
+	<body>
+    <div id="container-cb">
+        <div class="bg"></div>
+        <!--firstframe-->
+        <div class="txt-holder">
+            <div class="whats"><img src="whats.png" alt=""></div>
+            <div class="in"><img src="in.png" alt=""></div>
+            <div class="the"><img src="the.png" alt=""></div>
+            <div class="box-t"><img src="box.png" alt=""></div>
+            <div class="q"><img src="q.png" alt=""></div>
+        </div>
+        <div class="shadow"></div>
+        <div class="box-img"><img src="box-img.png" alt=""></div>
+        <!--2ndframe-->
+        
+        <div class="barbie-logo"><img src="barbie-logo.png" alt=""></div>
+        <canvas id="cvs"></canvas>
+        <div class="barbie"><img src="barbie.png" alt=""></div>
+        <div class="barbie-txt">
+            <div class="a"></div>
+            <div class="b"></div>
+        </div>
+        <div class="mattel-c"></div>
+        <!--3rdframe-->
+        <div class="car"><img src="car.png" alt=""></div>
+        <div class="car-logo"><img src="car-logo.png" alt=""></div>
+        <div class="car-text">
+            <div class="a"></div>
+            <div class="b"></div>
+            <div class="c"></div>
+        </div>
+        <div class="dc-c"></div>
+        <div class="mcd-c"></div>
+        
+        <div class="text2"></div>
+        <div class="mcd-logo"></div>
+        <div class="hm-logo"></div>
+        <div id="clickTag"></div>
+    </div>
+		<!-------------------------------------------------------------->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+    <script src="sparkle.js"></script>
+    <script>
+        //preloader
+        function startPreload(){function a(){r===e-1?n[e]():r++}var r=0,t=new Array,e=startPreload.arguments.length-1,n=startPreload.arguments;for(i=0;i<e;i++)t[i]=new Image,t[i].src=startPreload.arguments[i],addEvent(t[i],"load",a)}
+        //selector
+        function _(selector){return document.querySelector(selector);}
+        //addEventlistener
+        function addEvent(obj, evt, fn) {if(obj.addEventListener) {obj.addEventListener(evt, fn, false);}else if(obj.attachEvent) {obj.attachEvent('on' + evt, fn)}}
+        //removeEventlistener
+        function removeEvent(obj, evt, fn) {if(obj.addEventListener) {obj.removeEventListener(evt, fn, false);}else if(obj.attachEvent) {obj.detachEvent('on' + evt, fn)}}
+        
+        (function(){
+            var tl = new TimelineMax();
+            var box = new TimelineMax();
+            var box2 = new TimelineMax();
+            TweenLite.defaultOverwrite = false;
+            	startPreload(
+                    'bg.jpg',
+                    'sprite.png',
+                    'whats.png',
+                    'in.png',
+                    'the.png',
+                    'q.png',
+                    'box.png',
+                    'box-img.png',
+                    'barbie.png',
+                    'barbie-logo.png',
+                    'car.png',
+                    'car-logo.png'
+                    ,animate);
+			//---------------------------------------------------------------------------------------------------------------
+			//---------------------------------------------------------------------------------------------------------------
+            function animate(){
+              box.timeScale(1.2);
+              box2.timeScale(1.5);
+              box
+                .set('.box-img',{rotation:0,transformOrigin:'center center'})
+                .to('.box-img',.6,{y:'-=45',rotation:30,ease:Power3.easeOut})
+                .to('.box-img',.3,{ease:Power3.easeOut},'-=.4')
+                .to('.box-img',.3,{rotation:-30,ease:Power3.easeOut},'-=.2')
+                .to('.box-img',.3,{rotation:30,ease:Power3.easeOut},'-=.2')
+                .to('.box-img',.4,{y:'+=45',rotation:0,ease:Power4.easeIn})
+                .to('.box-img',.6,{y:'-=45',rotation:30,ease:Power3.easeOut})
+                .to('.box-img',.3,{ease:Power3.easeOut},'-=.4')
+                .to('.box-img',.3,{rotation:-30,ease:Power3.easeOut},'-=.2')
+                .to('.box-img',.4,{rotation:380,ease:Power3.easeOut},'-=.2')
+                .to('.box-img',.4,{y:'+=45',rotation:360,ease:Power4.easeIn})
+                .set('.box-img',{rotation:0,transformOrigin:'center center'})
+                .to('.box-img',.6,{y:'-=45',rotation:30,ease:Power3.easeOut})
+                .to('.box-img',.3,{ease:Power3.easeOut},'-=.4')
+                .to('.box-img',.3,{rotation:-30,ease:Power3.easeOut},'-=.2')
+                .to('.box-img',.3,{rotation:30,ease:Power3.easeOut},'-=.2')
+                .to('.box-img',.4,{y:'+=45',rotation:0,ease:Power4.easeIn})
+
+              tl
+                .set('#container-cb',{display:'block',onComplete:addCTAEvent})
+                .set('.box-img',{scale:.6,x:16,y:-34})
+                .set('.txt-holder',{scale:.65,x:-10,force3D:true,rotation:.0001})
+                .set('img',{force3D:true,rotation:.0001})
+                .set('.box-img',{force3D:true,rotation:.0001})
+                
+                .add(box,'0')
+                .staggerFrom('.txt-holder div',.7,{y:'-=20',display:'none',ease:Bounce.easeOut},.3,'0')
+                .to(['.box-img','.txt-holder'],1,{scale:.9,x:0,y:0,ease: Power2.easeInOut},'3.35')
+                .from('.shadow',1,{scale:.8,x:3,y:-60,opacity:0,ease: Power2.easeInOut},'3.35')
+                .to(['.box-img','.shadow'],.8,{x:200,opacity:0,ease:Power3.easeIn},'5')
+                .to('.txt-holder',.8,{x:-200,opacity:0,force3D:true,ease:Power3.easeIn},'5')
+                
+                .from('.mattel-c',.7,{opacity:0,ease:Power4.easeInOut},'5.7')
+                .staggerFrom(['.barbie','.barbie-logo'],.7,{scale:.5,opacity:0,ease:Power2.easeInOut},.3,'5.9')
+                .add(function(){initSparkle(220,200,50)},'5.9')
+                .staggerFrom('.barbie-txt div',.7,{y:'-=20',display:'none',ease:Power4.easeOut},.2,'6.6')
+                .add(stopSparkle,'6.9')
+                .to('.barbie',.8,{x:-200,opacity:0,ease:Power3.easeIn},'7.9')
+                .to(['.barbie-txt','.barbie-logo'],.8,{x:200,opacity:0,force3D:true,ease:Power3.easeIn},'7.9')
+                .to('.mattel-c',.7,{opacity:0,ease:Power4.easeInOut},'7.9')
+              
+                .from('.dc-c',.7,{opacity:0,ease:Power2.easeInOut},'8.1')
+                .from('.car',1,{x:90,y:-300,rotation:-80,ease: Back.easeOut.config(1.7)},'8.2')
+                .from('.car-logo',.7,{y:'-=20',display:'none',ease:Power4.easeOut},'8.6')
+                .staggerFrom('.car-text div',.7,{y:'-=20',display:'none',ease:Power4.easeOut},.2,'8.8')
+                
+                .to(['.car-text','.car-logo'],.8,{x:200,opacity:0,force3D:true,ease:Power3.easeIn},'10.2')
+                .to('.car',.8,{x:-200,opacity:0,ease:Power3.easeIn},'10.2')
+                .to('.dc-c',.7,{opacity:0,ease:Power2.easeInOut},'10.2')
+                .from('.mcd-c',.7,{opacity:0,ease:Power2.easeInOut},'10.5')
+                .from('.text2',.7,{opacity:0,ease:Power2.easeInOut},'12.5')
+                
+                .add(function(){
+                    tl
+                        .set('.box-img',{y:-67},'10.35')
+                        .fromTo('.box-img',2,{scale:1.4,opacity:0,x:-63},{opacity:1,x:-63,scale:.9},'10.4')
+                        .add(function(){
+                            tl
+                              .set('.car-logo',{x:23,y:18,rotation:.0001,scale:.75,opacity:0,force3D:true},'12.5')
+                              .set('.barbie-logo',{x:-150,y:98,rotation:.0001,scale:.67,opacity:0,force3D:true},'12.5')
+                              .fromTo('.car',1,{x:250,y:-80,scale:.63,rotation:-80,opacity:1},{x:115,opacity:1,y:47,rotation:0,ease: Back.easeOut.config(1.7)},'12.5')
+                              .fromTo('.barbie',1,{x:-18,y:22,scale:.75,opacity:0},{opacity:1,ease: Power3.easeOut},'12.5')
+                              .to([,'.barbie-logo','.car-logo'],.7,{opacity:1},'12.8')
+                              .add(function(){
+                                initSparkle(110,170,20)
+                                TweenMax.set('#cvs',{top:60,left:10}) //10 60
+                                },'12.5')
+                              .add(stopSparkle,'13.5')
+                        },'12.5')
+                    box2
+                        .to('.box-img',.4,{y:'+=45',rotation:30,ease:Power4.easeIn})
+                        .to('.box-img',.6,{y:'-=45',ease:Power3.easeOut})
+                        .to('.box-img',.4,{y:'+=45',rotation:-30,ease:Power4.easeIn})
+                        .to('.box-img',.6,{y:'-=45',ease:Power3.easeOut})
+                        .to('.box-img',.4,{y:'+=45',rotation:30,ease:Power4.easeIn})
+                        .to('.box-img',.6,{y:'-=45',ease:Power3.easeOut})
+                        .to('.box-img',.6,{y:'+=45',rotation:0,ease:Power3.easeOut})
+                },'10.4')
+
+            }
+			//---------------------------------------------------------------------------------------------------------------
+			//---------------------------------------------------------------------------------------------------------------
+            function addCTAEvent(){
+                addEvent(_('#clickTag'),'click', function(){window.open(window.clickTag)})
+            }
+            
+        })();
+        
+    </script>
+</body>
+</html>

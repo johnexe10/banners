@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>MANU4818 - Cover Me banners Q4</title>
+	<meta name="ad.size" content="width=300,height=250"> 
+	<link rel="stylesheet" href="style.css">
+	<script>
+		var clickTag = "https://www.google.com";
+	</script>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.0/TweenMax.min.js"></script>
+	<!-- STANDARD -->
+	<script src="cb_enabler.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/EaselJS/1.0.2/easeljs.min.js"></script>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+</head>
+<body>
+	<div id="container">
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+		<div class="bg">
+			<svg version="1.1" id="water" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 745 394" enable-background="new 0 0 745 394" xml:space="preserve">
+               <defs> 
+                    <filter id="turb">
+                        <feTurbulence id="waterwave" type="fractalNoise" baseFrequency="0.01" numOctaves="4"
+                            result="turbulence_3" data-filterId="3" />
+                        <feDisplacementMap xChannelSelector="R" yChannelSelector="G" in="SourceGraphic" in2="turbulence_3" scale="40" />
+                    </filter>
+                </defs>
+                <g id="img-holder" filter="url(#turb)">
+               		<image y="-20" overflow="visible" width="745" height="394" xlink:href="bg.jpg" ></image> 
+                </g>
+            </svg>
+		</div>
+		
+		<div class='sprite t1'></div>
+		<div class='sprite t2 f1'></div>
+		<div class='sprite t3 f1'></div>
+		<div class='sprite t4 f1'></div>
+		<canvas id="cvs"></canvas>
+		<div class="bg2">
+		   <img src="bg2.png" alt="">
+		</div>
+
+		<div class='sprite t5 f2'></div>
+		<div class='sprite t6 f2'></div>
+		
+		<div class='sprite cover'></div>
+		<div class="cta">
+			<div class='sprite cta-arrow'></div>
+			<div class='sprite cta-txt'></div>
+		</div>
+		<div class="border"><img src="border.png" alt=""></div>
+        
+        <div id='bgClick'></div>
+        <div class="legalmask"> <div id="legal"></div> </div>
+        <div class='sprite legal'></div>
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+	</div>
+	<script src="canvas.js"></script>
+	<script>
+		var tl = new TimelineMax();
+		var water = new TimelineMax({repeat:-1,yoyo:true});
+		function initAd() {
+			//--------- PRE-LOAD IMAGE ------------
+			startPreload('bg.jpg','bg2.png','border.png','sprite.png', 'legal.png', startAnim);
+			//-------------------------------------
+			function startAnim() {
+				//--------------- SET -----------------
+				TweenMax.set('#container', {display: 'block'});
+				TweenMax.set('.bg', {force3D:false});
+                TweenMax.set('#legal', {y: -72})
+				//------------ ADD EVENT --------------
+				addEvent();
+				initCanvas();
+				var interval;
+				// Add this cta hover function when the cta shows
+				// onComplete: hoverFunction
+				//---------- ADD ANIMATION ------------
+				tl
+					.add(water,'f1')
+                    .from('.t1',0.3,{opacity:0,scale:3,ease:Power2.easeIn,delay:0.3},'f1')
+                    .to('.t1',0.7,{y:-53,scale:0.6,ease:Power2.easeInOut},'f1+=1')
+				
+					.staggerFrom('.f1',0.8,{opacity:0,y:7,ease:Power1.easeInOut},0.2,'f1+=1.5')
+					
+					.add('pool','f1+=4.5')
+					.add(function(){interval = setInterval(addparticle,10)},'pool')
+					.to('.t1,.f1',2,{opacity:0,ease:Power1.easeInOut},'pool+=1.5')
+					.to(circles2.container,1,{alpha:0,ease:Power1.easeInOut},'pool+=2.5')
+					.from('.bg,.bg2,#cvs',1.5,{x:-270,ease:Power1.easeInOut},'pool+=2.5')
+                    .to('.bg2', 3,{scale:1.2, transformOrigin: '0% 0%', ease:Power1.easeInOut},'pool+=4.5')
+					.add(function(){clearInterval(interval)},'pool+=2.5')
+				//----------
+				
+					.to('.bg,.bg2,#cvs',1.5,{scale:1, x:-270,ease:Power1.easeInOut},'pool+=8')
+				//----------
+					.add('endframe','pool+=9')
+					.staggerFrom('.f2',0.8,{opacity:0,y:7,ease:Power1.easeInOut},0.2,'endframe')
+					.from('.cta', 1, {opacity: 0, ease: Power1.easeOut, onComplete: hoverFunction},'endframe+=1')
+					.add(function(){water.pause();removeCanvas()},15) //stop water animation at :15
+				//--------------------
+					
+					water.to("#waterwave", 10, { attr:{"baseFrequency":0.001},ease: Power0.easeNone })	
+//					     .to('#sparkles, #sparkle',1,{display:'none'})
+					
+				//-------------------------------------
+			};
+			
+			function addEvent() {
+				//--------------- SET -----------------
+				//To add:		_(object).on(events,  function);
+				//To remove:	_(object).off(events, function);
+				//-------------------------------------
+				_('#container').on('click', exit);
+			     _('.legal').on('click', showLegal);
+				_('#legal').on('click', exit);
+				_('#legal').on('mouseleave', hideLegal);
+			};
+            
+            function showLegal(){
+                console.log("show legal");
+                TweenMax.to('.legal', .4, {opacity: 0, ease: Power1.easeInOut})
+                TweenMax.to('#legal', .8, {y: 0, ease: Power1.easeInOut, delay: .2})
+                TweenMax.set('.legal', {pointerEvents: 'none'})
+            }
+            
+            function hideLegal(){
+                TweenMax.to('#legal', .4, {y: -72, ease: Power1.easeInOut})
+                TweenMax.to('.legal', .4, {opacity: 1, ease: Power1.easeInOut, delay: .2})
+                TweenMax.set('.legal', {pointerEvents: 'auto'})
+            }
+			
+			function exit() {
+				window.open(clickTag); /*Sizmek Exit*/
+				console.log('Exit')
+			}
+			
+			function hoverFunction() {
+				arrowAnim();
+				_('#container').on('mouseenter', arrowAnim);
+			}
+
+			function arrowAnim() {
+				TweenMax.set('.cta-arrow', {x: 0});
+				TweenMax.to('.cta-arrow', 0.5, {x: '+=5', repeat: 3, yoyo: true})
+			}
+
+
+		};
+	</script>
+</body>
+</html>

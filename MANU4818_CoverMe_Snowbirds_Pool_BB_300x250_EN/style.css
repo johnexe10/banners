@@ -1,0 +1,104 @@
+body {margin: 0px;}
+
+#container {
+	background-color: #ffffff;
+	border: 1px solid gray;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: none;
+	overflow: hidden;
+	position: absolute;
+	width: 300px;
+	height: 250px;
+}
+canvas{
+	top:0;
+	left: 0;
+}
+#container * {
+	position: absolute;
+}
+
+.border {
+	width: 300px;
+	height: 250px;
+	top:-1px;
+	left: -1px;
+}
+
+.bg,.bg2 {
+	width: 745px;
+	height: 394px;
+	top:-1px;
+	left: -1px;
+}
+.golf{
+	width: 76px;
+	height: 75px;
+	left: 300px;
+	top: 50px;
+}
+img{
+	display: block;
+	width: 100%;
+	height: auto;
+}
+/*SPRITE*/
+.sprite { background: url('sprite.png') no-repeat top left; width: 217px; height: 299px; background-size: 217px 299px;  } 
+.sprite.cover { background-position: 0 0; width: 76px; height: 9px; } 
+.sprite.cta-arrow { background-position: 0 -14px; width: 9px; height: 13px; } 
+.sprite.t1 { background-position: 0 -32px; width: 153px; height: 65px; } 
+.sprite.t2 { background-position: 0 -102px; width: 217px; height: 25px; } 
+.sprite.t3 { background-position: 0 -132px; width: 203px; height: 31px; } 
+.sprite.t4 { background-position: 0 -168px; width: 187px; height: 31px; } 
+.sprite.cta-txt { background-position: 0 -204px; width: 99px; height: 19px; } 
+.sprite.legal { background-position: 0 -228px; width: 28px; height: 11px; } 
+.sprite.t5 { background-position: 0 -244px; width: 111px; height: 25px; } 
+.sprite.t6 { background-position: 0 -274px; width: 192px; height: 25px; } 
+
+/*SPRITE POSITION*/
+
+.legal {top: 13px;left: 15px;} 
+.t1 {top: 86px;left: 73px;} 
+.t2 {top: 91px;left: 44px;} 
+.t3 {top: 123px;left: 47px;} 
+.t4 {top: 153px;left: 56px;} 
+.t5 {top: 67px;left: 95px;} 
+.t6 {top: 99px;left: 53px;} 
+.cover {bottom: 14px;left: 92px;} 
+
+.cta{
+    bottom: 76px;
+    left: 85px;
+    width: 130px;
+    height: 32px;
+    background-color: #ffb500;
+    border-radius: 4px;
+}
+.cta-arrow {top: 10px;left: 112px;} 
+.cta-txt {top: 7px;left: 9px;} 
+
+#bgClick {
+    width: 300px;
+	height: 250px;
+	top:-1px;
+	left: -1px;
+}
+
+#legal {
+    top: -8px;
+    left: -8px;
+    background: url('legal.png') no-repeat 0 0;
+    background-size: 300px 72px;
+    width: 300px;
+    height: 72px;
+}
+
+.legalmask {
+    top: 7px;
+    left: 7px;
+    width: 284px;
+    height: 72px;
+    overflow: hidden;
+}
