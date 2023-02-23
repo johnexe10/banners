@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<meta charset="UTF-8">
+	<title>CandyBanners</title>
+	<meta name="ad.size" content="width=300,height=250"> 
+	<link rel="stylesheet" href="style.css">
+	<script> var clickTag = "https://www.roundabouttheatre.org/get-tickets/2022-2023-season/1776/"; </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	<div id="container">
+		<div class='bg'>
+            <canvas id="canvas"></canvas>
+		</div>
+        <div class='sprite e-point'></div>
+        <div class='sprite logo'></div>
+        <div class='sprite t1-1'></div>
+        <div class='sprite t1-2'></div>
+        <div class="star-h">
+            <div class="star s1"><img src="star.png" alt=""></div>
+            <div class="star s2"><img src="star.png" alt=""></div>
+            <div class="star s3"><img src="star.png" alt=""></div>
+            <div class="star s4"><img src="star.png" alt=""></div>
+        </div>
+
+        <div class="header">
+            <div class='sprite t2-1'></div>
+        </div>
+
+        <div class="footer">
+            <div class='cta'>
+                <div class='sprite cta-text1'></div>
+            </div>
+            <div class='sprite rtc-logo'></div>
+        </div>
+        <div class='sprite logo'></div>
+        <div id='clickthru'></div>
+        
+	</div>
+    <script src="fireworks.js"></script>
+	<script>
+    //--------------preload-img-------------------
+    function preload(arr,f) { $('<div id="preload" />').appendTo('body'); $(arr).each(function () {$('<img />').attr('src',this).appendTo('#preload').hide(); }); window.onload =function(){ f(); $('#preload').remove()} }
+    //--------------vars-------------------
+	var tl = gsap.timeline({paused:true,  defaults: {duration: 0.5,ease: "none" }});
+    //---------------------------------
+    preload([
+        "sprite.png",
+        "bg.jpg"
+    ],startAnim);
+    //--------------animations---------------------
+    function startAnim() {
+		//------on load ------------
+		gsap.set('#container', {display: 'block',onComplete:()=>{
+			//------------ ADD EVENT --------------
+			addEvent();
+			tl.play();
+            for(var i=1; i<=$('.star').length;i++){
+                gsap.set('.s'+i,{x:82*(i-1)})
+            }
+		}});
+		//--------------- SET -----------------
+        gsap.set('.star-h',{transformOrigin:'0% 50%'})
+		//---------- ADD ANIMATION ------------
+        tl
+            //=========================
+            .add('Scene1')
+            .from('.logo',{opacity:0,duration:.8},'Scene1')
+            //=========================
+
+            .add('Scene2','Scene1+=.5')
+            .from('.star',{stagger:.2,x:'+=300',duration:1,ease:'power1.Out'},'Scene2')
+            .to('.star-h',{scale:.72,duration:2,ease:'power1.Out'},'Scene2')
+            .to('.star-h',{scale:.616,duration:.5,x:14,y:14,ease:'power1.inOut'},'Scene2+=2.5')
+            .from('.e-point',{opacity:0,duration:.5,ease:'power1.inOut'},'Scene2+=2.8')
+            .add(createFirework,'Scene2+=2.8')
+            .from('.t1-1',{opacity:0,duration:1,ease:'power1.inOut'},'Scene2+=3')
+            .from('.header',{opacity:0,duration:1,ease:'power1.inOut'},'Scene2+=3')
+            .add(createFirework,'Scene2+=3.5')
+
+            .add(createFirework,'Scene2+=6')
+            .add(createFirework,'Scene2+=6.5')
+            .to('.t1-1,.star-h,.e-point',{opacity:0,duration:1,ease:'power1.inOut'},'Scene2+=5')
+            .from('.t1-2',{opacity:0,duration:1,ease:'power1.inOut'},'Scene2+=5.5')
+            .add(function(){hoverFunction()},'Scene2+=5')
+        //-------------------------------------
+
+        
+    };
+
+    function addEvent() {
+        $('#clickthru').on('click', exit);
+    };
+    
+    function exit() {
+        //-----------exit guide--------------------------
+        //--adword--> ExitApi.exit();
+        //--adgear--> ADGEAR.html5.clickThrough("clickTAG");
+        //--studio--> Enabler.exit('Background Exit'); 
+        //--standard/sizemek/adword no-api--> window.open(clickTag);
+        //-----------exit--------------------------------
+        window.open(clickTag); /*Studio/Enabler Exit*/
+    }
+    var flag = true;
+    // var timer = 
+    function hoverFunction() {
+        $('#clickthru').on('mouseenter', function() {
+            gsap.to('.cta',{duration:.6,backgroundColor:'#ffffff'});
+            if(flag) {
+                createFirework();
+                flag=false;
+                setTimeout(()=>{flag=true;},1500)
+            }
+        });
+        $('#clickthru').on('mouseleave', function() {
+            gsap.to('.cta',{duration:.6,backgroundColor:'#06cef6'});
+
+        });
+    }
+//-------------------------------------
+
+</script>
+</body>
+</html>
+
+<!--2022-->

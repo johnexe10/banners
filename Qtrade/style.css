@@ -1,0 +1,80 @@
+body {margin: 0px;}
+
+#container {
+	background-color: black;
+	border: 1px solid gray;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: none;
+	overflow: hidden;
+	position: absolute;
+	width: 300px;
+	height: 250px;
+	pointer-events: none;
+}
+
+#container * {
+	position: absolute;
+}
+
+#clickthru{
+	width: 100%;
+	height: 100%;
+	pointer-events: auto;
+}
+
+/*-------------- SPRITE -------------*/
+.sprite { background: url('sprite.png') no-repeat top left; width: 233px; height: 320px; background-size: 233px 320px;  } 
+.sprite.cta-arrow { background-position: 0 0; width: 9px; height: 17px; } 
+.sprite.cta-hover { background-position: 0 -22px; width: 63px; height: 10px; } 
+.sprite.cta-text { background-position: 0 -37px; width: 63px; height: 10px; } 
+.sprite.logo { background-position: 0 -52px; width: 79px; height: 31px; } 
+.sprite.t1 { background-position: 0 -88px; width: 198px; height: 88px; } 
+.sprite.t2 { background-position: 0 -181px; width: 198px; height: 52px; } 
+.sprite.t3 { background-position: 0 -238px; width: 233px; height: 57px; } 
+.sprite.t4 { background-position: 0 -300px; width: 228px; height: 20px; } 
+
+/*--------- SPRITE POSITION ---------*/
+.cta-text, .cta-hover {top: 8px;left: 11px;}
+.cta-hover {opacity:0; }
+.cta-arrow {top: 171px;left: 167px;}
+
+.logo {top: 162px;left: 74px;}
+.t1 {top: 31px;left: 32px;}
+.t2 {top: 121px;left: 33px;}
+.t3 {top: 53px;left: 32px;}
+.t4 {top: 213px;left: 32px;}
+
+/*-------- IMAGES | POSITION --------*/
+img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+.bg,.border{
+	width: 300px;
+	height: 250px;
+}
+.clouds{
+    width: 100%;
+    height: 100%;
+}
+
+.line{
+    width: 213px;
+    height:2px;
+    top: 30px;
+    left: 32px;
+    background-color: #e77d27;
+}
+
+.cta{
+    background-color:#e77c25;
+    border-radius: 11px;
+    width: 85px;
+    height: 26px;
+    left: 186px;
+    top: 166px;
+}
+

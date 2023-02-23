@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<meta charset="UTF-8">
+	<title>CandyBanners</title>
+	<meta name="ad.size" content="width=300,height=250"> 
+	<link rel="stylesheet" href="style.css">
+	<script> 
+        var clickTag1 = "https://protege.movie/";
+        var clickTag2 = "https://tickets.protege.movie/";
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/PreloadJS/1.0.1/preloadjs.min.js"></script>
+</head>
+<body>
+	<div id="container">
+		<div class='bg'>
+			<img src="bg.jpg" alt="">
+		</div>
+		<canvas id="cvs" class="cvs"></canvas>
+		<div class='img2'>
+			<img src="img2.png" alt="">
+		</div>
+		<canvas id="cvs-girl" class="cvs"></canvas>
+		<div class='bg'>
+			<img src="gradient.png" alt="">
+		</div>
+
+        <div class='sprite d1 d'></div>
+        <div class='sprite d2 d'></div>
+        <div class='sprite d3 d'></div>
+        <div class='sprite d4 d'></div>
+        
+        <div class='cta'>
+            <div class='sprite cta1'></div>
+            <div class='sprite cta2'></div>
+            <div class='sprite cta-text1-1 ds1'></div>
+            <div class='sprite cta-text1-2 ds1'></div>
+            <div class='sprite cta-text2-1 ds2'></div>
+            <div class='sprite cta-text2-2 ds2'></div>
+        </div>
+        <div class="flare">
+            <img src="flare.png" alt="">
+        </div>
+        <div class='logo'>
+		    <canvas id="cvs-logo"></canvas>
+        </div>
+        <div class='footer'><img src="footer.png" alt="" ></div>
+        <div id='clickthru'></div>
+        
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/EaselJS/0.8.0/easeljs.min.js"></script>
+	<script src="canvas.js"></script>
+	<script>
+    var assets,manifest,isComplete = false;
+    var clickthru;
+    //--------------preload---------------------
+    function preloadfiles(){
+        assets = new createjs.LoadQueue(false);
+        manifest=[
+            {src: "sprite.png"},
+            {src: "bg.jpg"},
+            {src: "img1.png"},
+            {src: "img2.png"},
+            {src: "logo.png"},
+            {src: "footer.png"},
+            {src: "gradient.png"}
+        ];
+        assets.loadManifest(manifest);
+        assets.on("complete",startAnim);
+    }
+    window.onload = preloadfiles();
+    //--------------animations---------------------
+    var tl = gsap.timeline({delay: 1,  defaults: {duration: 0.5,ease: "none" }});
+    function startAnim() {
+        checkDate();
+        //--------------- SET -----------------
+        gsap.set("#container", {display: 'block'});
+        //------------ ADD EVENT --------------
+        addEvent();
+		initCanvas();
+        //---------- ADD ANIMATION ------------
+        tl
+            //=========================
+            .add('f1')
+            .to(mask,{y:-700,duration:1},'f1')
+            .from('.logo',{opacity:0,scale:5,duration:.3,onComplete:generateParticles,ease:'power1.in'},'f1+=.2')
+            .from('.flare',{opacity:0,duration:2,ease:'power1.inOut'},'f1')
+            .to('.flare',{opacity:0,duration:2,ease:'power1.inOut'},'f1+=2.5')
+            .from('.d',{y:5,opacity:0,ease:'power1.out'},'f1+=1.7')
+            .from('.cta',{opacity:0,ease:'power1.in'},'f1+=2')
+            .add(hoverFunction,'f1+=2')
+            .add(function(){particle_stop();isComplete=true},'15')
+        //-------------------------------------
+    };
+    function checkDate(){
+        var d1 = new Date("8 14, 2021 23:59:59");
+        var d2 = new Date("8 18, 2021 23:59:59");
+        var d3 = new Date("8 19, 2021 18:00:00");
+        var now = new Date();
+        console.log(now)
+        var timenow = new Date().getHours()
+            if(now < d1){
+                // console.log('Now – August 14: In Theaters August 20th')
+                gsap.set('.d1,.ds1',{display:'block'});
+            }
+            else if(now > d1 && now < d2){
+                // console.log('August 15 – August 18: In Theaters Friday')
+                gsap.set('.d2,.ds2',{display:'block'});
+            }
+            else if(now < d3){
+                // console.log('August 19 up until 6pm: In Theaters Tonight')
+                gsap.set('.d3,.ds2',{display:'block'});
+            }else{
+                // console.log('August 19 6pm+: Now Playing,aug 19 onwards')
+                gsap.set('.d4,.ds2',{display:'block'});
+            }
+
+        clickthru = (now < d1)? clickTag1 : clickTag2;
+    }
+    function addEvent() {
+        $('#clickthru').on('click', exit);
+    };
+    
+    function exit() {
+        //-----------exit guide--------------------------
+        //--adword--> ExitApi.exit();
+        //--adgear--> ADGEAR.html5.clickThrough("clickTAG");
+        //--studio--> Enabler.exit('Background Exit'); 
+        //--standard/sizemek/adword no-api--> window.open(clickTag);
+        //-----------exit--------------------------------
+        window.open(clickthru); /*Studio/Enabler Exit*/
+    }
+    
+    function hoverFunction() {
+        $('#clickthru').on('mouseenter', function() {
+            gsap.to('.cta1',{duration:.3, opacity:0});
+            gsap.to('.cta2',{duration:.3, opacity:1});
+            gsap.to('.cta-text1-1,.cta-text2-1',{duration:.3,opacity:0});
+            gsap.to('.cta-text1-2,.cta-text2-2',{duration:.3,opacity:1 });
+            if(isComplete) particle_play()
+        });
+        $('#clickthru').on('mouseleave', function() {
+            gsap.to('.cta1',{duration:.3, opacity:1});
+            gsap.to('.cta2',{duration:.3, opacity:0});
+            gsap.to('.cta-text1-1,.cta-text2-1',{duration:.3,opacity:1});
+            gsap.to('.cta-text1-2,.cta-text2-2',{duration:.3,opacity:0});
+            if(isComplete) particle_stop()
+        });
+    }
+//-------------------------------------
+
+</script>
+</body>
+</html>
+
+<!--2021-->

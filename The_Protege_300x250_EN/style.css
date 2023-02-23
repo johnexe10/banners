@@ -1,0 +1,99 @@
+body {margin: 0px;}
+#container {
+	background-color: black;
+	border: 1px solid gray;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: none;
+	overflow: hidden;
+	position: absolute;
+	width: 300px;
+	height: 250px;
+	pointer-events: none;
+}
+
+#container * {
+	position: absolute;
+}
+
+#clickthru{
+	width: 100%;
+	height: 100%;
+	pointer-events: auto;
+}
+
+/*-------------- SPRITE -------------*/
+.sprite { background: url('sprite.png') no-repeat top left; width: 124px; height: 253px; background-size: 124px 253px;  } 
+.sprite.cta-text1-1 { background-position: 0 0; width: 103px; height: 14px; } 
+.sprite.cta-text1-2 { background-position: 0 -19px; width: 103px; height: 14px; } 
+.sprite.cta-text2-1 { background-position: 0 -38px; width: 81px; height: 14px; } 
+.sprite.cta-text2-2 { background-position: 0 -57px; width: 81px; height: 14px; } 
+.sprite.cta1 { background-position: 0 -76px; width: 124px; height: 26px; } 
+.sprite.cta2 { background-position: 0 -107px; width: 124px; height: 26px; } 
+.sprite.d1 { background-position: 0 -138px; width: 108px; height: 25px; } 
+.sprite.d2 { background-position: 0 -168px; width: 108px; height: 25px; } 
+.sprite.d3 { background-position: 0 -198px; width: 108px; height: 25px; } 
+.sprite.d4 { background-position: 0 -228px; width: 108px; height: 25px; } 
+/*--------- SPRITE POSITION ---------*/
+.cta-text1-1,.cta-text1-2 {top: 6px;left: 11px;}
+.cta-text2-1,.cta-text2-2 {top: 6px;left: 22px;}
+.cta1, .cta2 {top:0px;left:0px;}
+.cta-text1-2,.cta-text2-2,.cta2 {opacity:0; }
+.d{
+	left: 96px;
+	bottom: 36px;
+	display:none;
+}
+.ds1,.ds2{
+	display:none;
+}
+/*-------- IMAGES | POSITION --------*/
+img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.img2 {
+	width: 300px;
+	height: 250px;
+}
+.img1 {
+	width: 300px;
+	height: 250px;
+}
+.bg{
+	width: 300px;
+	height: 250px;
+}
+.logo{
+	width: 201px;
+	height: 64px;
+	top: 102px;
+	left: 48px;
+}
+.footer{
+	width: 300px;
+	height: 16px;
+	bottom: -1px;
+}
+.d1{
+	left: 96px;
+	bottom: 36px;
+}
+.cta{/*    background-color: #027594;*//*    border-radius: 14px;*//*    border: 1px solid #027594;*/width: 120px;height: 23px;left: 88px;bottom: 9px;}
+
+
+
+
+.flare,.cvs{
+	position:absolute;
+	width:300px;
+	height:250px;
+}
+.logo canvas{
+	position:absolute;
+	width: 201px;
+	height: 64px;
+}

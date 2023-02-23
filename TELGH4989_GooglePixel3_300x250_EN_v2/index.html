@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<meta charset="UTF-8">
+	<title>TELGH4989_GooglePixel3</title>
+	<meta name="ad.size" content="width=300,height=250"> 
+	<link rel="stylesheet" href="style.css">
+	<script> var clickTag = "https://www.google.com"; </script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.0/TweenMax.min.js"></script>
+	<script src="cb_standard.js"></script>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+</head>
+<body>
+	<div id="container">
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+        <!-- ADD 'imgfix' CLASS ON ALL IMG TAGS DIVS -->
+		<div class='sprite t1'></div>
+		<div class='sprite t2'></div>
+		<div class='sprite t3'></div>
+        <div class="phone imgfix">
+        	<div class="back imgfix"><img src="back-phone.png" alt=""></div>
+        	<div class="front imgfix"><img src="front-phone.png"></div>
+        </div>
+        <div class='sprite pixel3'></div>
+        <div class='cta'>
+			<div class='sprite cta-hover'></div>
+			<div class='sprite cta-txt'></div>
+        </div>
+
+        <div class="bird1"></div>
+        <div class="flash"></div>
+        <div class="touch">
+        	<div class="circ imgfix"></div>
+        	<div class="circ2 imgfix"></div>
+        </div>
+        <div class='info imgfix'><img src="info.png" alt=""></div>
+        <div class="bird2 imgfix">
+        	<img src="bird2.png" alt="">
+        	<div class="eyelid"><img src="eye-lid.png" alt=""></div>
+        </div>
+        <div class='logo'><img src="logo.svg" alt=""></div>
+        <div id='clickthru'></div>
+        
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+	</div>
+	<script>
+		var tl = new TimelineMax();
+		function initAd() {
+			//--------- PRE-LOAD IMAGE ------------
+			startPreload('bird.png','sprite.png', startAnim);
+			//-------------------------------------
+			function startAnim() {
+				//--------------- SET -----------------
+				TweenMax.set('#container', {display: 'block'});
+                TweenMax.set('.sprite,.imgfix', { rotation:0.001});
+                TweenMax.set(".phone", {x:50,transformStyle:"preserve-3d",perspective:400})
+                TweenMax.set(".back", {rotationY:-180})
+				//------------ ADD EVENT --------------
+				addEvent();
+                hoverFunction();
+				//---------- ADD ANIMATION ------------
+				tl
+                    //f1=========================
+				    .add('f1')
+				    .from('.t1',1,{opacity:0,y:10,ease: Power1.easeOut},'f1')
+				    .to('.t1',1,{opacity:0,ease: Power1.easeOut},'f1+=2.2')
+					.add(playbird(2),'f1+=2')
+					.from('.bird1',1,{x:-300,ease: Power1.easeOut},'f1+=2')
+				    .to('.bird1',0.3,{y:'5',repeat:2,yoyo:true,ease: Power1.easeInOut},'f1+=2')
+                    //f2=========================
+					.add('f2','-=0.25')
+					.from('.flash',0.01,{opacity:0},'f2')
+                    .to('.flash',0.6,{opacity:0},'f2+=.02')
+					.add(touch(),'f2+=.5')
+					.from('.info',0.6,{yPercent:100, ease:Power2.easeOut},'f2+=1.5')
+					.to('.info,.touch,.bird1',0.5,{opacity:0},'f2+=3')
+					//f3=========================
+					.add('f3','-=0.25')
+					.from('.t2',1,{opacity:0,y:10,ease: Power1.easeOut},'f3')
+				    .to('.t2',0.8,{opacity:0,ease: Power1.easeOut},'f3+=2.5')
+					//f3=========================
+					.add('f4','-=0.25')
+					.from('.phone,.pixel3',1,{opacity:0,y:10,ease: Power1.easeOut},'f4')
+					.from('.pixel3',0.5,{x:73,ease: Power1.easeOut},'f4+=1.5') //center text from the phone
+					.to('.phone',1,{rotationY:-360,x:-20},'f4+=1.5')
+					.from('.t3',0.5,{opacity:0,x:-30,ease: Power1.easeInOut},'f4+=1.5')
+					//-------------------------------------
+					.set('.back',{rotationY:0},'f4+=2.5')
+					.to('.front',0.5,{x:20,ease: Power1.easeInOut},'f4+=2.5')
+					.to('.back',0.5,{x:-28,ease: Power1.easeInOut},'f4+=2.5')
+					.from('.cta',1,{opacity:0,ease: Power1.easeOut},'f4+=2.5')
+					.from('.bird2',0.8,{xPercent:100,y:50,ease: Power1.easeOut},'f4+=3')
+					.to('.eyelid',0.01,{opacity:1,repeat:3,yoyo:true,repeatDelay:.1,ease: Power1.easeOut},'f4+=4')
+				
+				//-------------------------------------
+			};
+			function playbird(n){
+				var tl = new TimelineMax({repeat:n});
+				tl.to('.bird1',0.3,{backgroundPosition:'0px -1750px', ease: SteppedEase.config(7)})
+				.set('.bird1',{backgroundPosition:'0px 0px'})
+				return tl;
+			}
+			function touch(){
+				var tl = new TimelineMax();
+					tl.from('.circ',0.4,{scale:0,transformOrigin:'center center'},'t')
+					.to('.circ2',0.4,{display:'block',scale:2,transformOrigin:'center center'},'t+=.4')
+					.to('.circ2',0.8,{opacity:0},'t+=.4')
+					.to('.circ',0.3,{scale:1.2,transformOrigin:'center center'},'t+=.8')
+					.to('.circ',0.3,{scale:1,transformOrigin:'center center'},'t+=1.1')
+				return tl;
+			}
+			function addEvent() {
+				//--------------- SET -----------------
+				//To add:		_(object).on(events,  function);
+				//To remove:	_(object).off(events, function);
+				//-------------------------------------
+				_('#clickthru').on('click', exit);
+			};
+			
+			function exit() {
+				window.open(clickTag); /*Standard Exit*/
+				console.log('Exit')
+			}
+			
+            function hoverFunction() {
+                _('#clickthru').on('mouseenter', function() {
+                    TweenMax.to('.cta', 		0.6, {backgroundColor:'#fff'});
+                    TweenMax.to('.cta-txt', 	0.6, {opacity:0});
+                    TweenMax.to('.cta-hover', 	0.6, { opacity:1 });
+                });
+                _('#clickthru').on('mouseleave', function() {
+                    TweenMax.to('.cta', 		0.6, {backgroundColor:'#248700'});
+                    TweenMax.to('.cta-txt', 	0.6, {opacity:1});
+                    TweenMax.to('.cta-hover', 	0.6, {opacity:0});
+                });
+            }
+            //-------------------------------------
+            
+		};
+	</script>
+</body>
+</html>
+
+<!--1018V1-->

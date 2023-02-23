@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="ad.size" content="width=300,height=250">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Seneca</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+
+      * {
+        box-sizing: inherit;
+        padding: 0;
+        margin: 0;
+      }
+
+      img { border: none; }
+
+      .banner-wrap {
+        position: relative;
+        display: block;
+        width: 300px;
+        height: 250px;
+        overflow: hidden;
+        color: #fff;
+        line-height: 1.2;
+        font-family: 'Open Sans', sans-serif;
+        background-color: #da291c;
+        border: 1px solid #000;
+        cursor: pointer;
+      }
+
+      .logo {
+		position: absolute;
+		bottom: 18px;
+		right: 11px;
+		width: 77px;
+		height: 16px;
+        opacity: 0;
+      }
+
+      .loaded .logo {
+        opacity: 1;
+        transition: 1s 0.25s;
+      }
+
+      .text-01 {
+        position: absolute;
+        top: 14px;
+        width: 100%;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        white-space: nowrap;
+        opacity: 0;
+      }
+
+      .loaded .text-01 {
+        -webkit-animation: fade-in-out 4s 0.25s forwards;
+        animation: fade-in-out 4s 0.25s forwards;
+      }
+
+      .challenge-accepted {
+        position: absolute;
+        top: 70px;
+        left: 50%;
+        width: 268px;
+        height: 78px;
+        transform: translateX(-50%);
+        fill: #fff;
+      }
+
+      .challenge-accepted [class*="letter"] {
+        fill: transparent;
+      }
+
+      .loaded .challenge .letter-c {
+        fill: #fff;
+        transition: 1s 1s;
+      }
+
+      .loaded .challenge .letter-h {
+        fill: #fff;
+        transition: 1s 2.3s;
+      }
+
+      .loaded .challenge .letter-a {
+        fill: #fff;
+        transition: 1s 1.8s;
+      }
+
+      .loaded .challenge .letter-l-01 {
+        fill: #fff;
+        transition: 1s 1.6s;
+      }
+
+      .loaded .challenge .letter-l-02 {
+        fill: #fff;
+        transition: 1s 1.2s;
+      }
+
+      .loaded .challenge .letter-e-01 {
+        fill: #fff;
+        transition: 1s 2.2s;
+      }
+
+      .loaded .challenge .letter-n {
+        fill: #fff;
+        transition: 1s 1.5s;
+      }
+
+      .loaded .challenge .letter-g {
+        fill: #fff;
+        transition: 1s 1.7s;
+      }
+
+      .loaded .challenge .letter-e-02 {
+        fill: #fff;
+        transition: 1s 2s;
+      }
+
+      .loaded .accepted .letter-a {
+        fill: #fff;
+        transition: 1s 1.4s;
+      }
+
+      .loaded .accepted .letter-c-01 {
+        fill: #fff;
+        transition: 1s 1.9s;
+      }
+
+      .loaded .accepted .letter-c-02 {
+        fill: #fff;
+        transition: 1s 2.1s;
+      }
+
+      .loaded .accepted .letter-e-01 {
+        fill: #fff;
+        transition: 1s 1.4s;
+      }
+
+      .loaded .accepted .letter-p {
+        fill: #fff;
+        transition: 1s 1.6s;
+      }
+
+      .loaded .accepted .letter-t {
+        fill: #fff;
+        transition: 1s 1.1s;
+      }
+
+      .loaded .accepted .letter-e-02 {
+        fill: #fff;
+        transition: 1s 1.8s;
+      }
+
+      .loaded .accepted .letter-d {
+        fill: #fff;
+        transition: 1s 1.3s;
+      }
+
+      /* IE10+ specific styles go here */
+      @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+        .challenge [class^="letter"],
+        .accepted [class^="letter"] { opacity: 0; }
+
+        .loaded .challenge [class^="letter"],
+        .loaded .accepted [class^="letter"] { opacity: 1; }
+      }
+
+      .student {
+		position: absolute;
+		left: 138px;
+		top: 56px;
+		width: 151px;
+		height: 159px;
+        opacity: 0;
+      }
+
+      .loaded .student {
+        opacity: 1;
+        transition: 1s 0.25s;
+      }
+
+      .text-02 {
+        position: absolute;
+        top: 14px;
+        width: 100%;
+        font-size: 17px;
+        text-align: center;
+        white-space: nowrap;
+        opacity: 0;
+      }
+
+      .loaded .text-02 {
+        opacity: 1;
+        transition: 1s 4s;
+      }
+
+      .cta {
+		position: absolute;
+		left: 15px;
+		bottom: 12px;
+		display: inline-block;
+		padding: 0.5625em 1.6em 0.375em 2.35em;
+        color: #da291c;
+        font-size: 12px;
+        line-height: 1;
+        font-weight: bold;
+        background-color: #fff;
+        border-radius: 5px;
+        white-space: nowrap;
+        opacity: 0;
+      }
+
+      .loaded .cta {
+        opacity: 1;
+        transition: 1s 0.25s;
+      }
+
+      .arrow {
+        vertical-align: middle;
+        margin-top: -1px;
+        fill: currentColor;
+        transition: 0.5s;
+      }
+
+      .banner-wrap:hover .arrow {
+        margin-left: 5px;
+      }
+
+      .replay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 5px;
+        fill: #fff;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .replay svg {
+        display: block;
+      }
+
+      .loaded .replay {
+        opacity: 0.5;
+        transition: 1s 5s;
+      }
+
+      @-webkit-keyframes fade-in-out {
+        0 { opacity: 0; }
+        15% { opacity: 1; }
+        85% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes fade-in-out {
+        0 { opacity: 0; }
+        15% { opacity: 1; }
+        85% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="banner-wrap" class="banner-wrap">
+      <img class="logo" src="secenca-logo.svg" alt="Seneca">
+
+      <p class="text-01">
+        Don't be defined by borders.
+      </p>
+
+      <svg class="challenge-accepted bg" viewBox="0 0 512.6 144.8">
+        <g class="challenge">
+          <path class="letter-c" d="M2.4,34.5v-0.2C2.4,15.5,16.6,0,36.9,0c12.5,0,20,4.2,26.1,10.2l-9.3,10.7c-5.1-4.6-10.3-7.5-16.9-7.5 c-11.2,0-19.2,9.3-19.2,20.6v0.2c0,11.4,7.9,20.8,19.2,20.8c7.6,0,12.2-3,17.4-7.8l9.3,9.4C56.7,64,49.2,68.5,36.4,68.5 C16.9,68.5,2.4,53.5,2.4,34.5z"/>
+          <path class="letter-h" d="M63.8,1.1h14.6v26.2h26.9V1.1h14.6v66.2h-14.6V40.8H78.4v26.6H63.8V1.1z"/>
+          <path class="letter-a" d="M147.1,0.7h13.4l28.4,66.7h-15.2l-6.1-14.8h-28l-6.1,14.8h-14.8L147.1,0.7z M162.4,39.7l-8.8-21.5l-8.8,21.5H162.4z"/>
+          <path class="letter-l-01" d="M187.8,1.1h14.6v53h33v13.2h-47.6V1.1z"/>
+          <path class="letter-l-02" d="M235,1.1h14.6v53h33v13.2H235V1.1z"/>
+          <path class="letter-e-01" d="M282.2,1.1h50v13h-35.5v13.4h31.2v12.9h-31.2v13.9h36v13h-50.4V1.1z"/>
+          <path class="letter-n" d="M334.2,1.1h13.4l31,40.8V1.1H393v66.2h-12.4l-32.1-42.1v42.1h-14.4V1.1z"/>
+          <path class="letter-g" d="M394.7,34.5v-0.2c0-18.8,14.7-34.2,34.7-34.2c11.9,0,19.1,3.2,26,9.1l-9.2,11.1c-5.1-4.2-9.6-6.7-17.3-6.7 c-10.6,0-19,9.4-19,20.6v0.2c0,12.1,8.3,21,20.1,21c4.9,0.1,9.7-1.3,13.7-4v-9.4H429V29.2h28.8V58c-7.9,6.8-17.9,10.5-28.3,10.5 C408.9,68.5,394.7,54,394.7,34.5z"/>
+          <path class="letter-e-02" d="M460.4,1.1h50v13h-35.5v13.4h31.2v12.9h-31.2v13.9h36v13h-50.5V1.1z"/>
+        </g>
+        <g class="accepted">
+          <path class="letter-a" d="M32.6,66.9H48l32.6,76.5H63.1l-7-17H24l-7,17H0L32.6,66.9z M50.2,111.7L40.1,87L30,111.7H50.2z"/>
+          <path class="letter-c-01" d="M66.7,105.7v-0.2c0-21.6,16.3-39.3,39.6-39.3c14.3,0,22.9,4.8,30,11.7l-10.6,12.3c-5.9-5.3-11.8-8.6-19.4-8.6 c-12.8,0-22,10.6-22,23.7v0.2c0,13,9,23.9,22,23.9c8.7,0,14-3.5,20-8.9l10.6,10.8c-7.8,8.4-16.5,13.6-31.1,13.6 C83.3,144.8,66.7,127.5,66.7,105.7z"/>
+          <path class="letter-c-02" d="M127.2,105.7v-0.2c0-21.6,16.3-39.3,39.6-39.3c14.3,0,22.9,4.8,30,11.7l-10.6,12.3c-5.9-5.3-11.8-8.6-19.4-8.6 c-12.8,0-22,10.6-22,23.7v0.2c0,13,9,23.9,22,23.9c8.7,0,14-3.5,20-8.9l10.6,10.8c-7.8,8.4-16.5,13.6-31.2,13.6 C143.8,144.8,127.2,127.5,127.2,105.7z"/>
+          <path class="letter-e-01" d="M197.7,67.5H255v14.9h-40.7v15.4h35.8v14.9h-35.8v16h41.3v14.8h-57.9V67.5z"/>
+          <path class="letter-t" d="M338.9,82.9h-23.1V67.5h63v15.4h-23.1v60.6h-16.7V82.9z"/>
+          <path class="letter-e-02" d="M380.7,67.5h57.3v14.9h-40.7v15.4h35.8v14.9h-35.8v16h41.3v14.8h-57.9V67.5z"/>
+          <path class="letter-d" d="M442.6,67.5h29.6c23.9,0,40.4,16.4,40.4,37.8v0.2c0,21.4-16.5,38-40.4,38h-29.6V67.5z M472.2,128.4 c13.7,0,22.9-9.2,22.9-22.7v-0.2c0-13.5-9.2-22.9-22.9-22.9h-12.9v45.8H472.2z"/>
+        </g>
+      </svg>
+
+      <img class="student" src="student.png" alt="">
+
+      <svg class="challenge-accepted bg" viewBox="0 0 512.6 144.8">
+        <g class="accepted">
+          <path class="letter-p" d="M259.6,67.5h31c18.1,0,29.1,10.8,29.1,26.3v0.2c0,17.6-13.7,26.7-30.7,26.7h-12.7v22.8h-16.7V67.5z M289.6,105.8 c8.4,0,13.2-5,13.2-11.5v-0.2c0-7.5-5.2-11.5-13.6-11.5h-13v23.2L289.6,105.8z"/>
+        </g>
+      </svg>
+
+      <p class="text-02">
+      	Explore what Seneca offers<br>international students.
+      </p>
+
+      <div class="cta">
+        Learn More
+        <svg class="arrow" width="18" height="18" viewBox="0 0 24 24">
+          <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+        </svg>
+      </div>
+
+      <span id="replay" class="replay">
+        <svg width="18" height="18" viewBox="0 0 24 24">
+          <path d="M12,5V1L7,6L12,11V7A6,6 0 0,1 18,13A6,6 0 0,1 12,19A6,6 0 0,1 6,13H4A8,8 0 0,0 12,21A8,8 0 0,0 20,13A8,8 0 0,0 12,5Z" />
+        </svg>
+      </span>
+    </div>
+
+    <script type="text/javascript">
+      var clickTag = "#";
+      var bannerWrap = document.getElementById('banner-wrap');
+      var replayBtn = document.getElementById('replay');
+      var isIE = !!navigator.userAgent.match(/Trident/g) || !!navigator.userAgent.match(/MSIE/g); // Detect IE
+
+      // Replay function
+      var replayBanner = function() {
+        bannerWrap.classList.remove('loaded');
+        setTimeout(function() { bannerWrap.classList.add('loaded'); }, 100);
+      };
+
+      // Replay button
+      replayBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        replayBanner();
+      });
+
+      // Animation delay bug-fix (mainly for Safari)
+      document.addEventListener('visibilitychange', function() {
+        if (!document.hidden && !isIE) replayBanner();
+      });
+
+      // Click
+      bannerWrap.addEventListener('click', function() {
+        window.open(window.clickTag);
+      });
+
+      // Wait till DOM loads before animation start
+      window.onload = function() {
+        bannerWrap.className += ' loaded';
+      }
+    </script>
+  </body>
+</html>

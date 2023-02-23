@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<meta charset="UTF-8">
+	<title>GammaCore_Display_Banners</title>
+	<meta name="ad.size" content="width=300,height=250"> 
+	<link rel="stylesheet" href="style.css">
+	<script> var clickTag = "https://www.gammacore.com"; </script>
+	<script> var clickTag2 = "https://www.gammacore.com";//instruction for use </script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.0/TweenMax.min.js"></script>
+	<script src="cb_standard.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/utils/Draggable.min.js"></script>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+</head>
+<body>
+	<div id="container">
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+        <!-- ADD 'imgfix' CLASS ON ALL IMG TAGS DIVS -->
+		<div class='bg'></div>
+		<div class="frame1">
+			<div class='sprite t1'></div>
+			<canvas id="cvs"></canvas>
+        </div>
+
+		<div class="frame2">
+			<div class='sprite t2'></div>
+			<div class='sprite t3'></div>
+			<div class='sprite t4'></div>
+      		<div class="hand"><img src="hand.png" alt=""></div>
+
+        </div>
+        <header>
+        	<div class="logo">
+        		<img src="gamma-logo.png" alt="">
+        	</div>
+        </header>
+
+        <div id='clickthru'></div>
+        <div id="zip">
+			<div class='sprite t5'></div>
+			<input type="text" id="zip-input" maxlength="5" autocomplete="off">
+			<div class="cta-go">
+				<div class='sprite go'></div>
+				<div class='sprite arrow'></div>
+			</div>
+       	</div>
+		<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+		<!-- ~~~~~~~~~~~~~~ scroller ~~~~~~~~~~~~~~ -->
+		<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+		<div id="scroller-container">
+			<div id="scroller">
+				<div class="content">
+					<span style="font-size: 11px;"><b><span style="">Important Safety Information</span></b>
+					</span>
+					<p style="margin-top: 3px;"><b>gammaCore™ (non-invasive vagus nerve stimulator) is intended to provide non-invasive vagus nerve stimulation (nVNS) on the side of the neck. gammaCore is indicated for:</b>
+					<ul style="margin-top:3px;">
+						<li><b>Adjunctive use for the preventive treatment of cluster headache in adult patients.</b></li>
+
+						<li><b>The acute treatment of pain associated with episodic cluster headache in adult patients.</b></li>
+
+						<li><b>The acute treatment of pain associated with migraine headache in adult patients.</b></li>
+						<li class="orangedot">The safety and effectiveness of gammaCore (nVNS) have not been established in the acute treatment of chronic cluster headache</li>
+						<li class="orangedot">gammaCore has not been shown to be effective for the preventive treatment of migraine headache</li>
+						<li class="orangedot">The long-term effects of the chronic use of gammaCore have not been evaluated</li>
+						<li class="orangedot">Safety and efficacy of gammaCore have not been evaluated in the following patients, and therefore gammaCore is NOT indicated for:</li>
+					</ul>
+					<ul style="margin-top:3px;margin-left: 7px;">
+						<li class="orangedonut">Patients with an active implantable medical device, such as a pacemaker, hearing aid implant, or any implanted electronic device</li>
+						<li class="orangedonut">Patients diagnosed with narrowing of the arteries (carotid atherosclerosis)</li>
+						<li class="orangedonut">Patients who have had surgery to cut the vagus nerve in the neck (cervical vagotomy)</li>
+						<li class="orangedonut">Pediatric patients </li>
+						<li class="orangedonut">Pregnant women </li>
+						<li class="orangedonut">Patients with clinically significant hypertension, hypotension, bradycardia, or tachycardia</li>
+					</ul>
+					<ul style="margin-top:3px;">
+						<li class="orangedot">Patients should not use gammaCore if they:</li>
+					</ul>
+					<ul style="margin-top:3px;margin-left: 7px;">
+						<li class="orangedonut">Have a metallic device such as a stent, bone plate, or bone screw implanted at or near their neck</li>
+						<li class="orangedonut">Are using another device at the same time (e.g., TENS Unit, muscle stimulator) or any portable electronic device (e.g., mobile phone)</li>
+					</ul>
+					<p style="margin-top: 3px;line-height: 1.4;"><b>NOTE: This list is not all inclusive. Please refer to the gammaCore <a id="instructions"><u>Instructions for Use</u></a> for all of the important warnings and precautions before using or prescribing this product.</b></p>
+					<p>&nbsp;</p>
+					<img src="EC-Logo.png" class="ec-logo" alt="">
+					<p style="margin-top: 6px;line-height: 1.3;">©2019 electroCore, Inc. All rights reserved. electroCore, the electroCore logo, gammaCore, gammaCore Sapphire, and the gammaCore Sapphire logo are trademarks of electroCore, Inc. <span><br>EPM-01059 Rev 1 Rel: 03/2019</span></p>
+					<p style="margin-top: -6px;">&nbsp;</p>
+				</div>
+			</div>
+			<div id="scrollerbar">
+				<div id="scrollbar"></div>
+				<div id="scrubber"></div>
+			</div>
+		</div>
+		<!-- ~~~~~~~~~~~~~~ INSERT DIVS ~~~~~~~~~~~~~~ -->
+	</div>
+    <script src="https://s0.2mdn.net/ads/studio/cached_libs/easeljs_0.8.2_937c3ec68021211c056f61c9ceaccffd_min.js"></script>
+    <script src="canvas.js"></script>
+	<script>
+		TweenLite.defaultOverwrite = false;
+		var tl = new TimelineMax(); //{repeatDelay:2,repeat:1}
+		var path1 =[{"x":-148,"y":15},{"x":-156.7,"y":4},{"x":145.7,"y":10.7},{"x":125,"y":86},{"x":113.2,"y":128.8},{"x":61,"y":130},{"x":61,"y":130},{"x":61,"y":130},{"x":9,"y":132.9},{"x":2,"y":104},{"x":-11.4,"y":49},{"x":65.7,"y":42.1},{"x":102,"y":80},{"x":129.5,"y":108.7},{"x":142.6,"y":112.4},{"x":155,"y":133},{"x":172.5,"y":162.1},{"x":148,"y":215},{"x":103,"y":173},{"x":79.5,"y":128.5},{"x":166.9,"y":45},{"x":209,"y":125},{"x":232.3,"y":169.1},{"x":124,"y":200.4},{"x":144,"y":134}];
+		var path2 = [{"x":450.4,"y":41.1},{"x":460.4,"y":31.5},{"x":159.5,"y":0},{"x":170.7,"y":77.4},{"x":177,"y":121},{"x":228.7,"y":129},{"x":228.7,"y":129},{"x":228.7,"y":129},{"x":279.9,"y":138},{"x":290.5,"y":110},{"x":310.7,"y":57},{"x":235.1,"y":41},{"x":194.3,"y":74},{"x":163.5,"y":99},{"x":150,"y":101},{"x":135,"y":120},{"x":114,"y":147},{"x":131.8,"y":202},{"x":181,"y":166},{"x":210,"y":125},{"x":134,"y":32},{"x":82,"y":105},{"x":53,"y":146.5},{"x":157,"y":191},{"x":145.9,"y":122}];
+		var scrollTL = new TimelineMax({paused: true});
+		function isMobileDevice() {
+			return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+		};
+		function initAd() {
+			//--------- PRE-LOAD IMAGE ------------
+			startPreload('hand.png','circ.png','sprite.png', startAnim);
+			//-------------------------------------
+			function startAnim() {
+				//--------------- SET -----------------
+				TweenMax.set('#container', {display: 'block'});
+                TweenMax.set('.sprite', { rotation:0.001});
+                TweenMax.set('.imgfix', { rotation:0.001});
+				//---------------update content if mobile
+				if(isMobileDevice()){
+					TweenMax.set('.content', { margin:0});
+				}
+                if(_('#scroller').c.clientWidth == _('#scroller').c.offsetWidth){
+                    TweenMax.set('.content',{margin:0});
+                }
+				//------------ ADD EVENT --------------
+				addEvent();
+                hoverFunction();
+				updateValues();
+				playScroller();
+				
+				initCanvas();
+				
+				drawCirc()
+				//---------- ADD ANIMATION ------------
+				tl
+				  .add('f1')
+				  .to(circ,6,{bezier: {values:path1, type:"cubic"},onUpdate:drawCirc,ease:Power1.easeOut},'f1')
+				  .to(circ2,6,{bezier: {values:path2, type:"cubic"},onUpdate:drawCirc,ease:Power1.easeOut},'f1+=.2')
+				  .to([circ,circ2],4.5,{scaleX:1.2,scaleY:1.2,onUpdate:drawCirc,ease:Power1.easeOut},'f1')
+				  .to([circ,circ2],1,{scaleX:5,scaleY:5,onUpdate:drawCirc,ease:Power1.easeOut},'f1+=3.5')
+				  //---------- 
+				  .add('f2','f1+=9')
+				  .from('.frame2',.8,{y:197,ease:Power3.easeInOut},'f2') 
+ 				  .to('.frame1',.8,{y:-197,ease:Power3.easeInOut},'f2') 
+				  .from('.hand',.8,{rotation:30,y:100,ease:Power3.easeInOut},'f2') 
+				  .staggerFrom('.t2,.t3,.t4',.8,{y:5,opacity:0,ease:Power1.easeOut},.2,'f2+=.5') 
+				  .from('#zip',.8,{display:'none',opacity:0,ease:Power1.easeOut},'f2+=2') 
+                  console.log(tl.totalDuration())
+				
+			};
+			
+			//-------zip validation---------
+
+			_('#zip-input').on('keyup', function(){
+				this.value=this.value.replace(/[^a-z0-9+]+/gi, '');
+				this.value=this.value.toUpperCase();
+			});
+			_('.cta-go').on('click', function(){
+				var zipcode= _('#zip-input').c.value;
+                window.open("https://www.gammacore.com/zip="+zipcode);
+			})
+			//-------------------------------------
+			//-------------scroller js-------------
+			//-------------------------------------
+			//difference of content height and its container
+			var contentHeight = _('.content').c.offsetHeight - _('#scroller-container').c.offsetHeight; 
+			//difference of scrubber height and scrollbar
+			var scrollHeight = _('#scrollerbar').c.offsetHeight - _('#scrubber').c.offsetHeight;
+			//dummy element
+			var scrollY = {y: 0};
+
+//			play scroller TIMELINE
+            function playScroller(){
+                var durs = ((contentHeight - scrollY.y) / contentHeight) * 60;
+				scrollTL.play();
+				scrollTL
+				.to(scrollY, durs, {y: contentHeight ,onUpdate: updateScroller,ease: Power0.easeNone})
+			}
+            
+            
+			//-------------------------------------
+            _('#scroller-container').on('mousedown', function() {scrollTL.pause();});
+            _('#scroller-container').on('touchstart', function() {scrollTL.pause();});
+//            _('#scroller-container').on('mouseleave', function() {scrollTL.clear(); playScroller()});
+//            _('#scroller-container').on('mouseup', function() {scrollTL.clear(); playScroller()});
+			//-------------------------------------
+			var draggable = Draggable.create("#scrubber", {bounds:"#scrollerbar",
+					edgeResistance:1,
+					type:"yPercent",
+					onDrag:function(){
+						var scrubTop =_('#scrubber').c._gsTransform.y/scrollHeight *100;
+						_('#scroller').c.scrollTop = contentHeight*(scrubTop/100);
+                        scrollY.y = contentHeight*(scrubTop/100);
+					},
+			});
+			////------------------scrollbar click-------------------
+			_('#scrollbar').on('click', function(e) {
+				var yPos = e.clientY - _('#scroller-container').c.offsetTop;
+				yPos = yPos-_('#scrubber').c.offsetHeight*.5;
+				yPos = yPos/scrollHeight *100;
+				scrollY.y = contentHeight*(yPos/100);
+				scrollY.y = (scrollY.y<0) ? 0 : (scrollY.y>contentHeight) ? contentHeight : scrollY.y;
+				updateScroller()
+			});
+
+			//--------------------animate scroller-----------------
+			function updateScroller(){
+				var scrollTop = scrollY.y/contentHeight * 100;
+				_('#scroller').c.scrollTop=scrollY.y;
+				TweenMax.set('#scrubber',{y:scrollHeight * (scrollTop/100)})
+			}
+			//-----------------mouse scroll--------------------
+
+			if(isMobileDevice()){
+				_('#scroller').c.addEventListener("scroll", scroll);
+			}else{
+				_('#scroller').c.addEventListener("wheel", function(){
+				scrollTL.pause();scroll()});
+			}
+            function scroll(){
+				var scrollTop = _('#scroller').c.scrollTop/contentHeight * 100;
+				TweenMax.set('#scrubber',{y:scrollHeight * (scrollTop/100)})
+                scrollY.y = contentHeight*(scrollTop/100);
+			}
+			//--------------values-----------------------
+			function updateValues(){
+				contentHeight = _('.content').c.offsetHeight - _('#scroller-container').c.offsetHeight; 
+				scrollHeight = _('#scrollerbar').c.offsetHeight - _('#scrubber').c.offsetHeight;
+			}
+			//-----------Toggle--------------------------
+
+			function addEvent() {
+				//--------------- SET -----------------
+				//To add:		_(object).on(events,  function);
+				//To remove:	_(object).off(events, function);
+				//-------------------------------------
+				_('#clickthru').on('click', exit);
+				_('#instructions').on('click', instructions);
+			};
+			
+			function exit() {
+				window.open(clickTag); /*Standard Exit*/
+				console.log('Exit')
+			}
+			function instructions() {
+                window.open(clickTag2);
+			}
+            function hoverFunction() {
+                _('#clickthru').on('mouseenter', function() {
+                    TweenMax.to('.cta-bg', 		0.5, {backgroundColor: '#ffffff'})
+                });
+                _('#clickthru').on('mouseleave', function() {
+                    TweenMax.to('.cta-bg', 		0.5, {backgroundColor: '#ff9e1b'})
+                });
+            }
+            //-------------------------------------
+            
+		};
+	</script>
+</body>
+</html>
+
+<!--1018V2-->
