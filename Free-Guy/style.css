@@ -28,7 +28,7 @@ body {margin: 0px;}
 }
 
 /*-------------- SPRITE -------------*/
-.sprite { background: url('https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/sprite.png') no-repeat top left; width: 300px; height: 231px; background-size: 300px 231px;  } 
+.sprite { background: url('sprite.png') no-repeat top left; width: 300px; height: 231px; background-size: 300px 231px;  } 
 .sprite.bottom2 { background-position: 0 0; width: 300px; height: 65px; } 
 .sprite.cta-text1 { background-position: 0 -70px; width: 162px; height: 49px; } 
 .sprite.cta-text2 { background-position: 0 -124px; width: 162px; height: 49px; } 

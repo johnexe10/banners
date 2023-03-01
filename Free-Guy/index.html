@@ -13,24 +13,24 @@
 <body>
 	<div id='container'>
         <div class='bg-cont imgfix'>
-            <div class="ef-bg imgfix"><img src='https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/ef-bg.jpg' alt='Background'></div>
-            <div class="balloon"><img src="https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/balloon.png" alt="Baloon"></div>
+            <div class="ef-bg imgfix"><img src='ef-bg.jpg' alt='Background'></div>
+            <div class="balloon"><img src="balloon.png" alt="Baloon"></div>
             <canvas id="cvs2"></canvas>
-            <div class="light-1 lights"><img src="https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/light-1.png" alt="Lights"></div>
-            <div class="light-2 lights"><img src="https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/light-2.png" alt="Lights"></div>
-            <div class="light-3 lights"><img src="https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/light-3.png" alt="Lights"></div>
+            <div class="light-1 lights"><img src="light-1.png" alt="Lights"></div>
+            <div class="light-2 lights"><img src="light-2.png" alt="Lights"></div>
+            <div class="light-3 lights"><img src="light-3.png" alt="Lights"></div>
             
         </div>
 
         <div class='sprite top'></div>
         <div class='ryan imgfix'>
-            <img src="https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/ryan.png" alt="">
+            <img src="ryan.png" alt="">
         </div>
         <canvas id="cvs"></canvas>
 
         <div class='sprite bottom2'></div>
         <div class='logo'>
-            <img src="https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/logo.png" alt="">
+            <img src="logo.png" alt="">
         </div>
         <div id='border'></div>
         <div id='clickthru'></div>
@@ -49,14 +49,14 @@
     var tlExplode = gsap.timeline({repeat: 6, repeatDelay: .5});
     //----------------------------------
     preload([
-        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/balloon.png",
-        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/ef-bg.jpg",
-        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/light-1.png",
-        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/light-2.png",
-        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/light-3.png",
-        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/logo.png",
-        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/ryan.png",
-        "https://freeguymovie.s3.amazonaws.com/neuron_freeguy/EN/Free-Guy_300x250_EN/sprite.png"
+        "balloon.png",
+        "ef-bg.jpg",
+        "light-1.png",
+        "light-2.png",
+        "light-3.png",
+        "logo.png",
+        "ryan.png",
+        "sprite.png"
     ],startAnim);
     //--------------animations---------------------
     function startAnim() {
